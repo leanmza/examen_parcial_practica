@@ -1,16 +1,23 @@
 body {
   font-family: roboto !important;
   font-size: 16px !important;
+  width: 100dvw;
 }
 .container-fluid {
   padding: 0 !important;
 }
+
 h1 {
   color: #06b6d4 !important;
   font-weight: 700 !important;
   font-size: 20px;
 }
 
+.btnCarrousel{
+    margin-right: 2rem;
+}
+
+nav{border-bottom: solid 0.1px var(--bs-secondary-color) ;}
 nav,
 footer {
   padding-inline: 16px !important;

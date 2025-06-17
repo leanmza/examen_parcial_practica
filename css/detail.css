@@ -1,0 +1,138 @@
+.encabezadoSection,
+.caracteristicasSection, .instruccionesSection {
+  height: 450px;
+  display: grid;
+  align-items: center;
+  align-content: center;
+  padding: 0 3rem;
+  margin-inline: 0;
+}
+
+.encabezadoSection,
+.instruccionesSection {
+  background-color: #2c3036;
+}
+.caracteristicasSection,
+.instruccionesSection {
+  width: 100dvw;
+  margin-inline: 0;
+  padding-inline: 15rem;
+}
+.tituloEncabezado {
+  display: grid;
+  align-content: center;
+}
+
+.tituloSection {
+  justify-items: center;
+  padding-bottom: 1.5rem;
+}
+.encabezadoImgDiv {
+  display: flex;
+  justify-content: center;
+}
+.encabezadoImg {
+  max-height: 400px;
+}
+h1 {
+  color: #695ca5 !important;
+  font-size: 2.5rem !important;
+}
+h1 > span,
+h2 {
+  color: white;
+}
+
+.btnApender {
+  background-color: #695ca5;
+}
+
+.btnReglas {
+  color: #06b6d4;
+  border-color: #06b6d4;
+}
+
+.cards{
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  width: 400px;
+  height: 195px;
+  background-color: #2c3036;
+}
+
+.card-text, .textoPaso>p {
+  max-width: 40ch;
+  font-size: 14px;
+}
+
+.card-icon {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  margin-top: 16px;
+  margin-left: 16px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+}
+.varita {
+  background-color: #695ca5;
+}
+.mazo {
+  background-color: #06b6d4;
+}
+.multiplayer {
+  background-color: #845ca5;
+}
+
+.instruccionesSection>.row{
+    display: flex;
+    justify-content: space-between;
+    padding-inline: 5vw ;
+}
+
+.divPasos{
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    width: 250px;
+}
+.pasos {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px;
+
+}
+.pasoJugar{
+    margin: 0;
+    
+}
+.primero {
+  background-color: #695ca5;
+}
+.segundo{
+    background-color: #06b6d4;
+}
+.tercero{
+    background-color: #845ca5;
+}
+.cuarto{
+    background-color: #d65959;
+}
+
+.textoPaso{
+    display: grid;
+    height: 48px;
+   align-content: baseline;
+ 
+}
