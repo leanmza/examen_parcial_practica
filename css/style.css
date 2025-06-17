@@ -43,4 +43,150 @@ a > i {
   color: var(--bs-secondary-color) !important;
 }
 
+.carousel-item {
+  height: 600px;
+  display: grid;
+  justify-content: center !important;
+  align-content: center !important;
+  text-align: center;
+}
 
+.carousel-item > h1 {
+  font-size: 48px !important;
+}
+
+.carousel-item > h4 {
+  max-width: 70ch;
+  color: var(--bs-secondary-color) !important;
+}
+.carrouselSection {
+  height: 600px;
+  display: grid;
+  align-items: center;
+  align-content: center;
+  padding: 0 3rem;
+  margin-inline: 0;
+}
+.carousel-item-1 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url(../assets/modular-game-table-rustic-walnut-hex-game-cover.jpg);
+  background-repeat: no;
+  background-size: cover;
+  display: grid;
+}
+
+.carousel-item-2 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(../assets/MTG-cards-in-hand.jpg);
+  background-repeat: no;
+  background-size: cover;
+}
+
+.carousel-item-3 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(../assets/orcs_and_ogre_minis.jpg);
+  background-repeat: no;
+  background-size: cover;
+}
+
+.popularesSection,
+.caracteristicasSection,
+.listoSection {
+  height: 550px;
+  display: grid;
+  align-items: center;
+  align-content: center;
+  padding: 0 3rem;
+  margin-inline: 0;
+  justify-content: center;
+  text-align: center;
+}
+
+.listoSection {
+  height: 350px;
+}
+.popularesSection {
+  background-color: #2c3036;
+}
+.listoSection {
+  background-color: #df3f40;
+}
+.tituloSection {
+  justify-items: center;
+  padding-bottom: 1.5rem;
+}
+
+.card-body > p,
+.card-body > h5,
+.card-body > h6 {
+  text-align: justify;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  width: 400px;
+  height: 195px;
+  background-color: #2c3036;
+}
+
+.card-text {
+  max-width: 40ch;
+  font-size: 14px;
+}
+
+.card-icon {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  margin-top: 16px;
+  margin-left: 16px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+}
+.card-icon {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  margin-top: 16px;
+  margin-left: 16px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+}
+
+.comunidad
+ {
+  background-color: #df3f40;
+}
+
+.contenido {
+  background-color: #06b6d4;
+}
+
+.tools{
+  background-color: #695ca5;
+}
+
+.btnLinkFullJuegos {
+  margin-top: 32px;
+  background-color: white;
+  color: #df3f40;
+}
+
+.btnLinkFullJuegos:hover {
+  background-color: #df3f40;
+  color: white;
+}
+
+h2 {
+  color: white;
+}

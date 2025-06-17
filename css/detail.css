@@ -52,35 +52,12 @@ h2 {
   border-color: #06b6d4;
 }
 
-.cards{
-    display: flex;
-    justify-content: center;
-}
-
-.card {
-  display: flex;
-  justify-content: center;
-  width: 400px;
-  height: 195px;
-  background-color: #2c3036;
-}
-
-.card-text, .textoPaso>p {
+.textoPaso>p {
   max-width: 40ch;
   font-size: 14px;
 }
 
-.card-icon {
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  width: 48px;
-  height: 48px;
-  margin-top: 16px;
-  margin-left: 16px;
-  margin-bottom: 8px;
-  border-radius: 6px;
-}
+
 .varita {
   background-color: #695ca5;
 }
@@ -152,3 +129,7 @@ h2 {
   color:#695ca5
 }
 
+.btnLinkFull:hover{
+  background-color: #695ca5;
+  color: white;
+}

@@ -12,7 +12,6 @@
     />
 
     <link rel="stylesheet" href="css/style.css" />
-  
 
     <!-- fuentes google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -54,7 +53,9 @@
                   <a class="dropdown-item" href="#">Dungeons & Dragons</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="magicDetail.html">Magic: The Gathering</a>
+                  <a class="dropdown-item" href="magicDetail.html"
+                    >Magic: The Gathering</a
+                  >
                 </li>
                 <li><a class="dropdown-item" href="#">Pathfinder</a></li>
               </ul>
@@ -81,18 +82,29 @@
       </div>
     </nav>
     <!-- MAIN -->
-    <main class="container">
-      <section class="carouselSection">
-        <div id="carouselExample" class="carousel slide">
+    <main class="container-fluid">
+      <!-- CAROUSEL -->
+      <section class="carrouselSection">
+        <div
+          id="carouselExample"
+          class="carousel slide"
+          data-bs-ride="carousel"
+        >
           <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="assets/libros.jpg" class="imgCarrousel" alt="..." />
+            <div class="carousel-item active carousel-item-1">
+              <h1>Empezá Aventuras Épicas</h1>
+              <h4>
+                Descubrí el mundo de los juegos de rol de mesa como D&D, cartas
+                Magic y muchos más. Tu próxima aventura te espera
+              </h4>
             </div>
-            <div class="carousel-item">
-              <img src="..." class="d-block w-100" alt="..." />
+            <div class="carousel-item carousel-item-2">
+              <h1>Magic: The Gathering</h1>
+              <h4>El juego de rol con cartas más popular</h4>
             </div>
-            <div class="carousel-item">
-              <img src="..." class="d-block w-100" alt="..." />
+            <div class="carousel-item carousel-item-3">
+              <h1>Dungeon & Dragons</h1>
+              <h4>El juego de rol más popular del mundo</h4>
             </div>
           </div>
           <button
@@ -115,8 +127,133 @@
           </button>
         </div>
       </section>
-      <section class="populares"></section>
-      <section class="separadorHorizontal"></section>
+      <section class="popularesSection">
+        <div class="tituloEncabezado tituloSection">
+          <h2>Juegos más populares</h2>
+        </div>
+        <!-- cards -->
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          <div class="col">
+            <div class="card h-100">
+              <img
+                src="assets/dragones.jpg"
+                class="card-img-top"
+                alt="dragones"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Dungeon & Dragons</h5>
+                <p class="card-text">
+                  El más grande juego de rol del mundo. Crea personajes, explora
+                  mazmorras y pelea contra montruos legendarios junto a tus
+                  amigos.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card h-100">
+              <img
+                src="assets/dragones.jpg"
+                class="card-img-top"
+                alt="dragones"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Magic: The Gathering</h5>
+                <p class="card-text">
+                  Invoca criaturas, lanza hechizos y pelea contra oponentes en
+                  el más grande juego de cartas coleccionables del multiverso.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card h-100">
+              <img
+                src="assets/dragones.jpg"
+                class="card-img-top"
+                alt="dragones"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Pathfinder</h5>
+                <p class="card-text">
+                  Viví combates tacticos y ricas historias in este querido
+                  sistema de juego de roles.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="caracteristicasSection">
+        <div class="tituloEncabezado tituloSection">
+          <h2>¿Por qué elegirnos?</h2>
+          <p>
+            Tenemos todo lo que necesitas para sumergirte en el mundo de los
+            juegos de rol de mesa
+          </p>
+        </div>
+        <div class="cards">
+          <!-- cards -->
+          <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+              <div class="card">
+                <div class="card-icon comunidad">
+                  <i class="fa-solid fa-people-group fa-xl"></i>
+                </div>
+                <div class="card-body">
+                  <h6 class="card-title">Gran comunidad</h6>
+                  <p class="card-text">
+                    Unite a miles de jugadores alrededor del mundo. Encontrá
+                    grupo, compartí historias y encontrá nuevos amigos a través
+                    de épicas aventuras.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card">
+                <div class="card-icon contenido">
+                  <i class="fa-solid fa-book fa-xl"></i>
+                </div>
+                <div class="card-body">
+                  <h6 class="card-title">Mucho contenido</h6>
+                  <p class="card-text">
+                    Accedé a guías completas y fáciles de entender, creador de
+                    personajes y recursos para D&D, Pathfinder y otros sistemas.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card">
+                <div class="card-icon tools">
+                  <i class="fa-solid fa-dice fa-xl"></i>
+                </div>
+                <div class="card-body">
+                  <h6 class="card-title">Herramientas Digitales</h6>
+                  <p class="card-text">
+                    Dados virtuales, hojas de personajes, gestión de campañas y
+                    todo lo que necesitas para jugar.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="listoSection">
+        <div class="tituloEncabezado tituloSection">
+          <h2>¿Listo para empezar tu aventura?</h2>
+          <p>Unite a miles de aventureros con alguno de estos juegos</p>
+          <div>
+            <a href="https://magic.wizards.com/en/mtgarena">
+              <button class="btn btnCarrousel btnLinkFullJuegos">
+                Ver Juegos de Rol
+              </button>
+            </a>
+          </div>
+        </div>
+      </section>
     </main>
     <!-- FOOTER -->
 
