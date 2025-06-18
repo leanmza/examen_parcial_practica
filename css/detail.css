@@ -1,5 +1,7 @@
 .encabezadoSection,
-.caracteristicasSection, .instruccionesSection, .jugaSection {
+.caracteristicasSection,
+.instruccionesSection,
+.jugaSection {
   height: 500px;
   display: grid;
   align-items: center;
@@ -22,8 +24,6 @@
   display: grid;
   align-content: center;
 }
-
-
 
 .encabezadoImgDiv {
   display: flex;
@@ -50,11 +50,10 @@ h2 {
   border-color: #06b6d4;
 }
 
-.textoPaso>p {
+.textoPaso > p {
   max-width: 40ch;
   font-size: 14px;
 }
-
 
 .varita {
   background-color: #695ca5;
@@ -66,18 +65,18 @@ h2 {
   background-color: #845ca5;
 }
 
-.instruccionesSection>.row{
-    display: flex;
-    justify-content: space-between;
-    padding-inline: 5vw ;
-    margin-bottom: 2rem;
+.instruccionesSection > .row {
+  display: flex;
+  justify-content: space-between;
+  padding-inline: 5vw;
+  margin-bottom: 2rem;
 }
 
-.divPasos{
-    display: grid;
-    justify-items: center;
-    text-align: center;
-    width: 250px;
+.divPasos {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  width: 250px;
 }
 .pasos {
   border-radius: 50%;
@@ -87,48 +86,45 @@ h2 {
   justify-content: center;
   align-items: center;
   margin-bottom: 16px;
-
 }
-.pasoJugar{
-    margin: 0;
-    
+.pasoJugar {
+  margin: 0;
 }
 .primero {
   background-color: #695ca5;
 }
-.segundo{
-    background-color: #06b6d4;
+.segundo {
+  background-color: #06b6d4;
 }
-.tercero{
-    background-color: #845ca5;
+.tercero {
+  background-color: #845ca5;
 }
-.cuarto{
-    background-color: #d65959;
-}
-
-.textoPaso{
-    display: grid;
-    height: 48px;
-   align-content: baseline;
- 
+.cuarto {
+  background-color: #d65959;
 }
 
-.bannerMagic{
+.textoPaso {
+  display: grid;
+  height: 48px;
+  align-content: baseline;
+}
+
+.bannerMagic {
   background-image: url(../assets/MTG-cards-in-hand.jpg);
   height: 150px;
 }
 
-.jugaSection{
+.jugaSection {
   background-color: #695ca5;
 }
 
-.btnLinkFull{
+.btnLinkFull {
   margin-top: 32px;
   background-color: white;
-  color:#695ca5
+  color: #695ca5;
 }
 
-.btnLinkFull:hover{
+.btnLinkFull:hover {
   background-color: #695ca5;
   color: white;
 }
