@@ -1,6 +1,6 @@
 .encabezadoSection,
 .caracteristicasSection, .instruccionesSection, .jugaSection {
-  height: 450px;
+  height: 500px;
   display: grid;
   align-items: center;
   align-content: center;
@@ -23,10 +23,8 @@
   align-content: center;
 }
 
-.tituloSection {
-  justify-items: center;
-  padding-bottom: 1.5rem;
-}
+
+
 .encabezadoImgDiv {
   display: flex;
   justify-content: center;
@@ -72,6 +70,7 @@ h2 {
     display: flex;
     justify-content: space-between;
     padding-inline: 5vw ;
+    margin-bottom: 2rem;
 }
 
 .divPasos{

@@ -33,3 +33,10 @@
 .btnSubmit{
     background-color: #06b6d4 !important;
 }
+
+.banner{
+  background-image: url(../assets/hoja_personajes.jpg);
+  background-position-y: 38%;
+  height: 150px;
+
+}

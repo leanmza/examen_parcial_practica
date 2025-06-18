@@ -13,10 +13,6 @@ h1 {
   /* font-size: 20px; */
 }
 
-.btnCarrousel {
-  margin-right: 2rem;
-}
-
 nav,
 footer {
   padding-inline: 16px !important;
@@ -45,7 +41,7 @@ a > i {
 }
 
 .carousel-item {
-  height: 600px;
+  height: 800px;
   justify-content: center !important;
   align-content: center !important;
   text-align: center;
@@ -57,7 +53,8 @@ a > i {
 }
 .carousel-texto > h1,
 .carousel-texto > h2 {
-  font-size: 48px !important;
+  font-size: 64px !important;
+  margin-bottom: 32px;
 }
 
 .carousel-texto > h2 {
@@ -67,9 +64,11 @@ a > i {
 .carousel-texto > h4 {
   max-width: 70ch;
   color: white;
+  line-height: 2.5rem;
+  margin-bottom: 40px;
 }
 .carrouselSection {
-  height: 600px;
+  height: 800px;
   display: grid;
   align-items: center;
   align-content: center;
@@ -84,7 +83,7 @@ a > i {
 
 .carousel-item-2 {
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url(../assets/MTG-cards-in-hand.jpg);
+    url(../assets/magic-the-gathering-lord-of-the-rings-tales.jpg);
   background-size: cover;
 }
 
@@ -118,7 +117,7 @@ a > i {
 }
 .tituloSection {
   justify-items: center;
-  padding-bottom: 1.5rem;
+  padding-bottom: 3rem;
 }
 
 .card-body > p,
@@ -214,4 +213,17 @@ a > i {
 
 h2 {
   color: white;
+}
+
+.btnCarrousel {
+   margin-right: 2rem;
+  border: solid white 1px;
+}
+
+.linksFooter{
+  display: grid;
+  justify-content: end;
+}
+footer{
+  padding-right: 8rem !important;
 }
