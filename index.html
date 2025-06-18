@@ -28,7 +28,7 @@
   </head>
   <body>
     <!-- HEADER / NAVBAR -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
       <div class="container-fluid">
         <div class="logo">
           <a href="index.html" class="linkHome">
@@ -92,19 +92,33 @@
         >
           <div class="carousel-inner">
             <div class="carousel-item active carousel-item-1">
-              <h1>Empezá Aventuras Épicas</h1>
-              <h4>
-                Descubrí el mundo de los juegos de rol de mesa como D&D, cartas
-                Magic y muchos más. Tu próxima aventura te espera
-              </h4>
+              <div class="carousel-texto">
+                <h1>Empezá Aventuras Épicas</h1>
+                <h4>
+                  Descubrí el mundo de los juegos de rol de mesa como D&D,
+                  cartas Magic y muchos más. Tu próxima aventura te espera
+                </h4>
+              </div>
             </div>
             <div class="carousel-item carousel-item-2">
-              <h1>Magic: The Gathering</h1>
-              <h4>El juego de rol con cartas más popular</h4>
+              <div class="carousel-texto">
+                <h2>Magic: The Gathering</h2>
+                <h4>
+                  El juego de cartas donde estrategia, fantasía y poder se
+                  combinan. ¡Invocá criaturas, lanzá hechizos y enfrentate a
+                  oponentes en batallas épicas!
+                </h4>
+              </div>
             </div>
             <div class="carousel-item carousel-item-3">
-              <h1>Dungeon & Dragons</h1>
-              <h4>El juego de rol más popular del mundo</h4>
+              <div class="carousel-texto">
+                <h2>Dungeon & Dragons</h2>
+                <h4>
+                  Viví aventuras legendarias. Creá tu héroe, explorá mazmorras,
+                  enfrentá dragones y dejá volar tu imaginación en el juego de
+                  rol más famoso del mundo.
+                </h4>
+              </div>
             </div>
           </div>
           <button
@@ -135,11 +149,7 @@
         <div class="row row-cols-1 row-cols-md-3 g-4">
           <div class="col">
             <div class="card h-100">
-              <img
-                src="assets/dragones.jpg"
-                class="card-img-top"
-                alt="dragones"
-              />
+              <div class="imgCard imgDnd"></div>
               <div class="card-body">
                 <h5 class="card-title">Dungeon & Dragons</h5>
                 <p class="card-text">
@@ -151,28 +161,22 @@
             </div>
           </div>
           <div class="col">
-            <div class="card h-100">
-              <img
-                src="assets/dragones.jpg"
-                class="card-img-top"
-                alt="dragones"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Magic: The Gathering</h5>
-                <p class="card-text">
-                  Invoca criaturas, lanza hechizos y pelea contra oponentes en
-                  el más grande juego de cartas coleccionables del multiverso.
-                </p>
+            <a href="magicDetail.html" class="linkCard">
+              <div class="card h-100">
+                <div class="imgCard imgMagic"></div>
+                <div class="card-body">
+                  <h5 class="card-title">Magic: The Gathering</h5>
+                  <p class="card-text">
+                    Invoca criaturas, lanza hechizos y pelea contra oponentes en
+                    el más grande juego de cartas coleccionables del multiverso.
+                  </p>
+                </div>
               </div>
-            </div>
+            </a>
           </div>
           <div class="col">
             <div class="card h-100">
-              <img
-                src="assets/dragones.jpg"
-                class="card-img-top"
-                alt="dragones"
-              />
+              <div class="imgCard imgPath"></div>
               <div class="card-body">
                 <h5 class="card-title">Pathfinder</h5>
                 <p class="card-text">
