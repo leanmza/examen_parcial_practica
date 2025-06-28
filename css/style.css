@@ -15,14 +15,10 @@ h1 {
 
 nav,
 footer {
-  padding-inline: 16px !important;
   font-weight: 500;
   font-size: 16px !important;
   background-color: #2c3036;
   color: var(--bs-secondary-color) !important;
-}
-nav,
-footer {
   padding-inline: 3rem !important;
   margin: 0 !important;
 }
@@ -108,13 +104,12 @@ a > i {
 
 .listoSection {
   height: 350px;
+   background-color: #df3f40;
 }
 .popularesSection {
   background-color: #2c3036;
 }
-.listoSection {
-  background-color: #df3f40;
-}
+
 .tituloSection {
   justify-items: center;
   padding-bottom: 3rem;
@@ -144,17 +139,6 @@ a > i {
   font-size: 14px;
 }
 
-.card-icon {
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  width: 48px;
-  height: 48px;
-  margin-top: 16px;
-  margin-left: 16px;
-  margin-bottom: 8px;
-  border-radius: 6px;
-}
 .card-icon {
   display: grid;
   justify-content: center;
