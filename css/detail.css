@@ -1,6 +1,6 @@
-.encabezadoSection,
-.caracteristicasSection,
-.instruccionesSection,
+.encabezado-section,
+.caracteristicas-section,
+.instrucciones-section,
 .jugaSection {
   height: 500px;
   display: grid;
@@ -10,28 +10,27 @@
   margin-inline: 0;
 }
 
-.encabezadoSection {
+.encabezado-section {
   background-image: url(../assets/ChatGPT\ Image\ magic\ velas.png);
   background-repeat: no-repeat;
   background-size: cover;
   background-position-y: 80%;
 }
-.encabezadoSection,
-.instruccionesSection {
+.encabezado-section,
+.instrucciones-section {
   background-color: #2c3036;
 }
-.caracteristicasSection,
-.instruccionesSection {
-
+.caracteristicas-section,
+.instrucciones-section {
   margin-inline: 0;
 }
 
-.tituloEncabezado {
+.header-title {
   display: grid;
   align-content: center;
 }
 
-.tituloEncabezado > p {
+.header-title > p {
   font-size: 1.2rem;
   max-width: 75ch;
 }
@@ -59,7 +58,7 @@ h2 {
   color: white;
 }
 
-.btnApender {
+.btn-aprender {
   background-color: #695ca5;
 }
 
@@ -83,20 +82,20 @@ h2 {
   background-color: #845ca5;
 }
 
-.instruccionesSection > .row {
+.instrucciones-section > .row {
   display: flex;
   justify-content: space-around;
   padding-inline: 5dvw;
   margin-bottom: 5dvh;
 }
 
-.divPasos {
+.pasos {
   display: grid;
   justify-items: center;
   text-align: center;
   width: 250px;
 }
-.pasos {
+.paso-icon {
   border-radius: 50%;
   width: 100px;
   height: 100px;
@@ -105,7 +104,7 @@ h2 {
   align-items: center;
   margin-bottom: 16px;
 }
-.pasoJugar {
+.pasos-header {
   margin: 0;
 }
 .primero {
@@ -127,45 +126,46 @@ h2 {
   align-content: baseline;
 }
 
-.bannerMagic {
+.banner-magic {
   background-image: url(../assets/MTG-cards-in-hand.jpg);
-  height: 150px;
 }
 
 .jugaSection {
   background-color: #695ca5;
-   height: 350px;
+  height: 350px;
 }
-.jugaSection>.tituloSection{
+.jugaSection > .header-section {
   padding: 0 !important;
 }
 
-.btnLinkFull {
+.btn-full {
   margin-top: 32px;
   background-color: white;
   color: #695ca5;
 }
 
-.btnLinkFull:hover {
+.btn-full:hover {
   background-color: #695ca5;
-  color: white;
+  color: white !important;
+  border: solid white 1px;
 }
+
 
 /* Pantallas hasta xl  */
 @media (max-width: 1199px) {
-  .encabezadoSection,
-  .caracteristicasSection,
-  .instruccionesSection,
+  .encabezado-section,
+  .caracteristicas-section,
+  .instrucciones-section,
   .jugaSection {
     height: fit-content;
     padding: 10dvh 5dvw;
   }
 
-  .instruccionesSection {
+  .instrucciones-section {
     padding-inline: 0;
   }
 
-  .instruccionesSection > .row {
+  .instrucciones-section > .row {
     display: flex;
     justify-content: space-around;
     padding-inline: 5dvw;
@@ -179,22 +179,22 @@ h2 {
 
 /* Pantallas hasta small */
 @media (max-width: 767px) {
-  .encabezadoSection {
+  .encabezado-section {
     padding-inline: 10dvw;
   }
-  .tituloEncabezado {
+  .header-title {
     display: grid;
     justify-items: center;
     text-align: center;
   }
 
-  .tituloEncabezado > h1 {
+  .header-title > h1 {
     font-size: 3rem !important;
   }
-  .tituloEncabezado > p {
+  .header-title > p {
     text-align: justify;
   }
-  .btnCarrousel {
+  .btn-outline-carrousel {
     margin: 8px;
   }
 }

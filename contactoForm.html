@@ -28,10 +28,10 @@
   </head>
   <body>
     <!-- HEADER / NAVBAR -->
-     <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
       <div class="container-fluid">
         <div class="logo">
-          <a href="index.html" class="linkHome">
+          <a href="index.html" class="link-home">
             <img src="assets/d20.png" alt="Bootstrap" width="24" height="24" />
             <span class="nombreWeb">Rol Dungeon</span>
           </a>
@@ -94,20 +94,23 @@
     </nav>
     <!-- MAIN -->
     <main class="container-fluid">
-      <section class="contactoForm">
-        <div class="py-5 text-center titulo">
+      <section class="encabezado-section">
+        <div class="header-title header-section">
           <h1>Contacto</h1>
-          <h6>
+          <p>
             ¿Tenés alguna pregunta sobre los juegos de rol? ¿Necesitas
             asistencia para tu próxima partida? Nosotros te ayudamos en tu épica
             aventura.
-          </h6>
+          </p>
         </div>
-        <div class="formDiv">
+      </section>
+      <section class="form-section">
+  
           <form action="" method="post">
+                  <div class="row"></div>
             <div class="row d-flex justify-content-center g-3">
               
-              <div class="col-12 col-sm-6 divInput">
+              <div class="col-12 col-sm-6 form-input">
                 <label for="nombre" class="form-label">Nombre</label>
                 <input
                   type="text"
@@ -119,7 +122,7 @@
                 />
                 <div class="invalid-feedback">Campo obligatirio</div>
               </div>
-              <div class="col-12 col-sm-6 divInput">
+              <div class="col-12 col-sm-6 form-input">
                 <label for="nombre" class="form-label">Apellido</label>
                 <input
                   type="text"
@@ -133,7 +136,7 @@
             </div>
             <div class="row d-flex justify-content-center g-3 mt-1">
               
-              <div class="col-12 col-sm-6 divInput">
+              <div class="col-12 col-sm-6 form-input">
                 <label for="email" class="form-label">Email </label>
                 <input
                   type="email"
@@ -144,7 +147,7 @@
                 />
                 <div class="invalid-feedback">Campo obligatirio</div>
               </div>
-              <div class="col-12 col-sm-6 divInput">
+              <div class="col-12 col-sm-6 form-input">
                 <label for="consulta" class="form-label">Motivo</label>
                 <select
                   name="consultas"
@@ -169,7 +172,7 @@
                 name="comentario"
                 id=""
                 placeholder="Dejanos tu consulta"
-                class="cajaComentario col-12 col-xxl-8"
+                class="form-textarea col-12 col-xxl-8"
                 required
                 minlength="30"
               ></textarea>
@@ -180,8 +183,8 @@
                 class="mb-4 col-12 form-check d-flex justify-content-center robot"
               >
                 <input
-                  type="checkbox"
-                  class="form-check-input checkbox"
+                  type="form-checkbox"
+                  class="form-check-input form-checkbox"
                   id="humano"
                   required
                 />
@@ -192,16 +195,17 @@
             </div>
             <div class="d-flex justify-content-center row">
               <button
-                class="btn btn-primary btn-lg  col-xl-2 col-lg-3 col-sm-4 col-6 btnSubmit"
+                class="btn btn-primary btn-lg  col-xl-2 col-lg-3 col-sm-4 col-6 btn-submit"
                 type="submit"
               >
                 Enviar
               </button>
             </div>
+                   </div>
           </form>
-        </div>
+ 
       </section>
-      <section class="banner"></section>
+      <section class="banner banner-form"></section>
     </main>
     <!-- FOOTER -->
     <footer class="row row-cols-1 row-cols-3 row-cols-md-5 py-5 border-top">
@@ -224,9 +228,9 @@
         <p class="text-body-secondary">&copy; 2025</p>
       </div>
 
-      <div class="col mb-3 rellenoFooter"></div>
-      <div class="col mb-3 rellenoFooter"></div>
-      <div class="col mb-3 linksFooter">
+      <div class="col mb-3 relleno"></div>
+      <div class="col mb-3 relleno"></div>
+      <div class="col mb-3 links-footer">
         <h6>Juegos</h6>
         <ul class="nav flex-column">
           <li class="nav-item mb-2">
@@ -249,7 +253,7 @@
           </li>
         </ul>
       </div>
-      <div class="col mb-3 linksFooter">
+      <div class="col mb-3 links-footer">
         <ul class="nav flex-column">
           <li class="nav-item mb-2">
             <a href="index.html" class="nav-link p-0 text-body-secondary"

@@ -32,7 +32,7 @@
     <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
       <div class="container-fluid">
         <div class="logo">
-          <a href="index.html" class="linkHome">
+          <a href="index.html" class="link-home">
             <img src="assets/d20.png" alt="Bootstrap" width="24" height="24" />
             <span class="nombreWeb">Rol Dungeon</span>
           </a>
@@ -93,13 +93,12 @@
         </div>
       </div>
     </nav>
+
     <!-- MAIN -->
     <main class="container-fluid">
-      <section class="encabezadoSection">
+      <section class="encabezado-section">
         <div class="row">
-          <div
-            class="col-xxl-6 col-xl-7 offset-xxl-2 offset-xl-1 tituloEncabezado"
-          >
+          <div class="col-xxl-6 col-xl-7 offset-xxl-2 offset-xl-1 header-title">
             <h1><span>Domina el arte de </span> Magic: The Gathering</h1>
             <p>
               Sumergíte en el multiverso del juego de cartas más estratégico.
@@ -107,21 +106,24 @@
             </p>
 
             <div>
-              <a href="#instrucciones">
-                <button class="btn btnCarrousel btnApender">
-                  Aprender a jugar
-                </button>
+              <a
+                href="#instrucciones"
+                class="btn btn-outline-carrousel btn-aprender"
+              >
+                Aprender a jugar
               </a>
-
-              <button class="btn btnCarrousel btnReglas">
+              <a
+                href=""
+                class="btn btn-outline-carrousel"
+              >
                 Reglas de juego
-              </button>
+              </a>
             </div>
           </div>
         </div>
       </section>
-      <section class="caracteristicasSection">
-        <div class="tituloEncabezado tituloSection">
+      <section class="caracteristicas-section">
+        <div class="header-title header-section">
           <h2>Caracteristicas del Juego</h2>
           <p>
             Descubrí que hace a Magic: The Gathering el juego de rol con cartas
@@ -133,7 +135,7 @@
           <div class="row row-cols-1 row-cols-md-3 g-4">
             <div class="col">
               <div class="card">
-                <div class="card-icon varita">
+                <div class="icon-card varita">
                   <i class="fa-solid fa-wand-sparkles fa-xl"></i>
                 </div>
                 <div class="card-body">
@@ -147,7 +149,7 @@
             </div>
             <div class="col">
               <div class="card">
-                <div class="card-icon mazo">
+                <div class="icon-card mazo">
                   <i class="fa-solid fa-layer-group fa-xl"></i>
                 </div>
                 <div class="card-body">
@@ -161,7 +163,7 @@
             </div>
             <div class="col">
               <div class="card">
-                <div class="card-icon multiplayer">
+                <div class="icon-card multiplayer">
                   <i class="fa-solid fa-user-group fa-xl"></i>
                 </div>
                 <div class="card-body">
@@ -176,45 +178,45 @@
           </div>
         </div>
       </section>
-      <section class="instruccionesSection">
+      <section class="instrucciones-section">
         <div
-          class="tituloEncabezado tituloSection tituloInstruciones"
+          class="header-title header-section tituloInstruciones"
           id="instrucciones"
         >
           <h2>Cómo jugar</h2>
           <p>Aprendé lo básico en estos simple pasos</p>
         </div>
         <div class="row row-cols-1 row-cols-md-4 g-4">
-          <div class="col-3 divPasos">
-            <div class="pasos primero">
-              <h3 class="pasoJugar">1</h3>
+          <div class="col-3 pasos">
+            <div class="paso-icon primero">
+              <h3 class="pasos-header">1</h3>
             </div>
             <div class="textoPaso">
               <h6>Mezclá y robá cartas</h6>
               <p>Robá 7 cartas de tu mazo y 1 cada en cada turno posterior.</p>
             </div>
           </div>
-          <div class="col-3 divPasos">
-            <div class="pasos segundo">
-              <h3 class="pasoJugar">2</h3>
+          <div class="col-3 pasos">
+            <div class="paso-icon segundo">
+              <h3 class="pasos-header">2</h3>
             </div>
             <div class="textoPaso">
               <h6>Sacrificá tierras</h6>
               <p>Jugá una carta de tierra por turno para generar maná.</p>
             </div>
           </div>
-          <div class="col-3 divPasos">
-            <div class="pasos tercero">
-              <h3 class="pasoJugar">3</h3>
+          <div class="col-3 pasos">
+            <div class="paso-icon tercero">
+              <h3 class="pasos-header">3</h3>
             </div>
             <div class="textoPaso">
               <h6>Invocá criaturas y hechizos</h6>
               <p>Usá el maná para invocar criaturas y lanzar hechizos.</p>
             </div>
           </div>
-          <div class="col-3 divPasos">
-            <div class="pasos cuarto">
-              <h3 class="pasoJugar">4</h3>
+          <div class="col-3 pasos">
+            <div class="paso-icon cuarto">
+              <h3 class="pasos-header">4</h3>
             </div>
             <div class="textoPaso">
               <h6>Atacá y ganá</h6>
@@ -223,24 +225,26 @@
           </div>
         </div>
       </section>
-      <section class="bannerMagic"></section>
+      <section class="banner banner-magic"></section>
       <section class="jugaSection">
-        <div class="tituloEncabezado tituloSection">
+        <div class="header-title header-section">
           <h2>¿Querés empezar a jugar ya?</h2>
           <p>
             Entrá en la comunidad de millones de jugadores alrededor del mundo,
             en la app oficial Magic: The Gathering Arena &copy
           </p>
           <div>
-            <a href="https://magic.wizards.com/en/mtgarena">
-              <button class="btn btnCarrousel btnLinkFull">
-                Descargar MGT Arena
-              </button>
+            <a
+              href="https://magic.wizards.com/en/mtgarena"
+              class="btn btn-outline-carrousel btn-full"
+            >
+              Descargar MGT Arena
             </a>
           </div>
         </div>
       </section>
     </main>
+
     <!-- FOOTER -->
 
     <footer class="row row-cols-1 row-cols-3 row-cols-md-5 py-5 border-top">
@@ -263,9 +267,9 @@
         <p class="text-body-secondary">&copy; 2025</p>
       </div>
 
-      <div class="col mb-3 rellenoFooter"></div>
-      <div class="col mb-3 rellenoFooter"></div>
-      <div class="col mb-3 linksFooter">
+      <div class="col mb-3 relleno"></div>
+      <div class="col mb-3 relleno"></div>
+      <div class="col mb-3 links-footer">
         <h6>Juegos</h6>
         <ul class="nav flex-column">
           <li class="nav-item mb-2">
@@ -288,7 +292,7 @@
           </li>
         </ul>
       </div>
-      <div class="col mb-3 linksFooter">
+      <div class="col mb-3 links-footer">
         <ul class="nav flex-column">
           <li class="nav-item mb-2">
             <a href="index.html" class="nav-link p-0 text-body-secondary"
