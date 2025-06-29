@@ -80,6 +80,7 @@ a > i {
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url(../assets/modular-game-table-rustic-walnut-hex-game-cover.jpg);
   background-size: cover;
+  background-position: center;
   display: grid;
 }
 
@@ -87,12 +88,14 @@ a > i {
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url(../assets/magic-the-gathering-lord-of-the-rings-tales.jpg);
   background-size: cover;
+    background-position: center;
 }
 
 .carousel-item-3 {
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url(../assets/orcs_and_ogre_minis.jpg);
   background-size: cover;
+    background-position: center;
 }
 
 .popularesSection,
