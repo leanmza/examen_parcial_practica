@@ -29,14 +29,25 @@
   </head>
   <body>
     <!-- HEADER / NAVBAR -->
-       <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
       <div class="container-fluid">
         <div class="logo">
-          <a href="home.html" class="linkHome">
+          <a href="index.html" class="linkHome">
             <img src="assets/d20.png" alt="Bootstrap" width="24" height="24" />
             <span class="nombreWeb">Rol Dungeon</span>
           </a>
         </div>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse mx-4" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item dropdown">
@@ -86,30 +97,26 @@
     <main class="container-fluid">
       <section class="encabezadoSection">
         <div class="row">
-          <div class="col-4 offset-2 tituloEncabezado">
+          <div
+            class="col-xxl-6 col-xl-7 offset-xxl-2 offset-xl-1 tituloEncabezado"
+          >
             <h1><span>Domina el arte de </span> Magic: The Gathering</h1>
             <p>
               Sumergíte en el multiverso del juego de cartas más estratégico.
               Armá mazos, conjurá hechizos y peleá en duelos épicos.
             </p>
 
-            <div><a href="#instrucciones">
-              <button class="btn btnCarrousel btnApender">
-                Aprender a jugar
-              </button>
+            <div>
+              <a href="#instrucciones">
+                <button class="btn btnCarrousel btnApender">
+                  Aprender a jugar
+                </button>
               </a>
 
               <button class="btn btnCarrousel btnReglas">
                 Reglas de juego
               </button>
             </div>
-          </div>
-          <div class="col-4 encabezadoImgDiv">
-            <img
-              src="assets/ChatGPT Image magic velas.png"
-              class="encabezadoImg"
-              alt="cartas de magic sobre mesa"
-            />
           </div>
         </div>
       </section>
@@ -170,11 +177,14 @@
         </div>
       </section>
       <section class="instruccionesSection">
-        <div class="tituloEncabezado tituloSection tituloInstruciones" id="instrucciones">
+        <div
+          class="tituloEncabezado tituloSection tituloInstruciones"
+          id="instrucciones"
+        >
           <h2>Cómo jugar</h2>
           <p>Aprendé lo básico en estos simple pasos</p>
         </div>
-        <div class="row">
+        <div class="row row-cols-1 row-cols-md-4 g-4">
           <div class="col-3 divPasos">
             <div class="pasos primero">
               <h3 class="pasoJugar">1</h3>
@@ -227,13 +237,13 @@
                 Descargar MGT Arena
               </button>
             </a>
-           </div>
+          </div>
         </div>
       </section>
     </main>
     <!-- FOOTER -->
 
-    <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 border-top">
+    <footer class="row row-cols-1 row-cols-3 row-cols-md-5 py-5 border-top">
       <div class="col mb-3">
         <div class="row d-flex justify-content-start gap-1">
           <a href="https://www.facebook.com" class="col-1">
@@ -253,8 +263,8 @@
         <p class="text-body-secondary">&copy; 2025</p>
       </div>
 
-      <div class="col mb-3"></div>
-      <div class="col mb-3"></div>
+      <div class="col mb-3 rellenoFooter"></div>
+      <div class="col mb-3 rellenoFooter"></div>
       <div class="col mb-3 linksFooter">
         <h6>Juegos</h6>
         <ul class="nav flex-column">
@@ -281,7 +291,7 @@
       <div class="col mb-3 linksFooter">
         <ul class="nav flex-column">
           <li class="nav-item mb-2">
-            <a href="home.html" class="nav-link p-0 text-body-secondary"
+            <a href="index.html" class="nav-link p-0 text-body-secondary"
               ><h6>Home</h6></a
             >
           </li>

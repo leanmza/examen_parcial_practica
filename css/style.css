@@ -8,9 +8,11 @@ body {
 }
 
 h1 {
-  color: #06b6d4 !important;
   font-weight: 700 !important;
-  /* font-size: 20px; */
+  background: linear-gradient(to left, #06b6d4, #dbdadf);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
 }
 
 nav,
@@ -49,13 +51,16 @@ a > i {
 }
 .carousel-texto > h1,
 .carousel-texto > h2 {
-  font-size: 64px !important;
+  font-size: 5rem;
   margin-bottom: 32px;
 }
 
 .carousel-texto > h2 {
   font-weight: 700 !important;
-  color: #06b6d4;
+  background: linear-gradient(45deg, #06b6d4, #dbdadf);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
 }
 .carousel-texto > h4 {
   max-width: 70ch;
@@ -104,10 +109,14 @@ a > i {
 
 .listoSection {
   height: 350px;
-   background-color: #df3f40;
+  background-color: #df3f40;
 }
 .popularesSection {
   background-color: #2c3036;
+}
+
+.listoSection > .tituloSection {
+  padding-bottom: 0 !important;
 }
 
 .tituloSection {
@@ -129,7 +138,7 @@ a > i {
 .card {
   display: flex;
   justify-content: center;
-  width: 400px;
+  max-width: 400px;
   height: 195px;
   background-color: #2c3036;
 }
@@ -200,14 +209,58 @@ h2 {
 }
 
 .btnCarrousel {
-   margin-right: 2rem;
+  margin-right: 2rem;
   border: solid white 1px;
 }
 
-.linksFooter{
+.linksFooter {
   display: grid;
   justify-content: end;
 }
-footer{
-  padding-right: 8rem !important;
+footer {
+  padding-inline: 5dvh !important;
+}
+/* Pantallas hasta medium  */
+@media (max-width: 991px) {
+  .carousel-texto {
+    padding: 0 10dvw;
+  }
+
+  .instruccionesSection,
+  .popularesSection,
+  .caracteristicasSection,
+  .listoSection {
+    height: fit-content;
+    padding: 10dvh 5dvw;
+  }
+
+  h2 {
+    font-size: 30px;
+  }
+  .card {
+    display: flex;
+    justify-content: center;
+    max-width: 90dvw;
+    background-color: #2c3036;
+  }
+  .card-text {
+    max-width: fit-content;
+  }
+}
+
+/* Pantallas hasta small */
+@media (max-width: 767px) {
+  .rellenoFooter {
+    display: none;
+  }
+
+  .carousel-texto > h1,
+  .carousel-texto > h2 {
+    font-size: 4rem;
+    margin-bottom: 32px;
+  }
+
+  footer {
+    padding-inline: 2dvh !important;
+  }
 }
