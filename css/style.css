@@ -167,14 +167,16 @@ a > i {
   text-decoration: none;
 }
 .card-dnd {
-  background-image: url(../assets/dragons.png);
-  background-position-y: bottom;
+  background-image: url(../assets/dnd_blue_dragons.png);
+  background-position-y: 80%;
 }
 .card-magic {
-  background-image: url(../assets/magic\ table.png);
+  background-image: url(../assets/magic_mystical.png);
+   background-position-y: 30%;
 }
 .card-pathfinder {
-  background-image: url(../assets/party.png);
+  background-image: url(../assets/pathfinder_party.png);
+   background-position-y: 80%;
 }
 
 .img-card {
