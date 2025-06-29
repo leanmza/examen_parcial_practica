@@ -1,7 +1,8 @@
+
 body {
   font-family: roboto !important;
   font-size: 16px !important;
-  width: 100dvw;
+  max-width: 99dvw !important;
 }
 .container-fluid {
   padding: 0 !important;
