@@ -29,15 +29,16 @@
 
 h1 {
   font-size: 4.5em !important;
-  background: linear-gradient(215deg,   rgba(76, 29, 149, 0.9),  rgba(255, 255, 255, 1));
+  background: linear-gradient(
+    215deg,
+    rgba(76, 29, 149, 0.9),
+    rgba(255, 255, 255, 1)
+  );
   color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
   font-weight: 800 !important;
-  
 }
-
-
 
 .btn-aprender {
   background-color: #695ca5;
@@ -109,8 +110,8 @@ h1 {
   max-width: 1200px;
 }
 
-.card{
-  max-height: 350px;
+.card {
+  padding-bottom: 0;
 }
 
 .card-img {
@@ -154,6 +155,15 @@ h1 {
     padding-inline: 10dvw;
   }
 
+  .cartas-section,
+  .instrucciones-section {
+    padding-inline: 5dvw !important;
+  }
+
+  .instrucciones-section {
+    padding-bottom: 2dvh !important;
+  }
+
   .header-title {
     display: grid;
     justify-items: center;
@@ -169,20 +179,22 @@ h1 {
   .btn-outline-carrousel {
     margin: 8px;
   }
+
+  .header-title > p {
+    font-size: 1rem;
+  }
 }
+
 /* Pantallas hasta extra small */
 @media (max-width: 575px) {
-  .cartas-section {
-    padding-inline: 5dvh;
-  }
-  .cards>div{
+  .cards > div {
     display: grid;
   }
-  .card-carta {
+  /* .card-type {
     max-width: 500px;
     width: 100%;
     max-height: 350px;
-  }
+  } */
   .card-img {
     max-height: 250px;
   }

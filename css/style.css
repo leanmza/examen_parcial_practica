@@ -1,3 +1,38 @@
+:root {
+  --color-primary: #695ca5;
+  --color-secondary: #06b6d4;
+  --color-accent: #df3f40;
+  --color-light: #dbdadf;
+  --color-dark: #2c3036;
+  --color-muted: #b3b3b3;
+  --color-light-white: #ffffff;
+  --color-primary-translucent: #695ca566;
+  --color-secondary-translucent: #06b6d466;
+  --color-dark-translucent: #2c303666;
+
+  /* Gradientes */
+  --gradient-primary: linear-gradient(
+    135deg,
+    var(--color-secondary),
+    var(--color-light)
+  );
+  --gradient-header: linear-gradient(
+    to left,
+    var(--color-secondary),
+    var(--color-light)
+  );
+  --gradient-magic: linear-gradient(
+    to bottom right,
+    var(--color-primary),
+    var(--color-secondary)
+  );
+
+--gradient-carrousel: linear-gradient(to bottom,
+  var(--color-primary-translucent),
+  var(--color-dark-translucent)
+);
+}
+
 body {
   font-family: roboto !important;
   font-size: 16px !important;
@@ -9,7 +44,7 @@ body {
 
 h1 {
   font-weight: 700 !important;
-  background: linear-gradient(to left, #06b6d4, #dbdadf);
+  background: var(--gradient-header);
   color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
@@ -19,23 +54,22 @@ nav,
 footer {
   font-weight: 500;
   font-size: 16px !important;
-  background-color: #2c3036;
-  color: var(--bs-secondary-color) !important;
+  background-color: var(--color-dark) !important;
+  color: var(--color-muted) !important;
   padding-inline: 3rem !important;
   margin: 0 !important;
 }
 
-.link-home {
+a {
   text-decoration: none;
-  color: white;
 }
-.nombreWeb {
+.site-name {
   margin: 8px;
-  color: var(--bs-secondary-color) !important;
+  color: var(--color-muted) !important;
 }
 
 a > i {
-  color: var(--bs-secondary-color) !important;
+  color: var(--color-muted) !important;
 }
 
 .carousel-item {
@@ -57,14 +91,14 @@ a > i {
 
 .carousel-texto > h2 {
   font-weight: 700 !important;
-  background: linear-gradient(45deg, #06b6d4, #dbdadf);
+  background: var(--gradient-primary);
   color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
 }
 .carousel-texto > h4 {
   max-width: 70ch;
-  color: white;
+  color: var(--color-light-white);
   line-height: 2.5rem;
   margin-bottom: 40px;
 }
@@ -76,7 +110,7 @@ a > i {
   margin-inline: 0;
 }
 .carousel-item-1 {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+  background-image: var(--gradient-carrousel),
     url(../assets/modular-game-table-rustic-walnut-hex-game-cover.jpg);
   background-size: cover;
   background-position: center;
@@ -84,14 +118,14 @@ a > i {
 }
 
 .carousel-item-2 {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+  background-image: var(--gradient-carrousel),
     url(../assets/magic-the-gathering-lord-of-the-rings-tales.jpg);
   background-size: cover;
   background-position: center;
 }
 
 .carousel-item-3 {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+  background-image:var(--gradient-carrousel),
     url(../assets/orcs_and_ogre_minis.jpg);
   background-size: cover;
   background-position: center;
@@ -112,10 +146,10 @@ a > i {
 
 .listo-section {
   height: 350px;
-  background-color: #df3f40;
+  background-color: var(--color-accent);
 }
 .populares-section {
-  background-color: #2c3036;
+  background-color: var(--color-dark);
 }
 
 .listo-section > .header-section {
@@ -124,7 +158,7 @@ a > i {
 
 .header-section {
   justify-items: center;
-  padding-bottom: 3rem;
+  padding-bottom: 2rem;
 }
 
 .card-body > p,
@@ -142,8 +176,9 @@ a > i {
   display: flex;
   justify-content: center;
   max-width: 400px;
-  height: 195px;
+  height: 100%;
   background-color: #2c3036;
+  padding: 16px;
 }
 
 .card-text {
@@ -157,8 +192,6 @@ a > i {
   align-items: center;
   width: 48px;
   height: 48px;
-  margin-top: 16px;
-  margin-left: 16px;
   margin-bottom: 8px;
   border-radius: 6px;
 }
@@ -172,11 +205,11 @@ a > i {
 }
 .card-magic {
   background-image: url(../assets/magic_mystical.png);
-   background-position-y: 30%;
+  background-position-y: 30%;
 }
 .card-pathfinder {
   background-image: url(../assets/pathfinder_party.png);
-   background-position-y: 80%;
+  background-position-y: 80%;
 }
 
 .img-card {
@@ -187,36 +220,36 @@ a > i {
 }
 
 .card-comunidad {
-  background-color: #df3f40;
+  background-color: var(--color-accent);
 }
 
 .card-contenido {
-  background-color: #06b6d4;
+  background-color: var(--color-secondary);
 }
 
 .card-tools {
-  background-color: #695ca5;
+  background-color: var(--color-primary);
 }
 
 .btn-games {
   margin-top: 32px;
-  background-color: white;
-  color: #df3f40;
+  background-color: var(--color-light-white);
+  color: var(--color-accent);
 }
 
 .btn-games:hover {
-  background-color: #df3f40;
-  color: white;
-  border: solid white 1px;
+  background-color: var(--color-accent);
+  color: var(--color-light-white);
+  border: solid var(--color-light-white) 1px;
 }
 
 h2 {
-  color: white;
+  color: var(--color-light-white);
 }
 
 .btn-outline-carrousel {
   margin-right: 2rem;
-  border: solid white 1px;
+  border: solid var(--color-light-white) 1px;
 }
 
 .links-footer {
@@ -227,14 +260,13 @@ footer {
   padding-inline: 5dvh !important;
 }
 
-.banner{
+.banner {
   height: 150px;
 }
 
-.card-title{
+.card-title {
   font-weight: 700 !important;
 }
-
 
 /* Pantallas hasta medium  */
 @media (max-width: 991px) {
@@ -256,7 +288,7 @@ footer {
     display: flex;
     justify-content: center;
     max-width: 90dvw;
-    background-color: #2c3036;
+    background-color: var(--color-dark);
   }
   .card-text {
     max-width: fit-content;

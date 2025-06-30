@@ -25,15 +25,12 @@
 .encabezado-section > .row {
   justify-content: center;
 }
-.card-carta {
-  max-width: 300px;
-  width: 100%;
-}
+
 .instrucciones-section {
   justify-content: center;
   width: 100%;
   height: fit-content;
-  padding: 10dvh;
+  padding: 7dvh;
 }
 
 .varita {
@@ -156,22 +153,26 @@
 }
 
 .card-img {
-  height: 250px;
-  padding: 24px;
+  height: 200px;
 }
 
 .card-info > .card-body {
-  max-height: 500px;
   height: 100%;
+  padding: 2rem;
 }
 
-.card-body > .card-title {
-  padding: 1rem 2rem;
+.card-info > .card-body > h6 {
+  padding: 2rem 0 1rem;
 }
+
+.card-body {
+  padding: 16px 0;
+}
+
 .card-body > ul {
   font-size: 14px;
   color: #b3b3b3;
-  padding-bottom: 0.5rem;
+  padding: 0;
   margin: 0;
 }
 
@@ -180,4 +181,23 @@
 }
 .instrucciones-section > .row > div {
   align-content: center;
+}
+
+/* Pantallas hasta small */
+@media (max-width: 767px) {
+.instrucciones-section > .row > div> .paso {
+ justify-content: center;
+}
+
+.instrucciones-section > .row > div {
+ margin-bottom: 32px;
+}
+
+  .header-title > p {
+    text-align: center;
+  }
+  .card-info > .card-body {
+  height: 100%;
+  padding: 2rem 2rem 0;
+}
 }

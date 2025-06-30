@@ -36,9 +36,8 @@
   text-align: center;
 }
 
-.consultas {
-  width: 100%;
-  height: 38px;
+.form-select {
+  margin: 0 !important;
 }
 
 .form-textarea {
