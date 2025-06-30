@@ -1,14 +1,19 @@
 :root {
   --color-primary: #695ca5;
   --color-secondary: #06b6d4;
+  --color-tertiary: #845ca5;
   --color-accent: #df3f40;
   --color-light: #dbdadf;
   --color-dark: #2c3036;
+  --color-dark-secondary: #202529;
   --color-muted: #b3b3b3;
   --color-light-white: #ffffff;
   --color-primary-translucent: #695ca566;
+  --color-primary-translucent-2: #695ca5e6;
   --color-secondary-translucent: #06b6d466;
+  --color-secondary-translucent-2: #06b6d433;
   --color-dark-translucent: #2c303666;
+  --color-dark-translucent-2: #2c303633;
 
   /* Gradientes */
   --gradient-primary: linear-gradient(
@@ -19,18 +24,28 @@
   --gradient-header: linear-gradient(
     to left,
     var(--color-secondary),
-    var(--color-light)
+    var(--color-light-white)
+  );
+  --gradient-header-detail: linear-gradient(
+    215deg,
+    rgba(76, 29, 149, 0.9),
+    var(--color-light-white)
   );
   --gradient-magic: linear-gradient(
     to bottom right,
-    var(--color-primary),
-    var(--color-secondary)
+    var(--color-primary-translucent),
+    var(--color-secondary-translucent)
   );
-
---gradient-carrousel: linear-gradient(to bottom,
-  var(--color-primary-translucent),
-  var(--color-dark-translucent)
-);
+  --gradient-carrousel: linear-gradient(
+    to bottom,
+    var(--color-primary-translucent),
+    var(--color-dark-translucent)
+  );
+  --gradient-banner: linear-gradient(
+    to bottom right,
+    var(--color-dark-translucent-2),
+    var(--color-secondary-translucent-2)
+  );
 }
 
 body {
@@ -125,7 +140,7 @@ a > i {
 }
 
 .carousel-item-3 {
-  background-image:var(--gradient-carrousel),
+  background-image: var(--gradient-carrousel),
     url(../assets/orcs_and_ogre_minis.jpg);
   background-size: cover;
   background-position: center;

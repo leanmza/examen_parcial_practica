@@ -29,11 +29,7 @@
 
 h1 {
   font-size: 4.5em !important;
-  background: linear-gradient(
-    215deg,
-    rgba(76, 29, 149, 0.9),
-    rgba(255, 255, 255, 1)
-  );
+  background: var(--gradient-header-detail);
   color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
@@ -41,18 +37,18 @@ h1 {
 }
 
 .btn-aprender {
-  background-color: #695ca5;
+  background-color: var(--color-primary);
 }
 
 .btnReglas {
-  color: #dbdadf;
-  border-color: #dbdadf;
+  color: var(--color-light);
+  border-color: var(--color-light);
 }
 
 .textoPaso > p {
   max-width: 75ch;
   font-size: 14px;
-  color: #b3b3b3;
+  color: var(--color-muted);
 }
 
 .instrucciones-section > .row {
@@ -88,7 +84,7 @@ h1 {
 }
 
 .juga-section {
-  background-color: #695ca5;
+  background-color: var(--color-primary);
   height: 350px;
 }
 .juga-section > .header-section {
@@ -97,14 +93,14 @@ h1 {
 
 .btn-full {
   margin-top: 32px;
-  background-color: white;
-  color: #695ca5;
+  background-color: var(--color-light-white);
+  color: var(--color-primary);
 }
 
 .btn-full:hover {
-  background-color: #695ca5;
-  color: white !important;
-  border: solid white 1px;
+  background-color: var(--color-primary);
+  color: var(--color-light-white) !important;
+  border: solid var(--color-light-white) 1px;
 }
 .cards {
   max-width: 1200px;

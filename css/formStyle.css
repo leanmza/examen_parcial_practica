@@ -10,7 +10,7 @@
 
 .form-section {
   height: fit-content;
-  background-color: #2c3036;
+  background-color: var(--color-dark);
   width: 100dvw;
   padding: 10dvh;
 }
@@ -23,7 +23,7 @@
 .header-title > h1 {
   font-size: 3rem !important ;
   font-weight: 700 !important;
-  background: linear-gradient(135deg, #06b6d4, #dbdadf);
+  background: var(--gradient-primary);
   color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
@@ -52,7 +52,7 @@
 }
 
 .btn-submit {
-  background-color: #06b6d4 !important;
+  background-color: var(--color-secondary) !important;
 }
 
 .form-input {
@@ -73,7 +73,7 @@
 /* Pantallas hasta small */
 @media (max-width: 575px) {
   .form-section {
-    background-color: #2c3036;
+    background-color: var(--color-dark);
     width: 100dvw;
     padding: 5dvh;
   }
