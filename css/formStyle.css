@@ -69,10 +69,7 @@
   align-content: center;
 }
 
-.header-title > p {
-  font-size: 1.2rem;
-  max-width: 75ch;
-}
+
 
 /* Pantallas hasta small */
 @media (max-width: 575px) {

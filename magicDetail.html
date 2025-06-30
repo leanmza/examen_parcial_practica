@@ -13,6 +13,7 @@
 
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/detail.css" />
+    <link rel="stylesheet" href="css/magicDetail.css" />
 
     <!-- fuentes google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -98,8 +99,8 @@
     <main class="container-fluid">
       <section class="encabezado-section">
         <div class="row">
-          <div class="col-xxl-6 col-xl-7 offset-xxl-2 offset-xl-1 header-title">
-            <h1><span>Domina el arte de </span> Magic: The Gathering</h1>
+          <div class="col-xxl-6 col-xl-7 header-title">
+            <h1>Magic: The Gathering</h1>
             <p>
               Sumergíte en el multiverso del juego de cartas más estratégico.
               Armá mazos, conjurá hechizos y peleá en duelos épicos.
@@ -164,8 +165,124 @@
                 <div class="card-body">
                   <h6 class="card-title">Múltiple formatos</h6>
                   <p class="card-text">
-                    Estándar, Commander, Booster Draft, Moderno y muchos más - encontrá el formato
-                    perfecto para tu estilo de juego preferido.
+                    Estándar, Commander, Booster Draft, Moderno y muchos más -
+                    encontrá el formato perfecto para tu estilo de juego
+                    preferido.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="cartas-section">
+        <div class="header-title header-section">
+          <h2>Tipos de cartas</h2>
+        </div>
+        <div class="cards">
+          <!-- cards -->
+          <div
+            class="row row-cols-1 row-cols-md-3 row-cols-lg-4 row-cols-sm-2 g-3"
+          >
+            <!-- criatura -->
+            <div class="col">
+              <div class="card card-carta h-100">
+                <div class="card-img card-criature"></div>
+                <div class="card-body">
+                  <h6 class="card-title">Criaturas</h6>
+                  <p class="card-text">
+                    Para atacar o bloquear a tu oponente. Guerreros, sicarios,
+                    bestias y monstruos para luchar de su parte
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- artefacto -->
+            <div class="col">
+              <div class="card card-carta h-100">
+                <div class="card-img card-artifact"></div>
+                <div class="card-body">
+                  <h6 class="card-title">Artefactos</h6>
+                  <p class="card-text">
+                    Objetos mágicos que te benefiarán en tu partida.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- tierra -->
+            <div class="col">
+              <div class="card card-carta h-100">
+                <div class="card-img card-land"></div>
+                <div class="card-body">
+                  <h6 class="card-title">Tierras</h6>
+                  <p class="card-text">
+                    Lugares bajo el control de un jugador que pueden ser usados
+                    para generar maná.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- planeswalker -->
+            <div class="col">
+              <div class="card card-carta h-100">
+                <div class="card-img card-planeswalker"></div>
+                <div class="card-body">
+                  <h6 class="card-title">Planeswalker</h6>
+                  <p class="card-text">
+                    Los caminadores de planos. Poderosos aliados con habilidades
+                    únicas que pueden cambiar el rumbo de la batalla.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- encatamiento -->
+            <div class="col">
+              <div class="card card-carta h-100">
+                <div class="card-img card-enchanment"></div>
+                <div class="card-body">
+                  <h6 class="card-title">Encantamientos</h6>
+                  <p class="card-text">
+                    Manifestaciones mágicas, cuyos efectos no suelen dejar con
+                    facilidad el campo de batalla
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- estirpe -->
+            <div class="col">
+              <div class="card card-carta h-100">
+                <div class="card-img card-kindred"></div>
+                <div class="card-body">
+                  <h6 class="card-title">Estirpe</h6>
+                  <p class="card-text">
+                    Representan magias, efectos mundanos y lugares tan asociados
+                    con un tipo concreto de criaturas.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- conjuro -->
+            <div class="col">
+              <div class="card card-carta h-100">
+                <div class="card-img card-curse"></div>
+                <div class="card-body">
+                  <h6 class="card-title">Conjuro</h6>
+                  <p class="card-text">
+                    Hechizos mágicos cuyos efectos son de corta duración o no se
+                    repiten.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- instantaneo -->
+            <div class="col">
+              <div class="card card-carta h-100">
+                <div class="card-img card-instant"></div>
+                <div class="card-body">
+                  <h6 class="card-title">Instantáneos</h6>
+                  <p class="card-text">
+                    Hechizos que se pueden lanzar en cualquier momento de la
+                    partida, incluso en el turno del oponente.
                   </p>
                 </div>
               </div>
@@ -174,54 +291,97 @@
         </div>
       </section>
       <section class="instrucciones-section">
-        <div
-          class="header-title header-section tituloInstruciones"
-          id="instrucciones"
-        >
+        <div class="header-title header-section" id="instrucciones">
           <h2>Cómo jugar</h2>
-          <p>Aprendé lo básico en estos simple pasos</p>
         </div>
-        <div class="row row-cols-1 row-cols-md-4 g-4">
-          <div class="col-3 pasos">
-            <div class="paso-icon primero">
-              <h3 class="pasos-header">1</h3>
+        <div class="row">
+          <div class="col-6">
+            <div class="paso row g-5">
+              <div class="paso-icon col-2 primero">
+                <h5 class="pasos-header">1</h5>
+              </div>
+              <div class="col-10 textoPaso">
+                <h6>Armá tu mazo</h6>
+                <p>
+                  Empezá con un mazo con 60 cartas. Incluí tierras para el maná
+                  y combiná criaturas, conjuros y hechizos.
+                </p>
+              </div>
             </div>
-            <div class="textoPaso">
-              <h6>Mezclá y robá cartas</h6>
-              <p>Robá 7 cartas de tu mazo y 1 cada en cada turno posterior.</p>
+            <div class="paso row g-5">
+              <div class="paso-icon col-2 segundo">
+                <h5 class="pasos-header">2</h5>
+              </div>
+              <div class="col-10 textoPaso">
+                <h6>Mezclá y robá cartas</h6>
+                <p>
+                  Mezclá tu mazo, que tu oponente lo corte y robá 7 cartas para
+                  empezar la partida. Luego robá 1 carta de tu mazo en cada
+                  turno posterior.
+                </p>
+              </div>
+            </div>
+            <div class="paso row g-5">
+              <div class="paso-icon col-2 tercero">
+                <h5 class="pasos-header">3</h5>
+              </div>
+              <div class="col-10 textoPaso">
+                <h6>Sacrificá tierras</h6>
+                <p>
+                  Jugá una carta de tierra por turno para generar maná y poder
+                  atacar con las criaturas e invocar hechizos.
+                </p>
+              </div>
+            </div>
+            <div class="paso row g-5">
+              <div class="paso-icon col-2 cuarto">
+                <h5 class="pasos-header">4</h5>
+              </div>
+              <div class="col-10 textoPaso">
+                <h6>Atacá y ganá</h6>
+                <p>
+                  Atacá con tus criaturas para reducir la vida de tu oponente de
+                  20 a 0 ¡El primero en llegar a cero pierde!
+                </p>
+              </div>
             </div>
           </div>
-          <div class="col-3 pasos">
-            <div class="paso-icon segundo">
-              <h3 class="pasos-header">2</h3>
-            </div>
-            <div class="textoPaso">
-              <h6>Sacrificá tierras</h6>
-              <p>Jugá una carta de tierra por turno para generar maná.</p>
-            </div>
-          </div>
-          <div class="col-3 pasos">
-            <div class="paso-icon tercero">
-              <h3 class="pasos-header">3</h3>
-            </div>
-            <div class="textoPaso">
-              <h6>Invocá criaturas y hechizos</h6>
-              <p>Usá el maná para invocar criaturas y lanzar hechizos.</p>
-            </div>
-          </div>
-          <div class="col-3 pasos">
-            <div class="paso-icon cuarto">
-              <h3 class="pasos-header">4</h3>
-            </div>
-            <div class="textoPaso">
-              <h6>Atacá y ganá</h6>
-              <p>Atacá a tu oponente para reducir su vida a cero.</p>
+          <div class="col-6">
+            <div class="card-info">
+              <div class="card-body">
+                <div class="card-img">
+                  <img
+                    src="assets/magic/jugadores_mesa.jpg"
+                    class="card-info-img"
+                    alt=""
+                  />
+                </div>
+                <h6 class="card-title">Conceptos básicos</h6>
+                <ul>
+                  <p>
+                    <i class="fa-solid fa-check icon-check"></i>&nbsp;&nbsp;
+                    Cada jugador empieza con 20 puntos de vida
+                  </p>
+                  <p>
+                    <i class="fa-solid fa-check icon-check"></i>&nbsp;&nbsp; Las
+                    tierras producen maná para usar criaturas y lanzar hechizos
+                  </p>
+                  <p>
+                    <i class="fa-solid fa-check icon-check"></i>&nbsp;&nbsp; Las
+                    criaturas pueden atacar y bloquear ataques
+                  </p>
+                  <p>
+                    <i class="fa-solid fa-check icon-check"></i>&nbsp;&nbsp;
+                    Reducí la vida de tu oponente a 0 para ganar
+                  </p>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
       </section>
       <section class="banner banner-magic"></section>
-      <section class="jugaSection">
+      <section class="juga-section">
         <div class="header-title header-section">
           <h2>¿Querés empezar a jugar ya?</h2>
           <p>
