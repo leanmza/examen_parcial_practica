@@ -10,7 +10,6 @@
 
 .form-section {
   height: fit-content;
-  background-color: var(--color-dark);
   width: 100dvw;
   padding: 10dvh;
 }

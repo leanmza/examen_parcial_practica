@@ -148,7 +148,7 @@ a > i {
 
 .populares-section,
 .caracteristicas-section,
-.listo-section {
+.listo-section, .colores-section {
   height: 550px;
   display: grid;
   align-items: center;

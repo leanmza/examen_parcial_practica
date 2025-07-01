@@ -2,7 +2,8 @@
 .caracteristicas-section,
 .instrucciones-section,
 .juga-section,
-.cartas-section {
+.cartas-section,
+.colores-section {
   height: 500px;
   display: grid;
   align-items: center;
@@ -186,11 +187,7 @@ h1 {
   .cards > div {
     display: grid;
   }
-  /* .card-type {
-    max-width: 500px;
-    width: 100%;
-    max-height: 350px;
-  } */
+
   .card-img {
     max-height: 250px;
   }

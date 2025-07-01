@@ -1,3 +1,4 @@
+.colores-section,
 .cartas-section {
   height: fit-content;
   padding: 7dvh;
@@ -13,7 +14,8 @@
   text-align: center;
 }
 .encabezado-section,
-.cartas-section {
+.colores-section,
+.instrucciones-section {
   background-color: var(--color-dark);
 }
 .encabezado-section > .row {
@@ -103,9 +105,9 @@
 .card-info-img {
   border-radius: 6px;
   width: 100%;
-  height: 100%; /* para que llene el contenedor */
-  object-fit: cover; /* recorta y ajusta */
-  object-position: bottom; /* podés cambiar esto */
+  height: 100%;
+  object-fit: cover;
+  object-position: bottom;
   border-radius: 6px;
 }
 
@@ -140,6 +142,58 @@
 .instrucciones-section > .row > div {
   align-content: center;
 }
+
+.colores-section>div>.row{
+  justify-content: center;
+}
+.colores-section>div>div>.col{
+  max-width: 350px;
+}
+
+.img-color {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  height: fit-content;
+}
+.card-color {
+  background-color: var(--color-dark-secondary);
+  /* max-width: 350px; */
+  width: 100%;
+}
+.card-color > div > img {
+  width: 100px;
+  height: 100px;
+  background-color: var(--color-light);
+  border-radius: 50%;
+}
+
+.card-color > .card-body > h6 {
+  font-size: 24px;
+}
+.card-color > .card-body > p,
+.card-color > .card-body > ul {
+  font-size: 1rem;
+}
+
+.card-color > .card-body > p{
+  height: 3rem;
+}
+.card-color > .card-body > ul {
+  padding: 0 1rem;
+  display: grid;
+  justify-content: start;
+  text-align: start;
+}
+
+.card-color > .card-body > ul > p {
+  margin-bottom: 0.5rem;
+}
+
+.card-color > .card-body > ul > p>i{
+  color:var(--color-primary)
+}
+
 
 /* Pantallas hasta small */
 @media (max-width: 767px) {
