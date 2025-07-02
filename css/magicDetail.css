@@ -108,7 +108,6 @@
   height: 100%;
   object-fit: cover;
   object-position: bottom;
-  border-radius: 6px;
 }
 
 .card-img {
@@ -143,57 +142,46 @@
   align-content: center;
 }
 
-.colores-section>div>.row{
-  justify-content: center;
-}
-.colores-section>div>div>.col{
-  max-width: 350px;
-}
-
-.img-color {
-  display: grid;
-  justify-content: center;
-  align-content: center;
-  height: fit-content;
-}
-.card-color {
-  background-color: var(--color-dark-secondary);
-  /* max-width: 350px; */
+/* section colores */
+.colores-section > .row {
+  max-width: 1200px;
   width: 100%;
 }
-.card-color > div > img {
-  width: 100px;
-  height: 100px;
+.color{
+  margin-bottom: 1rem;
+}
+
+.colores-section > .row > .col-iz {
+  padding: 0 2rem 0 0;
+}
+
+.colores-section > .row > .col-der {
+  padding: 0 0 0 2rem;
+}
+
+.icon-color > img {
   background-color: var(--color-light);
   border-radius: 50%;
+  max-width: 80px;
 }
-
-.card-color > .card-body > h6 {
-  font-size: 24px;
+.colores-section > .row > .col-der > div > div,
+.colores-section > .row > .col-iz {
+  align-content: center;
 }
-.card-color > .card-body > p,
-.card-color > .card-body > ul {
-  font-size: 1rem;
+.colores-section > .row > .col-der > div > div > h6 {
+  margin: 0 2rem;
 }
-
-.card-color > .card-body > p{
-  height: 3rem;
-}
-.card-color > .card-body > ul {
-  padding: 0 1rem;
-  display: grid;
-  justify-content: start;
-  text-align: start;
-}
-
-.card-color > .card-body > ul > p {
+.colores-section > .row > .col-der > div > div > p,
+.colores-section > .row > .col-der > div > div > ul > p {
+  font-size: 14px;
   margin-bottom: 0.5rem;
+  text-align: start;
+  padding-left: 3rem; 
 }
 
-.card-color > .card-body > ul > p>i{
-  color:var(--color-primary)
+.colores-section > .row > .col-der > div > div > ul {
+ padding: 0;
 }
-
 
 /* Pantallas hasta small */
 @media (max-width: 767px) {
