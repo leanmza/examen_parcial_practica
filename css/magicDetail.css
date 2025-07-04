@@ -15,14 +15,15 @@
 }
 .encabezado-section,
 .colores-section,
-.instrucciones-section {
+.card-section {
   background-color: var(--color-dark);
 }
 .encabezado-section > .row {
   justify-content: center;
 }
 
-.instrucciones-section {
+.instrucciones-section,
+.card-section {
   justify-content: center;
   width: 100%;
   height: fit-content;
@@ -39,7 +40,8 @@
   background-color: var(--color-tertiary);
 }
 
-.primero {
+.primero,
+.part {
   background-color: var(--color-primary);
 }
 .segundo {
@@ -138,7 +140,8 @@
   color: var(--color-primary);
   font-size: 18px;
 }
-.instrucciones-section > .row > div {
+.instrucciones-section > .row > div,
+.card.section > .row > div {
   align-content: center;
 }
 
@@ -198,13 +201,47 @@
   padding: 0;
 }
 
+.card-part-img-container > .card-info {
+  width: fit-content;
+  height: fit-content;
+}
+/* .card-part-img {
+  max-width: 450px;
+  height: 100%;
+} */
+
+.card-part-img-container {
+  justify-content: center;
+  display: flex;
+  padding-left: 3rem;
+  align-items: center;
+}
+.card-part-img-container > .card-info{
+  background-color: var(--color-dark-secondary);
+}
+
+.partes {
+  padding-right: 3rem;
+}
+
+.card-description {
+  display: none;
+  transition: all 0.3s ease;
+}
+
+.d-none {
+  display: block !important;
+}
+
+
 /* Pantallas hasta small */
 @media (max-width: 767px) {
+
   .instrucciones-section > .row > div > .paso {
     justify-content: center;
   }
 
-  .colores-section{
+  .colores-section {
     padding-inline: 5dvw !important;
   }
   .instrucciones-section > .row > div {
@@ -214,6 +251,7 @@
   .header-title > p {
     text-align: center;
   }
+
   .card-info > .card-body {
     height: 100%;
     padding: 2rem 2rem 0;
@@ -222,6 +260,7 @@
   .col-iz {
     display: none;
   }
+
   /* aplica a todos los hijos */
   .color > :not(:last-child) {
     padding: 0 0 1rem;

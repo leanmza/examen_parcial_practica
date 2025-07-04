@@ -105,105 +105,97 @@
         </div>
       </section>
       <section class="form-section">
-  
-          <form action="" method="post">
-                  <div class="row"></div>
-            <div class="row d-flex justify-content-center g-3">
-              
-              <div class="col-12 col-sm-6 form-input">
-                <label for="nombre" class="form-label">Nombre</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="nombre"
-                  placeholder="Nombre"
-                  value=""
-                  required
-                />
-                <div class="invalid-feedback">Campo obligatirio</div>
-              </div>
-              <div class="col-12 col-sm-6 form-input">
-                <label for="nombre" class="form-label">Apellido</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="nombre"
-                  placeholder="Apellido"
-                  value=""
-                />
-                <div class="invalid-feedback">Campo obligatirio</div>
-              </div>
-            </div>
-            <div class="row d-flex justify-content-center g-3 mt-1">
-              
-              <div class="col-12 col-sm-6 form-input">
-                <label for="email" class="form-label">Email </label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="email"
-                  placeholder="tucorreo@ejemplo.com"
-                  required
-                />
-                <div class="invalid-feedback">Campo obligatirio</div>
-              </div>
-              <div class="col-12 col-sm-6 form-input">
-                <label for="consulta" class="form-label">Motivo</label>
-                <select
-                  name="consultas"
-                  class="row mx-1 form-select"
-                  id=""
-                  required
-                >
-                  <option value="" selected hidden disabled>
-                    Elija una opción
-                  </option>
-                  <option value="consulta">Consulta general</option>
-                  <option value="funcionamiento">Mecánica de juego</option>
-                  <option value="consulta">Otro</option>
-                </select>
-              </div>
-            </div>
-            <hr class="my-4 col-8 offset-2" />
-
-            <div class="row d-flex justify-content-center g-3">
-                   
-              <textarea
-                name="comentario"
-                id=""
-                placeholder="Dejanos tu consulta"
-                class="form-textarea col-12 col-xxl-8"
+        <form action="" method="post">
+          <div class="row"></div>
+          <div class="row d-flex justify-content-center g-3">
+            <div class="col-12 col-sm-6 form-input">
+              <label for="nombre" class="form-label">Nombre</label>
+              <input
+                type="text"
+                class="form-control"
+                id="nombre"
+                placeholder="Nombre"
+                value=""
                 required
-                minlength="30"
-              ></textarea>
+              />
+              <div class="invalid-feedback">Campo obligatirio</div>
             </div>
-            <hr class="my-4 col-8 offset-2" />
-            <div class="d-flex justify-content-center row">
-              <div
-                class="mb-4 col-12 form-check d-flex justify-content-center"
+            <div class="col-12 col-sm-6 form-input">
+              <label for="nombre" class="form-label">Apellido</label>
+              <input
+                type="text"
+                class="form-control"
+                id="nombre"
+                placeholder="Apellido"
+                value=""
+              />
+              <div class="invalid-feedback">Campo obligatirio</div>
+            </div>
+          </div>
+          <div class="row d-flex justify-content-center g-3 mt-1">
+            <div class="col-12 col-sm-6 form-input">
+              <label for="email" class="form-label">Email </label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder="tucorreo@ejemplo.com"
+                required
+              />
+              <div class="invalid-feedback">Campo obligatirio</div>
+            </div>
+            <div class="col-12 col-sm-6 form-input">
+              <label for="consulta" class="form-label">Motivo</label>
+              <select
+                name="consultas"
+                class="row mx-1 form-select"
+                id=""
+                required
               >
-                <input
-                  type="form-checkbox"
-                  class="form-check-input form-checkbox"
-                  id="humano"
-                  required
-                />
-                <label class="form-check-label ms-2" for="same-address"
-                  >No soy un robot</label
-                >
-              </div>
+                <option value="" selected hidden disabled>
+                  Elija una opción
+                </option>
+                <option value="consulta">Consulta general</option>
+                <option value="funcionamiento">Mecánica de juego</option>
+                <option value="consulta">Otro</option>
+              </select>
             </div>
-            <div class="d-flex justify-content-center row">
-              <button
-                class="btn btn-primary btn-lg  col-xl-2 col-lg-3 col-sm-4 col-6 btn-submit"
-                type="submit"
+          </div>
+          <hr class="my-4 col-8 offset-2" />
+
+          <div class="row d-flex justify-content-center g-3">
+            <textarea
+              name="comentario"
+              id=""
+              placeholder="Dejanos tu consulta"
+              class="form-textarea col-12 col-xxl-8"
+              required
+              minlength="30"
+            ></textarea>
+          </div>
+          <hr class="my-4 col-8 offset-2" />
+          <div class="d-flex justify-content-center row">
+            <div class="mb-4 col-12 form-check d-flex justify-content-center">
+              <input
+                type="form-checkbox"
+                class="form-check-input form-checkbox"
+                id="humano"
+                required
+              />
+              <label class="form-check-label ms-2" for="same-address"
+                >No soy un robot</label
               >
-                Enviar
-              </button>
             </div>
-                   </div>
-          </form>
- 
+          </div>
+          <div class="d-flex justify-content-center row">
+            <button
+              class="btn btn-primary btn-lg col-xl-2 col-lg-3 col-sm-4 col-6 btn-submit"
+              type="submit"
+            >
+              Enviar
+            </button>
+          </div>
+        </form>
       </section>
       <section class="banner banner-form"></section>
     </main>

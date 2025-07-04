@@ -3,7 +3,7 @@
 .instrucciones-section,
 .juga-section,
 .cartas-section,
-.colores-section {
+.colores-section .card-section {
   height: 500px;
   display: grid;
   align-items: center;
@@ -50,9 +50,11 @@ h1 {
   max-width: 75ch;
   font-size: 14px;
   color: var(--color-muted);
+  text-align: justify;
 }
 
-.instrucciones-section > .row {
+.instrucciones-section > .row,
+.card-section > .row {
   display: flex;
   justify-content: space-around;
   padding-inline: 5dvw;
@@ -81,7 +83,7 @@ h1 {
 
 .textoPaso {
   display: grid;
-  align-content: baseline;
+  align-content: center;
 }
 
 .juga-section {
@@ -134,7 +136,8 @@ h1 {
     padding-inline: 0;
   }
 
-  .instrucciones-section > .row {
+  .instrucciones-section > .row,
+  .card-section > .row {
     display: flex;
     justify-content: space-around;
     padding-inline: 5dvw;

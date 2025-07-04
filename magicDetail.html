@@ -19,7 +19,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
       rel="stylesheet"
     />
     <!-- iconos font awesome -->
@@ -27,6 +27,8 @@
       src="https://kit.fontawesome.com/eaa90bc584.js"
       crossorigin="anonymous"
     ></script>
+    <!-- scripts -->
+    <script src="scripts/magic.js"></script>
   </head>
   <body>
     <!-- HEADER / NAVBAR -->
@@ -205,14 +207,8 @@
               <div class="col-sm-7 col-12">
                 <p>Paz, ley, estructura, altruismo e igualdad.</p>
                 <ul class="color-caracteristica">
-                  <p>
-                     Aliados:
-                    Azul y Verde
-                  </p>
-                  <p>
-                    </i>
-                    Enemigos: Negro y Rojo
-                  </p>
+                  <p>Aliados: Azul y Verde</p>
+                  <p>Enemigos: Negro y Rojo</p>
                 </ul>
               </div>
             </div>
@@ -227,14 +223,8 @@
               <div class="col-sm-7 col-12">
                 <p>Conocimiento, engaño, cautela y perfección.</p>
                 <ul class="color-caracteristica">
-                  <p>
-                     Aliados:
-                    Blanco y Negro
-                  </p>
-                  <p>
-                    </i>
-                    Enemigos: Rojo y Verde
-                  </p>
+                  <p>Aliados: Blanco y Negro</p>
+                  <p>Enemigos: Rojo y Verde</p>
                 </ul>
               </div>
             </div>
@@ -249,14 +239,8 @@
               <div class="col-sm-7 col-12">
                 <p>Poder, egoísmo, muerte, sacrificio y desinhibición.</p>
                 <ul class="color-caracteristica">
-                  <p>
-                     Aliados:
-                    Azul y Rojo
-                  </p>
-                  <p>
-                    </i>
-                    Enemigos: Verde y Blanco
-                  </p>
+                  <p>Aliados: Azul y Rojo</p>
+                  <p>Enemigos: Verde y Blanco</p>
                 </ul>
               </div>
             </div>
@@ -271,14 +255,8 @@
               <div class="col-sm-7 col-12">
                 <p>Libertad, emoción, acción, impulso y destrucción.</p>
                 <ul class="color-caracteristica">
-                  <p>
-                     Aliados:
-                    Negro y Verde
-                  </p>
-                  <p>
-                    </i>
-                    Enemigos: Blanco y Azul
-                  </p>
+                  <p>Aliados: Negro y Verde</p>
+                  <p>Enemigos: Blanco y Azul</p>
                 </ul>
               </div>
             </div>
@@ -293,14 +271,8 @@
               <div class="col-sm-7 col-12">
                 <p>Naturaleza, conexión, espiritualidad y tradición.</p>
                 <ul class="color-caracteristica">
-                  <p>
-                     Aliados:
-                    Blanco y Rojo
-                  </p>
-                  <p>
-                    </i>
-                    Enemigos: Azul y Negro
-                  </p>
+                  <p>Aliados: Blanco y Rojo</p>
+                  <p>Enemigos: Azul y Negro</p>
                 </ul>
               </div>
             </div>
@@ -417,6 +389,146 @@
                     partida, incluso en el turno del oponente.
                   </p>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="card-section">
+        <div class="header-title header-section">
+          <h2>Descubrí qué hay en una carta</h2>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-12 card-part-img-container">
+            <div class="card-info">
+              <div class="card-body">
+                <div class="partes-img">
+                  <img
+                    src="assets/magic/partes.png"
+                    class="card-part-img"
+                    alt=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-12 partes">
+            <!-- nombre -->
+            <div class="paso row g-5">
+              <div class="paso-icon col-2 part">
+                <h5 class="pasos-header parte-carta">1</h5>
+              </div>
+              <div class="col-10 textoPaso">
+                <div class="row part-card">
+                  <h6 class="col-10">Nombre</h6>
+                </div>
+              </div>
+            </div>
+            <!-- maná -->
+            <div class="paso row g-5 parte">
+              <div class="paso-icon col-2 part">
+                <h5 class="pasos-header parte-carta">2</h5>
+              </div>
+              <div class="col-10 textoPaso">
+                <div class="row part-card">
+                  <h6 class="col-10">Costo de maná</h6>
+                  <i class="fa-solid fa-plus col-1"></i>
+                </div>
+                <p class="card-description">
+                  El maná es el principal recurso del juego. Si figura un número
+                  dentro de un círculo gris, signifca que paga el maná de
+                  cualquier tipo de tierra. Si aparece el simbolo de un color
+                  con el fondo del mismo, se paga con maná de tierra de ese
+                  color.
+                </p>
+              </div>
+            </div>
+            <!-- simbolo -->
+            <div class="paso row g-5 parte">
+              <div class="paso-icon col-2 part">
+                <h5 class="pasos-header parte-carta">3</h5>
+              </div>
+              <div class="col-10 textoPaso">
+                <div class="row part-card">
+                  <h6 class="col-10">Símbolo de expansión</h6>
+                  <i class="fa-solid fa-plus col-1"></i>
+                </div>
+                <p class="card-description">
+                  Indica de qué set de Magic es la carta. El color del símbolo
+                  dice de que rareza es la carta: negro para las comunes, plata
+                  para las infrecuentes, dorado para las raras y naranja-rojizo
+                  para las raras míticas.
+                </p>
+              </div>
+            </div>
+            <!-- fuerza/resistencia -->
+            <div class="paso row g-5 parte">
+              <div class="paso-icon col-2 part">
+                <h5 class="pasos-header parte-carta">4</h5>
+              </div>
+              <div class="col-10 textoPaso">
+                <div class="row part-card">
+                  <h6 class="col-10">Fuerza/Resistencia</h6>
+                  <i class="fa-solid fa-plus col-1"></i>
+                </div>
+                <p class="card-description">
+                  La fuerza de una criatura (primer número) indica cuánto daño
+                  hace en combate. La resistencia (segundo número) significa
+                  cuanto daño debe tomar en un solo turno para destruirla.
+                </p>
+              </div>
+            </div>
+            <!-- número colección -->
+            <div class="paso row g-5 parte">
+              <div class="paso-icon col-2 part">
+                <h5 class="pasos-header parte-carta">5</h5>
+              </div>
+              <div class="col-10 textoPaso">
+                <div class="row part-card">
+                  <h6 class="col-10">Artista y número de colección</h6>
+                  <i class="fa-solid fa-plus col-1"></i>
+                </div>
+                <p class="card-description">
+                  Artista que hizo la ilustración. El número de colección hace
+                  que sea más fácil organizar tus cartas. Por ejemplo "65/199"
+                  significa que la carta es la 65° de 199 del set.
+                </p>
+              </div>
+            </div>
+            <!-- texto -->
+            <div class="paso row g-5 parte">
+              <div class="paso-icon col-2 part">
+                <h5 class="pasos-header parte-carta">6</h5>
+              </div>
+              <div class="col-10 textoPaso">
+                <div class="row part-card">
+                  <h6 class="col-10">Recuadro de texto</h6>
+                  <i class="fa-solid fa-plus col-1"></i>
+                </div>
+                <p class="card-description">
+                  Contiene información y habilidades de la carta. Si el texto
+                  está en <em>cursiva</em> es texto de ambientación, es decir,
+                  una pequeña historia de trasfondo.
+                </p>
+              </div>
+            </div>
+            <!-- tipo -->
+            <div class="paso row g-5 parte">
+              <div class="paso-icon col-2 part">
+                <h5 class="pasos-header parte-carta">7</h5>
+              </div>
+              <div class="col-10 textoPaso">
+                <div class="row part-card">
+                  <h6 class="col-10">Línea de tipo</h6>
+                  <i class="fa-solid fa-plus col-1"></i>
+                </div>
+                <p class="card-description">
+                  Indica que tipo de carta es: artefacto, creatura,
+                  encantamiento, instantáneo, tierra, planeswalker o conjuro.
+                  Puede contener infomación más específica, como que tipo de
+                  criatura es.
+                </p>
               </div>
             </div>
           </div>
