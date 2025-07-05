@@ -46,6 +46,11 @@
     var(--color-dark-translucent-2),
     var(--color-secondary-translucent-2)
   );
+  --gradient-parrafo: radial-gradient(
+    circle,
+    var(--color-primary-translucent-2),
+    var(--color-dark-translucent-2)
+  );
 }
 
 body {
@@ -148,7 +153,8 @@ a > i {
 
 .populares-section,
 .caracteristicas-section,
-.listo-section, .colores-section {
+.listo-section,
+.colores-section {
   height: 550px;
   display: grid;
   align-items: center;

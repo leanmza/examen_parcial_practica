@@ -41,7 +41,8 @@
 }
 
 .primero,
-.part {
+.part,
+.img-partes > div {
   background-color: var(--color-primary);
 }
 .segundo {
@@ -201,14 +202,61 @@
   padding: 0;
 }
 
-.card-part-img-container > .card-info {
-  width: fit-content;
-  height: fit-content;
+.partes-img {
+  background-image: url(../assets/magic/carta.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  aspect-ratio: 0.7/1;
+  height: 500px;
+  background-position: center;
+  align-content: space-between;
+  display: grid;
 }
-/* .card-part-img {
-  max-width: 450px;
+
+.parte{
+  align-items: center;
+}
+
+.img-partes {
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-dark-secondary);
+}
+
+.partes-img > :nth-child(even) {
+  margin-top: 8rem;
+}
+
+.partes-img > :nth-child(even) > :nth-child(odd) {
+  margin-bottom: 5rem;
+}
+
+.partes-img > :nth-child(even) > :nth-child(even) {
+  margin-top: 5rem;
+}
+
+
+.img-partes > div {
+  border-radius: 50%;
+  color: var(--color-light);
+  max-height: 48px;
+  max-width: 48px;
   height: 100%;
-} */
+  width: 100%;
+  aspect-ratio: 1/1;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+}
+
+.img-partes > .col > h5 {
+  margin: 0;
+  font-weight: 700 !important;
+}
+
+.col-vacia {
+  display: none !important  ;
+}
 
 .card-part-img-container {
   justify-content: center;
@@ -216,19 +264,29 @@
   padding-left: 3rem;
   align-items: center;
 }
-.card-part-img-container > .card-info{
+.card-part-img-container > .card-info {
   background-color: var(--color-dark-secondary);
 }
 
 .partes {
   padding-right: 3rem;
+  align-content: center;
 }
 
+.partes > .row > div{
+  margin-top: 0;
+}
 .card-description {
   display: none;
   transition: all 0.3s ease;
 }
 
+.resaltado {
+  border: 4px solid transparent;
+  border-image: var(--gradient-parrafo) 1;
+  transition: border 0.3s ease;
+  padding: 1rem 0;
+}
 .d-none {
   display: block !important;
 }
@@ -236,7 +294,6 @@
 
 /* Pantallas hasta small */
 @media (max-width: 767px) {
-
   .instrucciones-section > .row > div > .paso {
     justify-content: center;
   }
