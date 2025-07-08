@@ -1,0 +1,217 @@
+/* colores */
+:root {
+  --color-primary: #695ca5;
+  --color-secondary: #06b6d4;
+  --color-tertiary: #845ca5;
+  --color-accent: #df3f40;
+  --color-light: #dbdadf;
+  --color-dark: #2c3036;
+  --color-dark-secondary: #202529;
+  --color-muted: #b3b3b3;
+  --color-light-white: #ffffff;
+  --color-primary-translucent: #695ca566;
+  --color-primary-translucent-2: #695ca5e6;
+  --color-secondary-translucent: #06b6d466;
+  --color-secondary-translucent-2: #06b6d433;
+  --color-dark-translucent: #2c303666;
+  --color-dark-translucent-2: #2c303633;
+
+  /* Gradientes */
+  --gradient-primary: linear-gradient(
+    135deg,
+    var(--color-secondary),
+    var(--color-light)
+  );
+  --gradient-header: linear-gradient(
+    to left,
+    var(--color-secondary),
+    var(--color-light-white)
+  );
+  --gradient-header-detail: linear-gradient(
+    215deg,
+    rgba(76, 29, 149, 0.9),
+    var(--color-light-white)
+  );
+  --gradient-magic: linear-gradient(
+    to bottom right,
+    var(--color-primary-translucent),
+    var(--color-secondary-translucent)
+  );
+  --gradient-carousel: linear-gradient(
+    to bottom,
+    var(--color-primary-translucent),
+    var(--color-dark-translucent)
+  );
+  --gradient-banner: linear-gradient(
+    to bottom right,
+    var(--color-dark-translucent-2),
+    var(--color-secondary-translucent-2)
+  );
+  --gradient-parrafo: radial-gradient(
+    circle,
+    var(--color-primary-translucent-2),
+    var(--color-dark-translucent-2)
+  );
+}
+
+/* body y section */
+body {
+  font-family: inter !important;
+}
+
+.container-fluid {
+  padding: 0 !important;
+}
+
+section:not(.carousel-section) {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  padding: 10dvh 5dvw !important;
+  margin-inline: 0;
+  height: fit-content;
+  max-width: 99dvw;
+}
+
+.banner-section {
+  height: 150px;
+}
+
+a {
+  text-decoration: none;
+}
+
+a > i {
+  color: var(--color-muted) !important;
+}
+
+/* footer y nav */
+
+nav,
+footer {
+  font-weight: 500;
+  background-color: var(--color-dark) !important;
+  color: var(--color-muted) !important;
+  padding-inline: 3dvh !important;
+  margin: 0 !important;
+  width: 99dvw;
+}
+
+.site-name {
+  margin: 8px;
+  color: var(--color-muted) !important;
+}
+
+.links-footer {
+  display: grid;
+  justify-content: end;
+}
+
+/* Títulos */
+.header-title {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-weight: 700 !important;
+  color: transparent !important;
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+}
+
+h2 {
+  color: var(--color-light-white);
+}
+
+.header-title > p {
+  font-size: 1.2rem;
+  max-width: 75ch;
+  text-align: center;
+}
+
+.btn-outline-custom {
+  border: solid var(--color-light-white) 1px;
+}
+
+/* cards */
+
+.cards {
+  display: flex;
+  justify-content: center;
+}
+
+.card-body {
+  padding: 16px 0;
+}
+
+.card-body > * {
+  text-align: justify;
+}
+
+
+.card-body > p {
+  color: var(--color-muted);
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  max-width: 400px;
+  height: 100%;
+  background-color: #2c3036;
+  padding: 16px;
+}
+
+.card-title {
+  font-weight: 700 !important;
+}
+
+.card-text {
+  max-width: 40ch;
+  font-size: 14px;
+}
+
+.icon-card {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+}
+
+.linkCard {
+  text-decoration: none;
+}
+
+
+
+/* Pantallas md  */
+@media (max-width: 991px) {
+  .card {
+    display: flex;
+    justify-content: center;
+    max-width: 90dvw;
+    background-color: var(--color-dark);
+  }
+  .card-text {
+    max-width: fit-content;
+  }
+
+  h2 {
+    font-size: 30px;
+  }
+}
+
+/* Pantallas sm */
+@media (max-width: 767px) {
+}
+
+/* Pantallas xs */
+@media (max-width: 575px) {
+}

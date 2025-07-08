@@ -1,39 +1,15 @@
+.encabezado-section {
+  height: 800px !important;
+}
+
 .encabezado-section,
-.caracteristicas-section,
-.instrucciones-section,
-.juga-section,
-.cartas-section,
-.colores-section .card-section {
-  height: 500px;
-  display: grid;
-  align-items: center;
-  align-content: center;
-  padding: 0 3rem;
-  margin-inline: 0;
-}
-
-.caracteristicas-section,
-.cartas-section,
-.instrucciones-section {
-  margin-inline: 0;
-}
-
-.header-title {
-  display: grid;
-  align-content: center;
-}
-
-.header-title > p {
-  font-size: 1.2rem;
-  max-width: 75ch;
+.card-section {
+  justify-content: normal !important;
 }
 
 h1 {
-  font-size: 4.5em !important;
+  font-size: 4.5rem !important;
   background: var(--gradient-header-detail);
-  color: transparent;
-  background-clip: text;
-  -webkit-background-clip: text;
   font-weight: 800 !important;
 }
 
@@ -41,33 +17,7 @@ h1 {
   background-color: var(--color-primary);
 }
 
-.btnReglas {
-  color: var(--color-light);
-  border-color: var(--color-light);
-}
-
-.textoPaso > p {
-  max-width: 75ch;
-  font-size: 14px;
-  color: var(--color-muted);
-  text-align: justify;
-}
-
-.instrucciones-section > .row,
-.card-section > .row {
-  display: flex;
-  justify-content: space-around;
-  padding-inline: 5dvw;
-  margin-bottom: 5dvh;
-}
-
-.pasos {
-  display: grid;
-  justify-items: center;
-  text-align: center;
-  width: 250px;
-}
-.paso-icon {
+.step-number {
   border-radius: 50%;
   width: 50px;
   height: 50px;
@@ -76,22 +26,18 @@ h1 {
   align-items: center;
   margin-bottom: 16px;
 }
-.pasos-header {
+.step-header {
   margin: 0;
   font-weight: 700;
 }
 
-.textoPaso {
-  display: grid;
+.step-text {
   align-content: center;
 }
 
 .juga-section {
   background-color: var(--color-primary);
-  height: 350px;
-}
-.juga-section > .header-section {
-  padding: 0 !important;
+  height: 350px !important;
 }
 
 .btn-full {
@@ -113,7 +59,25 @@ h1 {
   padding-bottom: 0;
 }
 
-.card-img {
+.card-info {
+  border: solid #414244 1px;
+  border-radius: 6px;
+  background-color: var(--color-dark);
+}
+
+.card-info-img {
+  border-radius: 6px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: bottom;
+}
+
+.img-card-how-to {
+  height: 200px;
+}
+
+.img-type {
   height: 195px;
   width: 100%;
   background-position-x: center;
@@ -122,27 +86,28 @@ h1 {
   background-position-y: 5%;
 }
 
-/* Pantallas hasta xl  */
-@media (max-width: 1199px) {
-  .encabezado-section,
-  .caracteristicas-section,
-  .instrucciones-section,
-  .juga-section {
-    height: fit-content;
-    padding: 10dvh 5dvw;
-  }
+.card-info > .card-body {
+  padding: 2rem;
+}
 
-  .instrucciones-section {
-    padding-inline: 0;
-  }
+.card-info > .card-body > h6 {
+  padding: 2rem 0 1rem;
+}
 
-  .instrucciones-section > .row,
-  .card-section > .row {
-    display: flex;
-    justify-content: space-around;
-    padding-inline: 5dvw;
-    margin-bottom: 0 !important;
-  }
+.card-body > ul {
+  font-size: 14px;
+  color: var(--color-muted);
+  padding: 0;
+  margin: 0;
+}
+
+.card-body > ul > :last-child {
+  margin: 0;
+}
+
+.icon-check {
+  color: var(--color-primary);
+  font-size: 18px;
 }
 
 /* Pantallas hasta medium  */
@@ -155,8 +120,9 @@ h1 {
     padding-inline: 10dvw;
   }
 
-  .cartas-section,
-  .instrucciones-section {
+  .type-card-section,
+  .instrucciones-section,
+  .card-section {
     padding-inline: 5dvw !important;
   }
 
@@ -170,18 +136,15 @@ h1 {
     text-align: center;
   }
 
-  .header-title > h1 {
+  h1 {
     font-size: 3rem !important;
   }
   .header-title > p {
     text-align: justify;
-  }
-  .btn-outline-carrousel {
-    margin: 8px;
-  }
-
-  .header-title > p {
     font-size: 1rem;
+  }
+  .btn-outline-custom {
+    margin: 8px;
   }
 }
 
@@ -191,7 +154,7 @@ h1 {
     display: grid;
   }
 
-  .card-img {
+  .img-type {
     max-height: 250px;
   }
 }

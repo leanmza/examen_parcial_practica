@@ -1,19 +1,15 @@
 .colores-section,
-.cartas-section {
-  height: fit-content;
-  padding: 7dvh;
-  justify-content: space-around;
+.type-card-section {
+  justify-content: space-around !important;
 }
 
 .encabezado-section {
-  height: 800px;
   background-image: var(--gradient-magic), url(../assets/magic/magic.png);
   background-repeat: no-repeat;
   background-size: cover;
   background-position-y: center;
-  text-align: center;
 }
-.encabezado-section,
+
 .colores-section,
 .card-section {
   background-color: var(--color-dark);
@@ -22,36 +18,28 @@
   justify-content: center;
 }
 
-.instrucciones-section,
-.card-section {
-  justify-content: center;
-  width: 100%;
-  height: fit-content;
-  padding: 7dvh;
-}
-
-.varita {
+.icon-varita {
   background-color: var(--color-primary);
 }
-.mazo {
+.icon-mazo {
   background-color: var(--color-secondary);
 }
-.multiplayer {
+.icon-multiplayer {
   background-color: var(--color-tertiary);
 }
 
-.primero,
+.step-1,
 .part,
 .img-partes > div {
   background-color: var(--color-primary);
 }
-.segundo {
+.step-2 {
   background-color: var(--color-secondary);
 }
-.tercero {
+.step-3 {
   background-color: var(--color-tertiary);
 }
-.cuarto {
+.step-4 {
   background-color: var(--color-accent);
 }
 
@@ -59,6 +47,7 @@
   background-image: var(--gradient-banner), url(../assets/MTG-cards-in-hand.jpg);
 }
 
+/* type-card-section */
 .card-criature {
   background-image: var(--gradient-banner),
     url(../assets/magic/magic_criatura.jpg);
@@ -95,78 +84,23 @@
     url(../assets/magic/magic_instantaneo.jpg);
 }
 
-.juga-section > .header-title > p {
-  text-align: center;
-}
-
-.card-info {
-  border: solid #414244 1px;
-  border-radius: 6px;
-  background-color: var(--color-dark);
-}
-
-.card-info-img {
-  border-radius: 6px;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: bottom;
-}
-
-.card-img {
-  height: 200px;
-}
-
-.card-info > .card-body {
-  height: 100%;
-  padding: 2rem;
-}
-
-.card-info > .card-body > h6 {
-  padding: 2rem 0 1rem;
-}
-
-.card-body {
-  padding: 16px 0;
-}
-
-.card-body > ul {
-  font-size: 14px;
-  color: var(--color-muted);
-  padding: 0;
-  margin: 0;
-}
-
-.icon-check {
-  color: var(--color-primary);
-  font-size: 18px;
-}
-.instrucciones-section > .row > div,
-.card.section > .row > div {
-  align-content: center;
-}
-
-/* section colores */
-.colores-section > .row {
-  max-width: 1200px;
+/* color-section */
+.img-color {
   width: 100%;
 }
-
-.color-img {
-  width: 100%;
-}
-.color {
+.container-color-type {
   padding: 1rem 0;
+  font-size: 14px;
 }
 
-.color:last-child {
+.container-color-type:last-child {
   padding-bottom: 0;
 }
 
-.color:first-child {
+.container-color-type:first-child {
   padding-top: 0;
 }
-.color:not(:last-child) {
+.container-color-type:not(:last-child) {
   border-bottom: 1px solid var(--color-muted);
 }
 
@@ -183,70 +117,76 @@
   border-radius: 50%;
   max-width: 80px;
 }
-.colores-section > .row > .col-der > div > div,
-.colores-section > .row > .col-iz {
+.colores-section > .row > .col-iz,
+.icon-color {
   align-content: center;
+  justify-content: center;
+  display: grid;
 }
 .colores-section > .row > .col-der > div > div > h6 {
-  margin: 0 2rem;
-}
-.colores-section > .row > .col-der > div > div > p,
-.colores-section > .row > .col-der > div > div > ul > p {
-  font-size: 14px;
-  margin-bottom: 0.5rem;
-  text-align: start;
-  padding-left: 3rem;
+  padding-left: 0.5 rem;
 }
 
-.colores-section > .row > .col-der > div > div > ul {
+.container-color-type > div > p {
+  text-align: justify;
+}
+.color-caracteristica,
+.color-caracteristica > * {
   padding: 0;
+  margin-bottom: 0;
+}
+
+/* card-section */
+.card-part-img-container {
+  justify-content: center;
+  display: flex;
+  padding-left: 3rem;
+  align-items: center;
+}
+.card-part-img-container > .card-info {
+  background-color: var(--color-dark-secondary);
 }
 
 .partes-img {
-  background-image: url(../assets/magic/carta.png);
-  background-repeat: no-repeat;
-  background-size: contain;
-  aspect-ratio: 0.7/1;
-  height: 500px;
+  height: fit-content;
   background-position: center;
   align-content: space-between;
   display: grid;
+  position: relative;
 }
 
-.parte{
-  align-items: center;
+.container-partes-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
 .img-partes {
   display: flex;
   justify-content: space-between;
-  color: var(--color-dark-secondary);
 }
 
-.partes-img > :nth-child(even) {
-  margin-top: 8rem;
+.container-partes-img > :nth-child(even) > :nth-child(even) {
+  margin-top: 4rem;
 }
 
-.partes-img > :nth-child(even) > :nth-child(odd) {
-  margin-bottom: 5rem;
+.container-partes-img > :nth-child(even) {
+  margin-top: 10rem;
 }
-
-.partes-img > :nth-child(even) > :nth-child(even) {
-  margin-top: 5rem;
-}
-
 
 .img-partes > div {
   border-radius: 50%;
   color: var(--color-light);
   max-height: 48px;
   max-width: 48px;
-  height: 100%;
-  width: 100%;
   aspect-ratio: 1/1;
   display: grid;
   justify-content: center;
   align-content: center;
+  opacity: 90%;
+  cursor: pointer;
+  transition: 0.3 ease;
 }
 
 .img-partes > .col > h5 {
@@ -258,24 +198,36 @@
   display: none !important  ;
 }
 
-.card-part-img-container {
-  justify-content: center;
-  display: flex;
-  padding-left: 3rem;
+.parte {
   align-items: center;
 }
-.card-part-img-container > .card-info {
-  background-color: var(--color-dark-secondary);
-}
 
-.partes {
+.container-part {
   padding-right: 3rem;
   align-content: center;
 }
 
-.partes > .row > div{
+.container-part > .row > div {
   margin-top: 0;
 }
+
+.part-card {
+  max-width: 600px;
+}
+
+.part-card > i {
+  text-align: right;
+  cursor: pointer;
+  transition: 0.3 ease;
+}
+
+.card-part-text > p {
+  max-width: 75ch;
+  font-size: 14px;
+  color: var(--color-muted);
+  text-align: justify;
+}
+
 .card-description {
   display: none;
   transition: all 0.3s ease;
@@ -284,13 +236,23 @@
 .resaltado {
   border: 4px solid transparent;
   border-image: var(--gradient-parrafo) 1;
-  transition: border 0.3s ease;
+  transition: border 0.1s ease;
   padding: 1rem 0;
 }
+
 .d-none {
   display: block !important;
 }
 
+/* Pantallas hasta medium  */
+@media (max-width: 991px) {
+  .img-color {
+    display: none;
+  }
+  .container-part {
+    padding-right: 0;
+  }
+}
 
 /* Pantallas hasta small */
 @media (max-width: 767px) {
@@ -305,13 +267,9 @@
     margin-bottom: 32px;
   }
 
-  .header-title > p {
-    text-align: center;
-  }
-
   .card-info > .card-body {
     height: 100%;
-    padding: 2rem 2rem 0;
+    padding: 2rem 2rem 1rem;
   }
 
   .col-iz {
@@ -335,4 +293,32 @@
     text-align: center !important;
     padding-left: 0 !important;
   }
+
+  .partes-img {
+    height: 400px;
+    max-width: 300px;
+  }
+
+  .part-card {
+    justify-content: space-between;
+  }
+
+  .parte {
+    justify-content: center;
+  }
+
+  .card-part-img-container {
+    padding: 0;
+  }
+  .container-part {
+    padding: 2rem 0 0;
+  }
+
+  .card-part-img-container > .card-info > .card-body {
+    padding: 2rem;
+  }
+}
+
+/* Pantallas hasta extra small */
+@media (max-width: 575px) {
 }

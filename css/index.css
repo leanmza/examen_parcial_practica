@@ -1,0 +1,142 @@
+h1 {
+  background: var(--gradient-header);
+}
+
+.carousel-item {
+  height: 800px;
+  justify-content: center !important;
+  align-content: center !important;
+  text-align: center;
+}
+
+.carousel-texto {
+  display: grid;
+  justify-content: center;
+}
+.carousel-texto > h1,
+.carousel-texto > h2 {
+  font-size: 5rem;
+  margin-bottom: 32px;
+}
+
+.carousel-texto > h2 {
+  font-weight: 700 !important;
+  background: var(--gradient-primary);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.carousel-texto > h4 {
+  max-width: 70ch;
+  color: var(--color-light-white);
+  line-height: 2.5rem;
+  margin-bottom: 40px;
+}
+.carousel-section {
+  height: 800px;
+  padding-inline: 0 !important;
+}
+
+.carousel-item-1 {
+  background-image: var(--gradient-carousel),
+    url(../assets/modular-game-table-rustic-walnut-hex-game-cover.jpg);
+  background-size: cover;
+  background-position: center;
+  display: grid;
+}
+
+.carousel-item-2 {
+  background-image: var(--gradient-carousel),
+    url(../assets/magic-the-gathering-lord-of-the-rings-tales.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel-item-3 {
+  background-image: var(--gradient-carousel),
+    url(../assets/orcs_and_ogre_minis.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.listo-section {
+  height: 350px;
+  background-color: var(--color-accent);
+}
+.populares-section {
+  background-color: var(--color-dark);
+  justify-content: space-around;
+}
+
+.listo-section > .header-title {
+  margin-bottom: 0 !important;
+}
+
+.card-dnd {
+  background-image: url(../assets/dnd_blue_dragons.png);
+  background-position-y: 80%;
+}
+.card-magic {
+  background-image: url(../assets/magic_mystical.png);
+  background-position-y: 30%;
+}
+.card-pathfinder {
+  background-image: url(../assets/pathfinder_party.png);
+  background-position-y: 80%;
+}
+
+.img-card {
+  background-size: cover;
+  overflow: hidden;
+  background-repeat: no;
+  height: 200px;
+}
+
+.card-comunidad {
+  background-color: var(--color-accent);
+}
+
+.card-contenido {
+  background-color: var(--color-secondary);
+}
+
+.card-tools {
+  background-color: var(--color-primary);
+}
+
+.btn-games {
+  margin-top: 32px;
+  background-color: var(--color-light-white);
+  color: var(--color-accent);
+}
+
+.btn-games:hover {
+  background-color: var(--color-accent);
+  color: var(--color-light-white);
+  border: solid var(--color-light-white) 1px;
+}
+
+.btn-outline-custom {
+  margin-right: 2rem;
+}
+
+/* Pantallas hasta medium  */
+@media (max-width: 991px) {
+  .carousel-texto {
+    padding: 0 10dvw;
+  }
+}
+
+/* Pantallas hasta small */
+@media (max-width: 767px) {
+  .relleno {
+    display: none;
+  }
+
+  .carousel-texto > h1,
+  .carousel-texto > h2 {
+    font-size: 4rem;
+    margin-bottom: 32px;
+  }
+}

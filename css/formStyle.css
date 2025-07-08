@@ -1,38 +1,21 @@
-.encabezado-section,
-.form-section {
-  height: 400px;
-  display: grid;
-  align-items: center;
-  align-content: center;
-  padding: 0 3rem;
-  margin-inline: 0;
+.encabezado-section {
+  height: 300px !important;
 }
 
 .form-section {
-  height: fit-content;
-  width: 100dvw;
-  padding: 10dvh;
+  height: fit-content !important;
+  width: 100dvw !important;
+  padding: 10dvh !important;
+  background-color: var(--color-dark);
+  justify-content: normal !important;
 }
 
 .header-title {
-  display: grid;
-  align-content: center;
+  padding: 0 !important;
 }
-
 .header-title > h1 {
   font-size: 3rem !important ;
-  font-weight: 700 !important;
   background: var(--gradient-primary);
-  color: transparent;
-  background-clip: text;
-  -webkit-background-clip: text;
-}
-
-.header-title > p {
-  margin-top: 1.2rem;
-  font-size: 1.2rem;
-  max-width: 75ch;
-  text-align: center;
 }
 
 .form-select {
@@ -45,7 +28,7 @@
   max-width: 1200px;
 }
 
-.form-checkbox{
+.form-checkbox {
   width: 20px;
   height: 20px;
 }
@@ -57,44 +40,15 @@
 .form-input {
   max-width: 600px;
 }
-.banner-form {
+
+.banner-section {
   background-image: url(../assets/hoja_personajes.jpg);
   background-position-y: 38%;
 }
 
-.header-title {
-  display: grid;
-  align-content: center;
-}
-
-
-
 /* Pantallas hasta small */
 @media (max-width: 575px) {
-  .form-section {
-    background-color: var(--color-dark);
-    width: 100dvw;
-    padding: 5dvh;
+  .banner-section {
+    background-position-x: 10%;
   }
-
-  .header-title {
-    display: grid;
-    justify-items: center;
-    text-align: center;
-  }
-
-  .header-title > h1 {
-    font-size: 3rem !important;
-  }
-  .header-title > p {
-    text-align: justify;
-  }
-  .btn-outline-carrousel {
-    margin: 8px;
-  }
-
-  .banner-form {
-  background-image: url(../assets/hoja_personajes.jpg);
-  background-position-x: 10%;
-}
 }

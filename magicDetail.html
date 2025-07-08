@@ -11,7 +11,8 @@
       crossorigin="anonymous"
     />
 
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/commons.css" />
+    <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="css/detail.css" />
     <link rel="stylesheet" href="css/magicDetail.css" />
 
@@ -111,17 +112,17 @@
             <div>
               <a
                 href="#instrucciones"
-                class="btn btn-outline-carrousel btn-aprender"
+                class="btn .btn-outline-custom btn-aprender"
               >
                 Aprender a jugar
               </a>
-              <a href="" class="btn btn-outline-carrousel"> Reglas de juego </a>
+              <a href="" class="btn .btn-outline-custom"> Reglas de juego </a>
             </div>
           </div>
         </div>
       </section>
       <section class="caracteristicas-section">
-        <div class="header-title header-section">
+        <div class="header-title">
           <h2>Caracteristicas del Juego</h2>
           <p>
             Descubrí que hace a Magic: The Gathering el juego de rol con cartas
@@ -133,7 +134,7 @@
           <div class="row row-cols-1 row-cols-md-3 g-4">
             <div class="col">
               <div class="card">
-                <div class="icon-card varita">
+                <div class="icon-card icon-varita">
                   <i class="fa-solid fa-bolt fa-xl"></i>
                 </div>
                 <div class="card-body">
@@ -147,7 +148,7 @@
             </div>
             <div class="col">
               <div class="card">
-                <div class="icon-card mazo">
+                <div class="icon-card icon-mazo">
                   <i class="fa-solid fa-palette fa-xl"></i>
                 </div>
                 <div class="card-body">
@@ -161,7 +162,7 @@
             </div>
             <div class="col">
               <div class="card">
-                <div class="icon-card multiplayer">
+                <div class="icon-card icon-multiplayer">
                   <i class="fa-solid fa-layer-group fa-xl"></i>
                 </div>
                 <div class="card-body">
@@ -178,7 +179,7 @@
         </div>
       </section>
       <section class="colores-section">
-        <div class="header-title header-section">
+        <div class="header-title">
           <h2>Colores</h2>
           <p>
             Son el núcleo del sistema de maná y la estrategia en general del
@@ -190,18 +191,18 @@
           <div class="col-lg-6 col-12 col-iz">
             <img
               src="assets/magic/chromatic_circle.png"
-              class="color-img"
+              class="img-color"
               alt=""
             />
           </div>
           <!-- colores -->
           <div class="col-lg-6 col-12 col-der">
             <!-- blanco -->
-            <div class="color row">
-              <div class="icon-color icon-white col-sm-2 col-12">
+            <div class="container-color-type row">
+              <div class="icon-color icon-white col-sm-3 col-12">
                 <img src="assets/magic/magic_blanco.png" alt="" />
               </div>
-              <div class="col-sm-2 col-12 textoPaso">
+              <div class="col-sm-2 col-12 step-text">
                 <h6>Blanco</h6>
               </div>
               <div class="col-sm-7 col-12">
@@ -213,11 +214,11 @@
               </div>
             </div>
             <!-- azul -->
-            <div class="color row">
-              <div class="icon-color icon-blue col-sm-2 col-12">
+            <div class="container-color-type row">
+              <div class="icon-color icon-blue col-sm-3 col-12">
                 <img src="assets/magic/magic_azul.png" alt="" />
               </div>
-              <div class="col-sm-2 col-12 textoPaso">
+              <div class="col-sm-2 col-12 step-text">
                 <h6>Azul</h6>
               </div>
               <div class="col-sm-7 col-12">
@@ -229,11 +230,11 @@
               </div>
             </div>
             <!-- negro -->
-            <div class="color row">
-              <div class="icon-color icon-black col-sm-2 col-12">
+            <div class="container-color-type row">
+              <div class="icon-color icon-black col-sm-3 col-12">
                 <img src="assets/magic/magic_negro.png" alt="" />
               </div>
-              <div class="col-sm-2 col-12 textoPaso">
+              <div class="col-sm-2 col-12 step-text">
                 <h6>Negro</h6>
               </div>
               <div class="col-sm-7 col-12">
@@ -245,11 +246,11 @@
               </div>
             </div>
             <!-- rojo -->
-            <div class="color row">
-              <div class="icon-color icon-red col-sm-2 col-12">
+            <div class="container-color-type row">
+              <div class="icon-color icon-red col-sm-3 col-12">
                 <img src="assets/magic/magic_rojo.png" alt="" />
               </div>
-              <div class="col-sm-2 col-12 textoPaso">
+              <div class="col-sm-2 col-12 step-text">
                 <h6>Rojo</h6>
               </div>
               <div class="col-sm-7 col-12">
@@ -261,11 +262,11 @@
               </div>
             </div>
             <!-- verde -->
-            <div class="color row">
-              <div class="icon-color icon-green col-sm-2 col-12">
+            <div class="container-color-type row">
+              <div class="icon-color icon-green col-sm-3 col-12">
                 <img src="assets/magic/magic_verde.png" alt="" />
               </div>
-              <div class="col-sm-2 col-12 textoPaso">
+              <div class="col-sm-2 col-12 step-text">
                 <h6>Verde</h6>
               </div>
               <div class="col-sm-7 col-12">
@@ -279,10 +280,11 @@
           </div>
         </div>
       </section>
-      <section class="cartas-section">
-        <div class="header-title header-section">
+      <section class="type-card-section">
+        <div class="header-title">
           <h2>Tipos de cartas</h2>
         </div>
+
         <div class="cards">
           <!-- cards -->
           <div
@@ -291,7 +293,7 @@
             <!-- criatura -->
             <div class="col">
               <div class="card h-100">
-                <div class="card-img card-criature"></div>
+                <div class="img-type card-criature"></div>
                 <div class="card-body">
                   <h6 class="card-title">Criaturas</h6>
                   <p class="card-text">
@@ -304,7 +306,7 @@
             <!-- artefacto -->
             <div class="col">
               <div class="card h-100">
-                <div class="card-img card-artifact"></div>
+                <div class="img-type card-artifact"></div>
                 <div class="card-body">
                   <h6 class="card-title">Artefactos</h6>
                   <p class="card-text">
@@ -316,7 +318,7 @@
             <!-- tierra -->
             <div class="col">
               <div class="card h-100">
-                <div class="card-img card-land"></div>
+                <div class="img-type card-land"></div>
                 <div class="card-body">
                   <h6 class="card-title">Tierras</h6>
                   <p class="card-text">
@@ -329,7 +331,7 @@
             <!-- planeswalker -->
             <div class="col">
               <div class="card h-100">
-                <div class="card-img card-planeswalker"></div>
+                <div class="img-type card-planeswalker"></div>
                 <div class="card-body">
                   <h6 class="card-title">Planeswalker</h6>
                   <p class="card-text">
@@ -342,7 +344,7 @@
             <!-- encatamiento -->
             <div class="col">
               <div class="card h-100">
-                <div class="card-img card-enchanment"></div>
+                <div class="img-type card-enchanment"></div>
                 <div class="card-body">
                   <h6 class="card-title">Encantamientos</h6>
                   <p class="card-text">
@@ -355,7 +357,7 @@
             <!-- estirpe -->
             <div class="col">
               <div class="card h-100">
-                <div class="card-img card-kindred"></div>
+                <div class="img-type card-kindred"></div>
                 <div class="card-body">
                   <h6 class="card-title">Estirpe</h6>
                   <p class="card-text">
@@ -368,7 +370,7 @@
             <!-- conjuro -->
             <div class="col">
               <div class="card h-100">
-                <div class="card-img card-curse"></div>
+                <div class="img-type card-curse"></div>
                 <div class="card-body">
                   <h6 class="card-title">Conjuro</h6>
                   <p class="card-text">
@@ -381,7 +383,7 @@
             <!-- instantaneo -->
             <div class="col">
               <div class="card h-100">
-                <div class="card-img card-instant"></div>
+                <div class="img-type card-instant"></div>
                 <div class="card-body">
                   <h6 class="card-title">Instantáneos</h6>
                   <p class="card-text">
@@ -395,7 +397,7 @@
         </div>
       </section>
       <section class="card-section">
-        <div class="header-title header-section">
+        <div class="header-title">
           <h2>Descubrí qué hay en una carta</h2>
         </div>
 
@@ -404,38 +406,41 @@
             <div class="card-info">
               <div class="card-body">
                 <div class="partes-img">
-                  <div class="row row-cols-3 img-partes">
-                    <div class="col">
-                      <h5 class="number-part">1</h5>
+                  <img src="/practico parcial/assets/magic/carta.png" alt="" />
+                  <div class="container-partes-img">
+                    <div class="row row-cols-3 img-partes">
+                      <div class="col">
+                        <h5 class="number-part">1</h5>
+                      </div>
+                      <div class="col col-vacia"></div>
+                      <div class="col"><h5 class="number-part">2</h5></div>
                     </div>
-                    <div class="col col-vacia"></div>
-                    <div class="col"><h5 class="number-part">2</h5></div>
-                  </div>
-                  <div class="row row-cols-3 img-partes">
-                    <div class="col">
-                      <h5 class="number-part">7</h5>
+                    <div class="row row-cols-3 img-partes">
+                      <div class="col">
+                        <h5 class="number-part">7</h5>
+                      </div>
+                      <div class="col"><h5 class="number-part">6</h5></div>
+                      <div class="col"><h5 class="number-part">3</h5></div>
                     </div>
-                    <div class="col"><h5 class="number-part">6</h5></div>
-                    <div class="col"><h5 class="number-part">3</h5></div>
-                  </div>
-                  <div class="row row-cols-3 img-partes">
-                    <div class="col">
-                      <h5 class="number-part">5</h5>
+                    <div class="row row-cols-3 img-partes">
+                      <div class="col">
+                        <h5 class="number-part">5</h5>
+                      </div>
+                      <div class="col col-vacia"></div>
+                      <div class="col"><h5 class="number-part">4</h5></div>
                     </div>
-                    <div class="col col-vacia"></div>
-                    <div class="col"><h5 class="number-part">4</h5></div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-md-6 col-12 partes">
+          <div class="col-md-6 col-12 container-part">
             <!-- nombre -->
             <div class="paso row parte">
-              <div class="paso-icon col-2 part">
-                <h5 class="pasos-header parte-carta">1</h5>
+              <div class="step-number col-2 part">
+                <h5 class="step-header parte-carta">1</h5>
               </div>
-              <div class="col-10 textoPaso">
+              <div class="col-10 card-part-text">
                 <div class="row part-card">
                   <h6 class="col-10">Nombre</h6>
                 </div>
@@ -443,10 +448,10 @@
             </div>
             <!-- maná -->
             <div class="paso row parte">
-              <div class="paso-icon col-2 part">
-                <h5 class="pasos-header parte-carta">2</h5>
+              <div class="step-number col-2 part">
+                <h5 class="step-header parte-carta">2</h5>
               </div>
-              <div class="col-10 textoPaso">
+              <div class="col-10 card-part-text">
                 <div class="row part-card">
                   <h6 class="col-10">Costo de maná</h6>
                   <i class="fa-solid fa-plus col-1"></i>
@@ -462,10 +467,10 @@
             </div>
             <!-- simbolo -->
             <div class="paso row parte">
-              <div class="paso-icon col-2 part">
-                <h5 class="pasos-header parte-carta">3</h5>
+              <div class="step-number col-2 part">
+                <h5 class="step-header parte-carta">3</h5>
               </div>
-              <div class="col-10 textoPaso">
+              <div class="col-10 card-part-text">
                 <div class="row part-card">
                   <h6 class="col-10">Símbolo de expansión</h6>
                   <i class="fa-solid fa-plus col-1"></i>
@@ -480,10 +485,10 @@
             </div>
             <!-- fuerza/resistencia -->
             <div class="paso row parte">
-              <div class="paso-icon col-2 part">
-                <h5 class="pasos-header parte-carta">4</h5>
+              <div class="step-number col-2 part">
+                <h5 class="step-header parte-carta">4</h5>
               </div>
-              <div class="col-10 textoPaso">
+              <div class="col-10 card-part-text">
                 <div class="row part-card">
                   <h6 class="col-10">Fuerza/Resistencia</h6>
                   <i class="fa-solid fa-plus col-1"></i>
@@ -497,10 +502,10 @@
             </div>
             <!-- número colección -->
             <div class="paso row parte">
-              <div class="paso-icon col-2 part">
-                <h5 class="pasos-header parte-carta">5</h5>
+              <div class="step-number col-2 part">
+                <h5 class="step-header parte-carta">5</h5>
               </div>
-              <div class="col-10 textoPaso">
+              <div class="col-10 card-part-text">
                 <div class="row part-card">
                   <h6 class="col-10">Artista y número de colección</h6>
                   <i class="fa-solid fa-plus col-1"></i>
@@ -514,10 +519,10 @@
             </div>
             <!-- texto -->
             <div class="paso row parte">
-              <div class="paso-icon col-2 part">
-                <h5 class="pasos-header parte-carta">6</h5>
+              <div class="step-number col-2 part">
+                <h5 class="step-header parte-carta">6</h5>
               </div>
-              <div class="col-10 textoPaso">
+              <div class="col-10 card-part-text">
                 <div class="row part-card">
                   <h6 class="col-10">Recuadro de texto</h6>
                   <i class="fa-solid fa-plus col-1"></i>
@@ -531,10 +536,10 @@
             </div>
             <!-- tipo -->
             <div class="paso row parte">
-              <div class="paso-icon col-2 part">
-                <h5 class="pasos-header parte-carta">7</h5>
+              <div class="step-number col-2 part">
+                <h5 class="step-header parte-carta">7</h5>
               </div>
-              <div class="col-10 textoPaso">
+              <div class="col-10 card-part-text">
                 <div class="row part-card">
                   <h6 class="col-10">Línea de tipo</h6>
                   <i class="fa-solid fa-plus col-1"></i>
@@ -551,17 +556,17 @@
         </div>
       </section>
       <section class="instrucciones-section">
-        <div class="header-title header-section" id="instrucciones">
+        <div class="header-title" id="instrucciones">
           <h2>Cómo jugar</h2>
         </div>
 
         <div class="row">
           <div class="col-md-6 col-12">
             <div class="paso row g-5">
-              <div class="paso-icon col-2 primero">
-                <h5 class="pasos-header">1</h5>
+              <div class="step-number col-2 step-1">
+                <h5 class="step-header">1</h5>
               </div>
-              <div class="col-10 textoPaso">
+              <div class="col-10 card-part-text">
                 <h6>Armá tu mazo</h6>
                 <p>
                   Empezá con un mazo con 60 cartas. Incluí tierras para el maná
@@ -570,10 +575,10 @@
               </div>
             </div>
             <div class="paso row g-5">
-              <div class="paso-icon col-2 segundo">
-                <h5 class="pasos-header">2</h5>
+              <div class="step-number col-2 step-2">
+                <h5 class="step-header">2</h5>
               </div>
-              <div class="col-10 textoPaso">
+              <div class="col-10 card-part-text">
                 <h6>Mezclá y robá cartas</h6>
                 <p>
                   Mezclá tu mazo y robá 7 cartas para empezar la partida. Luego
@@ -582,10 +587,10 @@
               </div>
             </div>
             <div class="paso row g-5">
-              <div class="paso-icon col-2 tercero">
-                <h5 class="pasos-header">3</h5>
+              <div class="step-number col-2 step-3">
+                <h5 class="step-header">3</h5>
               </div>
-              <div class="col-10 textoPaso">
+              <div class="col-10 card-part-text">
                 <h6>Sacrificá tierras</h6>
                 <p>
                   Jugá una carta de tierra por turno para generar maná y poder
@@ -594,10 +599,10 @@
               </div>
             </div>
             <div class="paso row g-5">
-              <div class="paso-icon col-2 cuarto">
-                <h5 class="pasos-header">4</h5>
+              <div class="step-number col-2 step-4">
+                <h5 class="step-header">4</h5>
               </div>
-              <div class="col-10 textoPaso">
+              <div class="col-10 card-part-text">
                 <h6>Atacá y ganá</h6>
                 <p>
                   Atacá con tus criaturas para reducir la vida de tu oponente de
@@ -609,7 +614,7 @@
           <div class="col-md-6 col-12">
             <div class="card-info">
               <div class="card-body">
-                <div class="card-img">
+                <div class="img-card-how-to">
                   <img
                     src="assets/magic/jugadores_mesa.jpg"
                     class="card-info-img"
@@ -640,9 +645,9 @@
           </div>
         </div>
       </section>
-      <section class="banner banner-magic"></section>
+      <section class="banner-section banner-magic"></section>
       <section class="juga-section">
-        <div class="header-title header-section">
+        <div class="header-title">
           <h2>¿Querés empezar a jugar ya?</h2>
           <p>
             Entrá en la comunidad de millones de jugadores alrededor del mundo,
@@ -651,7 +656,7 @@
           <div>
             <a
               href="https://magic.wizards.com/en/mtgarena"
-              class="btn btn-outline-carrousel btn-full"
+              class="btn .btn-outline-custom btn-full"
             >
               Descargar MGT Arena
             </a>

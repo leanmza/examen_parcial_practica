@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   toggleButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
-      const padre = btn.closest(".textoPaso");
+      const padre = btn.closest(".card-part-text");
       const parrafo = padre.querySelector(".card-description");
 
       if (parrafo) {
