@@ -167,7 +167,7 @@
   justify-content: space-between;
 }
 
-.car-example{
+.card-example {
   width: 100%;
 }
 
@@ -249,6 +249,10 @@
   display: block !important;
 }
 
+.paso:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
 /* Pantallas hasta medium  */
 @media (max-width: 991px) {
   .img-color {
@@ -259,10 +263,17 @@
   }
 }
 
+.card-part-img-container {
+  padding-left: 0;
+}
 /* Pantallas hasta small */
 @media (max-width: 767px) {
   .instrucciones-section > .row > div > .paso {
     justify-content: center;
+  }
+
+  .card-section {
+    padding: 5dvh 5dvw !important;
   }
 
   .colores-section {
@@ -300,12 +311,18 @@
   }
 
   .partes-img {
-    height: 400px;
     max-width: 300px;
   }
 
+  .container-partes-img > :nth-child(2n) {
+    margin-top: 6rem;
+  }
   .part-card {
     justify-content: space-between;
+  }
+
+  .card-example {
+    max-height: 300px;
   }
 
   .parte {
@@ -316,12 +333,27 @@
     padding: 0;
   }
   .container-part {
-    padding: 2rem 0 0;
+    padding: 2rem 1.5rem 0;
   }
 
   .card-part-img-container > .card-info > .card-body {
     padding: 2rem;
   }
+
+  .paso > * {
+    margin-top: 0;
+  }
+
+  .paso:first-child {
+    margin-top: 1rem;
+  }
+
+  .paso > .card-part-text,
+  .container-color-type > .step-text {
+    margin-top: 1rem;
+    text-align: center !important;
+  }
+  
 }
 
 /* Pantallas hasta extra small */
