@@ -97,6 +97,11 @@ footer {
   width: 99dvw;
 }
 
+.dropdown-menu{
+  background-color: var(--color-dark) !important;
+  border: none;
+}
+
 .site-name {
   margin: 8px;
   color: var(--color-muted) !important;
@@ -134,8 +139,9 @@ h2 {
 }
 
 .btn-outline-custom {
-  border: solid var(--color-light-white) 1px;
+  margin-right: 2rem;
 }
+
 
 /* cards */
 

@@ -117,9 +117,6 @@ h1 {
   border: solid var(--color-light-white) 1px;
 }
 
-.btn-outline-custom {
-  margin-right: 2rem;
-}
 
 /* Pantallas hasta medium  */
 @media (max-width: 991px) {
