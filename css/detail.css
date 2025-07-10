@@ -140,7 +140,7 @@ h1 {
     font-size: 3rem !important;
   }
   .header-title > p {
-    text-align: justify;
+    text-align: center;
     font-size: 1rem;
   }
   .btn-outline-custom {

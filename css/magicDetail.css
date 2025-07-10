@@ -179,7 +179,7 @@
   margin-top: 10rem;
 }
 
-.img-partes > div {
+.number-part {
   border-radius: 50%;
   color: var(--color-light);
   max-height: 48px;
@@ -227,7 +227,7 @@
 }
 
 .card-part-text > p {
-  max-width: 75ch;
+  max-width: 60ch;
   font-size: 14px;
   color: var(--color-muted);
   text-align: justify;
@@ -252,6 +252,12 @@
 .paso:not(:last-child) {
   margin-bottom: 1rem;
 }
+
+.instrucciones-section>.row>:first-child{
+  align-content: center;
+}
+
+
 
 /* Pantallas hasta medium  */
 @media (max-width: 991px) {
@@ -353,7 +359,18 @@
     margin-top: 1rem;
     text-align: center !important;
   }
+
+  .parte{
+    display: none;
+  }
   
+  .icon-descripcion{
+    display: none !important;
+  }
+
+  .card-section{
+    padding-bottom: 5dvh !important;
+  }
 }
 
 /* Pantallas hasta extra small */
