@@ -195,6 +195,15 @@ h2 {
   text-decoration: none;
 }
 
+.sugerencia-text{
+  font-size: 12px;
+  color:var(--color-muted);
+  text-align: center;
+}
+
+.img-feature {
+  width: 100%;
+}
 
 
 /* Pantallas md  */

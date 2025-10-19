@@ -1,22 +1,24 @@
-.colores-section,
+.colors-section,
 .type-card-section {
   justify-content: space-around !important;
 }
 
-.encabezado-section {
+.hero-section {
   background-image: var(--gradient-magic), url(../assets/magic/magic.png);
   background-repeat: no-repeat;
   background-size: cover;
   background-position-y: center;
 }
 
-.colores-section,
+.btn-aprender {
+  background-color: var(--color-primary);
+}
+.colors-section,
 .card-section {
   background-color: var(--color-dark);
 }
-.encabezado-section > .row {
-  justify-content: center;
-}
+
+
 
 .icon-varita {
   background-color: var(--color-primary);
@@ -43,7 +45,7 @@
   background-color: var(--color-accent);
 }
 
-.banner-magic {
+.banner-section {
   background-image: var(--gradient-banner), url(../assets/MTG-cards-in-hand.jpg);
 }
 
@@ -85,9 +87,7 @@
 }
 
 /* color-section */
-.img-color {
-  width: 100%;
-}
+
 .container-color-type {
   padding: 1rem 0;
   font-size: 14px;
@@ -104,11 +104,11 @@
   border-bottom: 1px solid var(--color-muted);
 }
 
-.colores-section > .row > .col-iz {
+.colors-section > .row > .col-iz {
   padding: 0 2rem 0 0;
 }
 
-.colores-section > .row > .col-der {
+.colors-section > .row > .col-der {
   padding: 0 0 0 2rem;
 }
 
@@ -117,13 +117,13 @@
   border-radius: 50%;
   max-width: 80px;
 }
-.colores-section > .row > .col-iz,
+.colors-section > .row > .col-iz,
 .icon-color {
   align-content: center;
   justify-content: center;
   display: grid;
 }
-.colores-section > .row > .col-der > div > div > h6 {
+.colors-section > .row > .col-der > div > div > h6 {
   padding-left: 0.5 rem;
 }
 
@@ -253,7 +253,7 @@
   margin-bottom: 1rem;
 }
 
-.instrucciones-section>.row>:first-child{
+.how-to-section>.row>:first-child{
   align-content: center;
 }
 
@@ -261,7 +261,7 @@
 
 /* Pantallas hasta medium  */
 @media (max-width: 991px) {
-  .img-color {
+  .img-feature {
     display: none;
   }
   .container-part {
@@ -274,7 +274,7 @@
 }
 /* Pantallas hasta small */
 @media (max-width: 767px) {
-  .instrucciones-section > .row > div > .paso {
+  .how-to-section > .row > div > .paso {
     justify-content: center;
   }
 
@@ -282,10 +282,10 @@
     padding: 5dvh 5dvw !important;
   }
 
-  .colores-section {
+  .colors-section {
     padding-inline: 5dvw !important;
   }
-  .instrucciones-section > .row > div {
+  .how-to-section > .row > div {
     margin-bottom: 32px;
   }
 

@@ -1,8 +1,11 @@
-.encabezado-section {
+.hero-section {
   height: 800px !important;
 }
 
-.encabezado-section,
+.hero-section > .row {
+  justify-content: center;
+}
+
 .card-section {
   justify-content: normal !important;
 }
@@ -13,9 +16,7 @@ h1 {
   font-weight: 800 !important;
 }
 
-.btn-aprender {
-  background-color: var(--color-primary);
-}
+
 
 .step-number {
   border-radius: 50%;
@@ -35,7 +36,7 @@ h1 {
   align-content: center;
 }
 
-.juga-section {
+.action-section {
   background-color: var(--color-primary);
   height: 350px !important;
 }
@@ -116,17 +117,17 @@ h1 {
 
 /* Pantallas hasta small */
 @media (max-width: 767px) {
-  .encabezado-section {
+  .hero-section {
     padding-inline: 10dvw;
   }
 
   .type-card-section,
-  .instrucciones-section,
+  .how-to-section,
   .card-section {
     padding-inline: 5dvw !important;
   }
 
-  .instrucciones-section {
+  .how-to-section {
     padding-bottom: 2dvh !important;
   }
 

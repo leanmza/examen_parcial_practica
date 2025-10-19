@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="css/commons.css" />
     <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="css/detail.css" />
-    <link rel="stylesheet" href="css/magicDetail.css" />
+    <link rel="stylesheet" href="css/dndDetail.css" />
 
     <!-- fuentes google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -66,7 +66,9 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="dndDetail.html">Dungeons & Dragons</a>
+                  <a class="dropdown-item" href="dndDetail.html"
+                    >Dungeons & Dragons</a
+                  >
                 </li>
                 <li>
                   <a class="dropdown-item" href="magicDetail.html"
@@ -103,10 +105,10 @@
       <section class="hero-section">
         <div class="row">
           <div class="col-xxl-6 col-xl-7 header-title">
-            <h1>Magic: The Gathering</h1>
+            <h1>Dungeons and Dragons</h1>
             <p>
-              Sumergíte en el multiverso del juego de cartas más estratégico.
-              Armá mazos, conjurá hechizos y peleá en duelos épicos.
+              El más grande juego de rol te espera. Creá héroes legendarios,
+              explorá reinos llenos de fantasía y viví aventuras inolvidables.
             </p>
 
             <div>
@@ -117,7 +119,7 @@
                 Aprender a jugar
               </a>
               <a href="#card-section" class="btn btn-outline-light">
-                Conocé tu carta
+                Recursos
               </a>
             </div>
           </div>
@@ -125,162 +127,74 @@
       </section>
       <section class="feature-section">
         <div class="header-title">
-          <h2>Caracteristicas del Juego</h2>
+          <h2>¿Qué es Dungeons and Dragons?</h2>
           <p>
-            Descubrí que hace a Magic: The Gathering el juego de rol con cartas
-            más popular
+            D&D es un juego de narrativa colaborativa donde vos y tus amigos
+            crean aventuras épicas juntos. Un jugador es el Dungeon Master (DM),
+            guiando la historia, mientras que otros interpretan personajes
+            heroicos que exploran mundos mágicos.
           </p>
         </div>
-        <div class="cards">
-          <!-- cards -->
-          <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col">
-              <div class="card">
-                <div class="icon-card icon-varita">
-                  <i class="fa-solid fa-bolt fa-xl"></i>
-                </div>
-                <div class="card-body">
-                  <h6 class="card-title">Juego estratégico</h6>
-                  <p class="card-text">
-                    Dominá complejas estrategias con miles de cartas únicas,
-                    cada una ofece diferentes caminos a la victoria.
-                  </p>
-                </div>
+        <div class="row">
+          <div class="col-lg-6 col-12">
+            <img
+              src="assets/dnd/roll_dnd_dice.png"
+              class="img-feature"
+              alt=""
+            />
+          </div>
+
+          <div class="col-lg-6 col-12">
+            <div class="row feature-row">
+              <div class="icon-card icon-group col-2">
+                <i class="fa-solid fa-people-group fa-xl"></i>
+              </div>
+              <div class="card-body col-10">
+                <h6 class="card-title">Narrativa colaborativa</h6>
+                <p class="card-text">
+                  Trabajá junto a tus compañeros para crear incríbles historias
+                  que se desarrollan en función de sus elecciones y tiradas de
+                  dados.
+                </p>
               </div>
             </div>
-            <div class="col">
-              <div class="card">
-                <div class="icon-card icon-mazo">
-                  <i class="fa-solid fa-palette fa-xl"></i>
-                </div>
-                <div class="card-body">
-                  <h6 class="card-title">Cinco colores de maná</h6>
-                  <p class="card-text">
-                    Blanco, azul, negro, rojo y verde - cada color representa
-                    diferentes filosofías y estilos de juego.
-                  </p>
-                </div>
+            <div class="row feature-row">
+              <div class="icon-card icon-dice col-2">
+                <i class="fa-solid fa-dice fa-xl"></i>
+              </div>
+              <div class="card-body col-10">
+                <h6 class="card-title">Que sea lo que los dados quieran</h6>
+                <p class="card-text">
+                  Usá el D20, el dado de 20 caras, para determinar el resultado
+                  de las acciones, añadiendo emoción e imprevisibilidad.
+                </p>
               </div>
             </div>
-            <div class="col">
-              <div class="card">
-                <div class="icon-card icon-multiplayer">
-                  <i class="fa-solid fa-layer-group fa-xl"></i>
-                </div>
-                <div class="card-body">
-                  <h6 class="card-title">Múltiple formatos</h6>
-                  <p class="card-text">
-                    Estándar, Commander, Booster Draft, Moderno y muchos más -
-                    encontrá el formato perfecto para tu estilo de juego
-                    preferido.
-                  </p>
-                </div>
+            <div class="row feature-row">
+              <div class="icon-card icon-multiplayer col-2">
+                <i class="fa-solid fa-wand-magic fa-xl"></i>
+              </div>
+              <div class="card-body col-10">
+                <h6 class="card-title">Posibilidades ilimitadas</h6>
+                <p class="card-text">
+                  Creá un personaje de raza y clase que vos elijas y explorá
+                  infinitos mundos de fantasía y aventura.
+                </p>
               </div>
             </div>
           </div>
         </div>
       </section>
-      <section class="colors-section">
+      <section class="races-section">
         <div class="header-title">
-          <h2>Colores</h2>
+          <h2>Razas</h2>
           <p>
-            Son el núcleo del sistema de maná y la estrategia en general del
-            juego.
+            Descubrí las distintas razas del mundo de D&D, cada una ofrece
+            habilidades únicas, historia ancestral y un estilo de juego
+            diferente. La elección define tu camino.
           </p>
         </div>
-        <div class="row">
-          <!-- circulo cromático -->
-          <div class="col-lg-6 col-12 col-iz">
-            <img
-              src="assets/magic/chromatic_circle.png"
-              class="img-feature"
-              alt=""
-            />
-          </div>
-          <!-- colores -->
-          <div class="col-lg-6 col-12 col-der">
-            <!-- blanco -->
-            <div class="container-color-type row">
-              <div class="icon-color icon-white col-sm-3 col-12">
-                <img src="assets/magic/magic_blanco.png" alt="" />
-              </div>
-              <div class="col-sm-2 col-12 step-text">
-                <h6>Blanco</h6>
-              </div>
-              <div class="col-sm-7 col-12">
-                <p>Paz, ley, estructura, altruismo e igualdad.</p>
-                <ul class="color-caracteristica">
-                  <p>Aliados: Azul y Verde</p>
-                  <p>Enemigos: Negro y Rojo</p>
-                </ul>
-              </div>
-            </div>
-            <!-- azul -->
-            <div class="container-color-type row">
-              <div class="icon-color icon-blue col-sm-3 col-12">
-                <img src="assets/magic/magic_azul.png" alt="" />
-              </div>
-              <div class="col-sm-2 col-12 step-text">
-                <h6>Azul</h6>
-              </div>
-              <div class="col-sm-7 col-12">
-                <p>Conocimiento, engaño, cautela y perfección.</p>
-                <ul class="color-caracteristica">
-                  <p>Aliados: Blanco y Negro</p>
-                  <p>Enemigos: Rojo y Verde</p>
-                </ul>
-              </div>
-            </div>
-            <!-- negro -->
-            <div class="container-color-type row">
-              <div class="icon-color icon-black col-sm-3 col-12">
-                <img src="assets/magic/magic_negro.png" alt="" />
-              </div>
-              <div class="col-sm-2 col-12 step-text">
-                <h6>Negro</h6>
-              </div>
-              <div class="col-sm-7 col-12">
-                <p>Poder, egoísmo, muerte, sacrificio y desinhibición.</p>
-                <ul class="color-caracteristica">
-                  <p>Aliados: Azul y Rojo</p>
-                  <p>Enemigos: Verde y Blanco</p>
-                </ul>
-              </div>
-            </div>
-            <!-- rojo -->
-            <div class="container-color-type row">
-              <div class="icon-color icon-red col-sm-3 col-12">
-                <img src="assets/magic/magic_rojo.png" alt="" />
-              </div>
-              <div class="col-sm-2 col-12 step-text">
-                <h6>Rojo</h6>
-              </div>
-              <div class="col-sm-7 col-12">
-                <p>Libertad, emoción, acción, impulso y destrucción.</p>
-                <ul class="color-caracteristica">
-                  <p>Aliados: Negro y Verde</p>
-                  <p>Enemigos: Blanco y Azul</p>
-                </ul>
-              </div>
-            </div>
-            <!-- verde -->
-            <div class="container-color-type row">
-              <div class="icon-color icon-green col-sm-3 col-12">
-                <img src="assets/magic/magic_verde.png" alt="" />
-              </div>
-              <div class="col-sm-2 col-12 step-text">
-                <h6>Verde</h6>
-              </div>
-              <div class="col-sm-7 col-12">
-                <p>Naturaleza, conexión, espiritualidad y tradición.</p>
-                <ul class="color-caracteristica">
-                  <p>Aliados: Blanco y Rojo</p>
-                  <p>Enemigos: Azul y Negro</p>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="row"></div>
       </section>
       <section class="type-card-section">
         <div class="header-title">
@@ -413,7 +327,7 @@
                     class="card-example"
                     alt=""
                   />
-                  
+
                   <div class="container-partes-img">
                     <div class="row row-cols-3 img-partes">
                       <div class="col number-part">
@@ -439,7 +353,9 @@
                   </div>
                 </div>
               </div>
-              <p class="sugerencia-text">Clickeá sobre un número para saber más</p>
+              <p class="sugerencia-text">
+                Clickeá sobre un número para saber más
+              </p>
             </div>
           </div>
           <div class="col-md-6 col-12 container-part">

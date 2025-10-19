@@ -1,0 +1,57 @@
+.hero-section {
+  background-image: var(--gradient-magic), url(../assets/dnd/dnd_party_vs_dragon.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-y: center;
+}
+
+.feature-section{
+  background-color: var(--color-dark);
+}
+
+h1{
+  background: var(--gradient-header) ;
+}
+
+.btn-aprender {
+  background-color: var(--color-secondary);
+}
+
+.banner-section {
+  background-image: var(--gradient-banner), url(../assets/dnd/4_e3dd72dc-84f5-410e-882c-80cb42b1b4c2_2048x.png);
+  background-position-y: center;
+  background-size: cover;
+}
+
+.feature-row{
+  align-items: center;
+}
+
+.feature-section>.row>:first-child{
+  padding: 0;
+}
+.feature-section>.row>:last-child{
+  align-content: center;
+  padding: 3rem;
+}
+
+.img-feature{
+  max-width: 45dvw;
+}
+
+.icon-group {
+  background-color: var(--color-primary);
+}
+.icon-dice {
+  background-color: var(--color-secondary);
+}
+.icon-multiplayer {
+  background-color: var(--color-accent);
+}
+.icon-card{
+  margin-bottom: 0;
+}
+
+.card-body{
+  padding: 1rem;
+}
