@@ -74,6 +74,11 @@
   max-width: 75ch;
 }
 
+.span-error{
+  color: red;
+  font-size: 12px;
+}
+
 /* Pantallas hasta small */
 @media (max-width: 575px) {
   .form-section {

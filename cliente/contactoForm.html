@@ -25,6 +25,8 @@
       src="https://kit.fontawesome.com/eaa90bc584.js"
       crossorigin="anonymous"
     ></script>
+
+    <script src="scripts/form_script.js"></script>
   </head>
   <body>
     <!-- HEADER / NAVBAR -->
@@ -78,7 +80,7 @@
               <a class="nav-link" href="contactoForm.html">Contacto</a>
             </li>
           </ul>
-          <form class="d-flex" role="search">
+          <form class="d-flex" role="search" >
             <input
               class="form-control me-2"
               type="search"
@@ -106,12 +108,13 @@
       </section>
       <section class="form-section">
   
-          <form action="" method="post">
+        <form action="http://127.0.0.1:5000/contactoForm/" method="post" id="contactoForm">
+
                   <div class="row"></div>
             <div class="row d-flex justify-content-center g-3">
               
               <div class="col-12 col-sm-6 form-input">
-                <label for="nombre" class="form-label">Nombre</label>
+                <label for="nombre" class="form-label">Nombre <span id="label-nombre" class="span-error"></span></label>
                 <input
                   type="text"
                   class="form-control"
@@ -123,11 +126,11 @@
                 <div class="invalid-feedback">Campo obligatirio</div>
               </div>
               <div class="col-12 col-sm-6 form-input">
-                <label for="nombre" class="form-label">Apellido</label>
+                <label for="nombre" class="form-label">Apellido <span id="label-apellido" class="span-error"></span></label>
                 <input
                   type="text"
                   class="form-control"
-                  id="nombre"
+                  id="apellido"
                   placeholder="Apellido"
                   value=""
                 />
@@ -137,7 +140,7 @@
             <div class="row d-flex justify-content-center g-3 mt-1">
               
               <div class="col-12 col-sm-6 form-input">
-                <label for="email" class="form-label">Email </label>
+                <label for="email" class="form-label">Email <span id="label-email" class="span-error"></span></label>
                 <input
                   type="email"
                   class="form-control"
@@ -148,29 +151,29 @@
                 <div class="invalid-feedback">Campo obligatirio</div>
               </div>
               <div class="col-12 col-sm-6 form-input">
-                <label for="consulta" class="form-label">Motivo</label>
+                <label for="consulta" class="form-label">Motivo <span id="label-motivo" class="span-error"></span></label>
                 <select
                   name="consultas"
                   class="row mx-1 consultas"
-                  id=""
+                  id="motivo"
                   required
                 >
                   <option value="" selected hidden disabled>
                     Elija una opción
                   </option>
-                  <option value="consulta">Consulta general</option>
-                  <option value="funcionamiento">Mecánica de juego</option>
-                  <option value="consulta">Otro</option>
+                  <option value="consulta_general">Consulta general</option>
+                  <option value="mecanica_juego">Mecánica de juego</option>
+                  <option value="otro">Otro</option>
                 </select>
               </div>
             </div>
             <hr class="my-4 col-8 offset-2" />
 
             <div class="row d-flex justify-content-center g-3">
-                   
+                   <label for="mensaje" class="form-label"> Mensaje <span id="label-mensaje" class="span-error"></span></label>
               <textarea
                 name="comentario"
-                id=""
+                id="mensaje"
                 placeholder="Dejanos tu consulta"
                 class="form-textarea col-12 col-xxl-8"
                 required
@@ -183,7 +186,7 @@
                 class="mb-4 col-12 form-check d-flex justify-content-center robot"
               >
                 <input
-                  type="form-checkbox"
+                  type="checkbox"
                   class="form-check-input form-checkbox"
                   id="humano"
                   required
@@ -197,6 +200,7 @@
               <button
                 class="btn btn-primary btn-lg  col-xl-2 col-lg-3 col-sm-4 col-6 btn-submit"
                 type="submit"
+                id="submit"
               >
                 Enviar
               </button>
