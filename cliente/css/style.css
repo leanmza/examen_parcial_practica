@@ -229,6 +229,41 @@ footer {
   height: 150px;
 }
 
+/* Header backgrounds per game (used on detail pages) */
+.header-magic {
+  background-image: url(../assets/ChatGPT\ Image\ magic\ velas.png);
+  background-size: cover;
+  background-position: center;
+}
+.header-dnd {
+  background-image: url(../assets/dragons.png);
+  background-size: cover;
+  background-position: center;
+}
+.header-pathfinder {
+  background-image: url(../assets/party.png);
+  background-size: cover;
+  background-position: center;
+}
+
+/* Banner image used across pages (e.g., index, magic detail) */
+.banner-magic {
+  background-image: url(../assets/MTG-cards-in-hand.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.banner-dnd {
+  background-image: url(../assets/dragons.png);
+  background-size: cover;
+  background-position: center;
+}
+
+.banner-pathfinder {
+  background-image: url(../assets/party.png);
+  background-size: cover;
+  background-position: center;
+}
 
 /* Pantallas hasta medium  */
 @media (max-width: 991px) {

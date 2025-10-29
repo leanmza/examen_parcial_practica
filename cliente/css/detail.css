@@ -11,15 +11,16 @@
 }
 
 .encabezado-section {
-  background-image: url(../assets/ChatGPT\ Image\ magic\ velas.png);
   background-repeat: no-repeat;
   background-size: cover;
   background-position-y: 80%;
 }
+
 .encabezado-section,
 .instrucciones-section {
   background-color: #2c3036;
 }
+
 .caracteristicas-section,
 .instrucciones-section {
   margin-inline: 0;
@@ -42,19 +43,12 @@
   resize: both;
   overflow: hidden;
 }
+
 .encabezadoImg {
   height: 400px;
 }
-h1 {
-  font-size: 4em !important;
-  background: linear-gradient(150deg, #695ca5, #dbdadf);
-  color: transparent;
-  background-clip: text;
-  -webkit-background-clip: text;
-}
 
-h1 > span,
-h2 {
+h1 > span {
   color: white;
 }
 
@@ -75,9 +69,11 @@ h2 {
 .varita {
   background-color: #695ca5;
 }
+
 .mazo {
   background-color: #06b6d4;
 }
+
 .multiplayer {
   background-color: #845ca5;
 }
@@ -95,6 +91,7 @@ h2 {
   text-align: center;
   width: 250px;
 }
+
 .paso-icon {
   border-radius: 50%;
   width: 100px;
@@ -104,38 +101,92 @@ h2 {
   align-items: center;
   margin-bottom: 16px;
 }
+
 .pasos-header {
   margin: 0;
 }
+
 .primero {
   background-color: #695ca5;
 }
+
 .segundo {
   background-color: #06b6d4;
 }
+
 .tercero {
   background-color: #845ca5;
 }
+
 .cuarto {
   background-color: #d65959;
 }
 
 .textoPaso {
   display: grid;
-
   align-content: baseline;
-}
-
-.banner-magic {
-  background-image: url(../assets/MTG-cards-in-hand.jpg);
 }
 
 .jugaSection {
   background-color: #695ca5;
   height: 350px;
 }
+
 .jugaSection > .header-section {
   padding: 0 !important;
+}
+
+.news-section {
+  height: fit-content;
+  padding: 10dvh 3rem;
+}
+
+.news-card {
+  background-color: #2c3036;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: .5rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.news-header {
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #845ca5 0%, #06b6d4 100%);
+  border-top-left-radius: .5rem;
+  border-top-right-radius: .5rem;
+}
+
+.news-header .icon {
+  color: white;
+}
+
+.news-title {
+  font-size: 1rem;
+  margin-bottom: .5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.news-desc {
+  font-size: .9rem;
+  color: var(--bs-secondary-color);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.news-meta {
+  font-size: .8rem;
+  color: var(--bs-secondary-color);
 }
 
 .btn-full {

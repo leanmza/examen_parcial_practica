@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Magic the Gathering</title>
-    <link rel="icon" type="image/png" href="assets/ico.png" />
+    <title>Dungeons & Dragons</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css"
+      rel="stylesheet"
       rel="stylesheet"
       integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT"
       crossorigin="anonymous"
@@ -66,15 +66,13 @@
                   <a class="dropdown-item" href="dndDetail.html">Dungeons & Dragons</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="magicDetail.html"
-                    >Magic: The Gathering</a
-                  >
+                  <a class="dropdown-item" href="magicDetail.html">Magic: The Gathering</a>
                 </li>
                 <li><a class="dropdown-item" href="pathfinderDetail.html">Pathfinder</a></li>
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="novedades_DnD.html">Novedades</a>
+               <a class="nav-link" href="novedades_DnD.html">Novedades</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="contactoForm.html">Contacto</a>
@@ -100,26 +98,19 @@
 
     <!-- MAIN -->
     <main class="container-fluid">
-      <section class="encabezado-section header-magic">
+      <section class="encabezado-section header-dnd">
         <div class="row">
           <div class="col-xxl-6 col-xl-7 offset-xxl-2 offset-xl-1 header-title">
-            <h1><span>Domina el arte de </span> Magic: The Gathering</h1>
+            <h1><span>Vive aventuras en </span> Dungeons & Dragons</h1>
             <p>
-              Sumergíte en el multiverso del juego de cartas más estratégico.
-              Armá mazos, conjurá hechizos y peleá en duelos épicos.
+              Creá tu héroe, explorá mundos fantásticos y enfrentá desafíos épicos guiado por un Dungeon Master.
             </p>
 
             <div>
-              <a
-                href="#instrucciones"
-                class="btn btn-outline-carrousel btn-aprender"
-              >
+              <a href="#instrucciones" class="btn btn-outline-carrousel btn-aprender">
                 Aprender a jugar
               </a>
-              <a
-                href="https://magic.wizards.com/en/rules"
-                class="btn btn-outline-carrousel"
-              >
+              <a href="https://www.dndbeyond.com/sources/basic-rules" class="btn btn-outline-carrousel">
                 Reglas de juego
               </a>
             </div>
@@ -130,8 +121,7 @@
         <div class="header-title header-section">
           <h2>Caracteristicas del Juego</h2>
           <p>
-            Descubrí que hace a Magic: The Gathering el juego de rol con cartas
-            más popular
+            Descubrí qué hace a Dungeons & Dragons el juego de rol más famoso del mundo
           </p>
         </div>
         <div class="cards">
@@ -140,13 +130,12 @@
             <div class="col">
               <div class="card">
                 <div class="icon-card varita">
-                  <i class="fa-solid fa-wand-sparkles fa-xl"></i>
+                  <i class="fa-solid fa-hat-wizard fa-xl"></i>
                 </div>
                 <div class="card-body">
-                  <h6 class="card-title">Lanzamiento de hechizos</h6>
+                  <h6 class="card-title">Crea tu personaje</h6>
                   <p class="card-text">
-                    Lanza poderosos hechizos usando mana de tus cartas de
-                    tierras. Cada color ofrece estrategias y habilidades únicas.
+                    Elegí raza, clase, trasfondo y habilidades para construir un héroe único.
                   </p>
                 </div>
               </div>
@@ -154,13 +143,12 @@
             <div class="col">
               <div class="card">
                 <div class="icon-card mazo">
-                  <i class="fa-solid fa-layer-group fa-xl"></i>
+                  <i class="fa-solid fa-dungeon fa-xl"></i>
                 </div>
                 <div class="card-body">
-                  <h6 class="card-title">Armá tu mazo</h6>
+                  <h6 class="card-title">Exploración y narrativa</h6>
                   <p class="card-text">
-                    Armá estratégicamente tu mazo con al menos 60 cartas de las
-                    miles que hay disponibles.
+                    Descubrí mazmorras, resolvé misterios y toma decisiones que afectan la historia.
                   </p>
                 </div>
               </div>
@@ -168,13 +156,12 @@
             <div class="col">
               <div class="card">
                 <div class="icon-card multiplayer">
-                  <i class="fa-solid fa-user-group fa-xl"></i>
+                  <i class="fa-solid fa-people-group fa-xl"></i>
                 </div>
                 <div class="card-body">
-                  <h6 class="card-title">Multijugador</h6>
+                  <h6 class="card-title">Juego en equipo</h6>
                   <p class="card-text">
-                    Jugá con tus amigos en un enfrentamiento uno a uno o competí
-                    en torneos con diferentes modos de juego
+                    Colaborá con tu grupo para superar encuentros y derrotar a poderosos enemigos.
                   </p>
                 </div>
               </div>
@@ -183,10 +170,7 @@
         </div>
       </section>
       <section class="instrucciones-section">
-        <div
-          class="header-title header-section tituloInstruciones"
-          id="instrucciones"
-        >
+        <div class="header-title header-section tituloInstruciones" id="instrucciones">
           <h2>Cómo jugar</h2>
           <p>Aprendé lo básico en estos simple pasos</p>
         </div>
@@ -196,8 +180,8 @@
               <h3 class="pasos-header">1</h3>
             </div>
             <div class="textoPaso">
-              <h6>Mezclá y robá cartas</h6>
-              <p>Robá 7 cartas de tu mazo y 1 cada en cada turno posterior.</p>
+              <h6>Crea tu personaje</h6>
+              <p>Define atributos, equipo y habilidades de tu héroe nivel 1.</p>
             </div>
           </div>
           <div class="col-3 pasos">
@@ -205,8 +189,8 @@
               <h3 class="pasos-header">2</h3>
             </div>
             <div class="textoPaso">
-              <h6>Sacrificá tierras</h6>
-              <p>Jugá una carta de tierra por turno para generar maná.</p>
+              <h6>Tira los dados</h6>
+              <p>Usá un d20 para resolver acciones, ataques y salvaciones.</p>
             </div>
           </div>
           <div class="col-3 pasos">
@@ -214,8 +198,8 @@
               <h3 class="pasos-header">3</h3>
             </div>
             <div class="textoPaso">
-              <h6>Invocá criaturas y hechizos</h6>
-              <p>Usá el maná para invocar criaturas y lanzar hechizos.</p>
+              <h6>Rolea y explora</h6>
+              <p>Interactuá con el mundo, conversa con NPCs y toma decisiones.</p>
             </div>
           </div>
           <div class="col-3 pasos">
@@ -223,28 +207,23 @@
               <h3 class="pasos-header">4</h3>
             </div>
             <div class="textoPaso">
-              <h6>Atacá y ganá</h6>
-              <p>Atacá a tu oponente para reducir su vida a cero.</p>
+              <h6>Combate por turnos</h6>
+              <p>Actúa por iniciativa, usa habilidades y coopera para ganar.</p>
             </div>
           </div>
         </div>
       </section>
-      <section class="banner banner-magic">
-       
+      <section class="banner banner-dnd">
       </section>
       <section class="jugaSection">
         <div class="header-title header-section">
           <h2>¿Querés empezar a jugar ya?</h2>
           <p>
-            Entrá en la comunidad de millones de jugadores alrededor del mundo,
-            en la app oficial Magic: The Gathering Arena &copy
+            Unite a millones de aventureros con recursos gratuitos para comenzar hoy mismo.
           </p>
           <div>
-            <a
-              href="https://magic.wizards.com/en/mtgarena"
-              class="btn btn-outline-carrousel btn-full"
-            >
-              Descargar MGT Arena
+            <a href="https://www.dndbeyond.com/" class="btn btn-outline-carrousel btn-full">
+              Ir a D&D Beyond
             </a>
           </div>
         </div>
@@ -279,41 +258,29 @@
         <h6>Juegos</h6>
         <ul class="nav flex-column">
           <li class="nav-item mb-2">
-            <a href="dndDetail.html" class="nav-link p-0 text-body-secondary"
-              >Dungeons & Dragons</a
-            >
+            <a href="dndDetail.html" class="nav-link p-0 text-body-secondary">Dungeons & Dragons</a>
           </li>
           <li class="nav-item mb-2">
-            <a href="magicDetail.html" class="nav-link p-0 text-body-secondary"
-              >Magic: The Gathering</a
-            >
+            <a href="magicDetail.html" class="nav-link p-0 text-body-secondary">Magic: The Gathering</a>
           </li>
           <li class="nav-item mb-2">
             <a href="pathfinderDetail.html" class="nav-link p-0 text-body-secondary">Pathfinder</a>
           </li>
           <li class="nav-item mb-2">
-            <a href="#" class="nav-link p-0 text-body-secondary"
-              >Warhammer 40k</a
-            >
+            <a href="#" class="nav-link p-0 text-body-secondary">Warhammer 40k</a>
           </li>
         </ul>
       </div>
       <div class="col mb-3 links-footer">
         <ul class="nav flex-column">
           <li class="nav-item mb-2">
-            <a href="index.html" class="nav-link p-0 text-body-secondary"
-              ><h6>Home</h6></a
-            >
+            <a href="index.html" class="nav-link p-0 text-body-secondary"><h6>Home</h6></a>
           </li>
           <li class="nav-item mb-2">
-            <a href="novedades_DnD.html" class="nav-link p-0 text-body-secondary"
-              ><h6>Novedades</h6></a
-            >
+            <a href="#" class="nav-link p-0 text-body-secondary"><h6>Novedades</h6></a>
           </li>
           <li class="nav-item mb-2">
-            <a href="contactoForm.html" class="nav-link p-0 text-body-secondary"
-              ><h6>Contacto</h6></a
-            >
+            <a href="contactoForm.html" class="nav-link p-0 text-body-secondary"><h6>Contacto</h6></a>
           </li>
         </ul>
       </div>

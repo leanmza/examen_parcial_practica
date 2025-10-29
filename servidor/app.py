@@ -39,26 +39,7 @@ def insert_mensaje():
     else:
         res = Response(MENSAJE_ERROR_CONEXION, status=500)
     return res
-# @app.route("/persona/<int:id>", methods=["DELETE"])
-# def delete_persona(id):
-#     cursor.execute("DELETE FROM tablapersonas WHERE id = %s;", [id])
-#     db.commit()
-#     return Response({"ok": True}, status=200)
-# @app.route("/persona/<int:id>", methods=["PUT"])
-# def update_persona(id):
-#     res = None
-#     if cursor:
-#         try:
-#             cursor.execute("UPDATE tablapersonas SET nombre=%s, edad=%s WHERE id=%s;",
-#                 [request.form["nombre"], request.form["edad"] or None, id])
-#             db.commit()
-#             res = Response({"ok": True}, status=201)
-#         except IntegrityError:
-#             db.rollback()
-#             res = Response(MENSAJE_ERROR_UNIQUE, status=400)
-#     else:
-#         res = Response(MENSAJE_ERROR_CONEXION, status=500)
-#     return res
+
 if __name__=="__main__":
     try:
         serve(app, host="127.0.0.1", port=5000)
