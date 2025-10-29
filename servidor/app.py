@@ -8,6 +8,10 @@ CORS(app, resources={
     r"/contactoForm/": {
         "methods": ["POST"],
         "origins": "http://127.0.0.1:5500"
+    },
+    r"/torneoForm/": {
+        "methods": ["POST"],
+        "origins": "http://127.0.0.1:5500"
     }
 })
 
@@ -30,7 +34,36 @@ def insert_mensaje():
         try:
             cursor.execute(  "INSERT INTO mensajes(nombre, apellido, email, motivo, mensaje) VALUES (%s, %s, %s, %s, %s);",
   
-                [request.form["nombre"], request.form["apellido"], request.form["email"], request.form["motivo"], request.form["mensaje"] ])
+                [request.form["nombre"],
+                 request.form["apellido"],
+                 request.form["email"],
+                 request.form["motivo"],
+                 request.form["mensaje"] ])
+            db.commit()
+            res = Response({"ok": True}, status=201)
+        except IntegrityError:
+            db.rollback()
+            # res = Response(MENSAJE_ERROR_UNIQUE, status=400)
+    else:
+        res = Response(MENSAJE_ERROR_CONEXION, status=500)
+    return res
+
+@app.route("/torneoForm/", methods=["POST"])
+def insert_jugador():
+    res = None
+    if cursor:
+        try:
+            cursor.execute(  "INSERT INTO jugadores(nombre, apellido, edad, direccion, telefono, sede, fecha, identificador) VALUES (%s, %s, %s, %s, %s, %s, %s, %s);",
+  
+                [request.form["nombre"],
+                 request.form["apellido"],
+                 request.form["edad"],
+                 request.form["direccion"],
+                 request.form["telefono"],
+                 request.form["sede"],
+                 request.form["fecha"], 
+                 request.form["identificador"]] )
+            
             db.commit()
             res = Response({"ok": True}, status=201)
         except IntegrityError:

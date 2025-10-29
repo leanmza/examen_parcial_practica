@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Handler de envío (homogéneo al de contacto)
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Elementos
@@ -146,10 +146,34 @@ document.addEventListener("DOMContentLoaded", () => {
       return out;
     };
     const identificador = generarIdentificador(10);
-
+ 
     // Generar PDF
     generarPDF({ nombre, apellido, edad, telefono, direccion, sede, fecha, identificador });
 
+        const data = new FormData();
+    data.append("nombre", nombre);
+    data.append("apellido", apellido);
+    data.append("edad", edad);
+    data.append("telefono", telefono);
+    data.append("direccion", direccion);
+    data.append("sede", sede);
+    data.append("fecha", fecha);
+    data.append("identificador", identificador);
+
+    try {
+      const response = await fetch("http://127.0.0.1:5000/torneoForm/", {
+        method: "POST",
+        body: data,
+      });
+      if (response.ok) {
+        alert("Inscripción exitosa");
+          } else {
+        alert("Error al enviar el mensaje");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Error de conexión");
+    }
     alert('¡Inscripción exitosa! Se ha generado tu comprobante en PDF.');
 
     // Reset form
