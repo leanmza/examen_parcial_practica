@@ -13,7 +13,7 @@
 
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/formStyle.css" />
-    
+
     <!-- fuentes google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -66,14 +66,20 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="dndDetail.html">Dungeons & Dragons</a>
+                  <a class="dropdown-item" href="dndDetail.html"
+                    >Dungeons & Dragons</a
+                  >
                 </li>
                 <li>
                   <a class="dropdown-item" href="magicDetail.html"
                     >Magic: The Gathering</a
                   >
                 </li>
-                <li><a class="dropdown-item" href="pathfinderDetail.html">Pathfinder</a></li>
+                <li>
+                  <a class="dropdown-item" href="pathfinderDetail.html"
+                    >Pathfinder</a
+                  >
+                </li>
               </ul>
             </li>
             <li class="nav-item">
@@ -97,28 +103,31 @@
               <i class="fa-solid fa-magnifying-glass"></i>
             </button>
           </form>
-          
         </div>
       </div>
     </nav>
-    
+
     <!-- MAIN -->
     <main class="container-fluid">
       <section class="encabezado-section header-magic">
         <div class="header-title header-section">
           <h1>Inscripción a Torneos</h1>
           <p>
-            ¿Listo para demostrar tus habilidades? Inscribite a nuestros torneos de juegos de rol y cartas. 
-            Enfrentate a otros jugadores y demostrá quién es el mejor estratega.
+            ¿Listo para demostrar tus habilidades? Inscribite a nuestros torneos
+            de juegos de rol y cartas. Enfrentate a otros jugadores y demostrá
+            quién es el mejor estratega.
           </p>
         </div>
       </section>
-      
+
       <section class="form-section">
         <form id="torneoForm">
+          <!-- nombre y apellido -->
           <div class="row d-flex justify-content-center g-3">
             <div class="col-12 col-sm-6 form-input">
-              <label for="nombre" class="form-label">Nombre <span id="label-nombre" class="span-error"></span></label>
+              <label for="nombre" class="form-label"
+                >Nombre <span id="label-nombre" class="span-error"></span
+              ></label>
               <input
                 type="text"
                 class="form-control"
@@ -129,7 +138,9 @@
               <div class="invalid-feedback">Campo obligatorio</div>
             </div>
             <div class="col-12 col-sm-6 form-input">
-              <label for="apellido" class="form-label">Apellido <span id="label-apellido" class="span-error"></span></label>
+              <label for="apellido" class="form-label"
+                >Apellido <span id="label-apellido" class="span-error"></span
+              ></label>
               <input
                 type="text"
                 class="form-control"
@@ -140,80 +151,106 @@
               <div class="invalid-feedback">Campo obligatorio</div>
             </div>
           </div>
-          
+
+          <!-- dni y fecha de nacimiento  -->
           <div class="row d-flex justify-content-center g-3 mt-3">
             <div class="col-12 col-sm-6 form-input">
-              <label for="edad" class="form-label">Edad <span id="label-edad" class="span-error"></span></label>
+              <label for="dni" class="form-label"
+                >DNI <span id="label-dni" class="span-error"></span
+              ></label>
               <input
                 type="number"
                 class="form-control"
-                id="edad"
-                placeholder="Edad"
-                min="16"
+                id="dni"
+                placeholder="DNI"
                 required
               />
-              <div class="invalid-feedback">Debes tener al menos 16 años</div>
+              <div class="invalid-feedback">Campo obligatorio</div>
             </div>
             <div class="col-12 col-sm-6 form-input">
-              <label for="telefono" class="form-label">Teléfono <span id="label-telefono" class="span-error"></span></label>
+              <label for="nacimiento" class="form-label"
+                >Fecha de nacimiento
+                <span id="label-nacimiento" class="span-error"></span
+              ></label>
               <input
-                type="tel"
+                type="date"
                 class="form-control"
-                id="telefono"
-                placeholder="Número de teléfono"
+                id="nacimiento"
+                placeholder="Fecha de nacimiento"
                 required
               />
               <div class="invalid-feedback">Campo obligatorio</div>
             </div>
           </div>
-          
+
+          <!-- email y telefono -->
           <div class="row d-flex justify-content-center g-3 mt-3">
             <div class="col-12 col-sm-6 form-input">
-              <label for="direccion" class="form-label">Dirección <span id="label-direccion" class="span-error"></span></label>
+              <label for="email" class="form-label"
+                >Email <span id="label-email" class="span-error"></span
+              ></label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder="Email"
+                required
+              />
+              <div class="invalid-feedback">Campo obligatorio</div>
+            </div>
+            <div class="col-12 col-sm-6 form-input">
+              <label for="telefono" class="form-label"
+                >Teléfono <span id="label-telefono" class="span-error"></span
+              ></label>
               <input
                 type="text"
                 class="form-control"
-                id="direccion"
-                placeholder="Dirección"
+                id="telefono"
+                placeholder="Teléfono"
                 required
               />
               <div class="invalid-feedback">Campo obligatorio</div>
             </div>
+          </div>
+
+          <hr class="my-4 col-8 offset-2" />
+          <!-- info torneo -->
+          <div class="row d-flex justify-content-center g-3 mt-3">
             <div class="col-12 col-sm-6 form-input">
-              <label for="sede" class="form-label">Sede del Torneo <span id="label-sede" class="span-error"></span></label>
-              <select
-                class="form-select"
-                id="sede"
-                required
-              >
-                <option value="" selected hidden disabled>Selecciona una sede</option>
-                <option value="Seminario 507, Providencia, Santiago de Chile, Chile">Seminario 507, Providencia, Santiago de Chile, Chile</option>
-                <option value="Av San Martin 325, Mendoza, Argentina">Av San Martin 325, Mendoza, Argentina</option>
-                <option value="Av Belgrano 12, CABA, Argentina">Av Belgrano 12, CABA, Argentina</option>
+              <!-- todo traer los valores desde una api, se tiene que cargar dinámicamente,
+                tabla sedes, atributos id_sede, nombre, ciudad, direccion, provincia, pais -->
+              <label for="sede" class="form-label"
+                >Sede del Torneo <span id="label-sede" class="span-error"></span
+              ></label>
+              <select class="form-select" id="sede" required>
+                <option value="" selected hidden disabled>
+                  Selecciona una sede
+                </option>
               </select>
               <div class="invalid-feedback">Debes seleccionar una sede</div>
             </div>
-          </div>
-          
-          <div class="row d-flex justify-content-center g-3 mt-3">
             <div class="col-12 form-input">
-              <label for="fecha" class="form-label">Fecha y Horario <span id="label-fecha" class="span-error"></span></label>
-              <select
-                class="form-select"
-                id="fecha"
-                required
-              >
-                <option value="" selected hidden disabled>Selecciona una fecha y horario</option>
+              <label for="fecha" class="form-label"
+                >Fecha <span id="label-fecha" class="span-error"></span
+              ></label>
+              <select class="form-select" id="fecha" required>
+                <option value="" selected hidden disabled>
+                  Selecciona una fecha
+                </option>
                 <!-- Las opciones se cargarán dinámicamente con JavaScript -->
               </select>
-              <div class="invalid-feedback">Debes seleccionar una fecha y horario</div>
+              <div class="invalid-feedback">
+                Debes seleccionar una fecha y horario
+              </div>
             </div>
           </div>
-          
+
           <hr class="my-4 col-8 offset-2" />
-          
+
           <div class="d-flex justify-content-center row">
-            <div class="mb-4 col-12 form-check d-flex justify-content-center robot">
+            <div
+              class="mb-4 col-12 form-check d-flex justify-content-center robot"
+            >
               <input
                 type="checkbox"
                 class="form-check-input form-checkbox"
@@ -225,7 +262,7 @@
               </label>
             </div>
           </div>
-          
+
           <div class="d-flex justify-content-center row">
             <button
               class="btn btn-primary btn-lg col-xl-2 col-lg-3 col-sm-4 col-6 btn-submit"
@@ -237,10 +274,10 @@
           </div>
         </form>
       </section>
-      
+
       <section class="banner banner-form"></section>
     </main>
-    
+
     <!-- FOOTER -->
     <footer class="row row-cols-1 row-cols-3 row-cols-md-5 py-5 border-top">
       <div class="col mb-3">
@@ -267,32 +304,50 @@
         <h6>Juegos</h6>
         <ul class="nav flex-column">
           <li class="nav-item mb-2">
-            <a href="dndDetail.html" class="nav-link p-0 text-body-secondary">Dungeons & Dragons</a>
+            <a href="dndDetail.html" class="nav-link p-0 text-body-secondary"
+              >Dungeons & Dragons</a
+            >
           </li>
           <li class="nav-item mb-2">
-            <a href="magicDetail.html" class="nav-link p-0 text-body-secondary">Magic: The Gathering</a>
+            <a href="magicDetail.html" class="nav-link p-0 text-body-secondary"
+              >Magic: The Gathering</a
+            >
           </li>
           <li class="nav-item mb-2">
-            <a href="pathfinderDetail.html" class="nav-link p-0 text-body-secondary">Pathfinder</a>
+            <a
+              href="pathfinderDetail.html"
+              class="nav-link p-0 text-body-secondary"
+              >Pathfinder</a
+            >
           </li>
           <li class="nav-item mb-2">
-            <a href="#" class="nav-link p-0 text-body-secondary">Warhammer 40k</a>
+            <a href="#" class="nav-link p-0 text-body-secondary"
+              >Warhammer 40k</a
+            >
           </li>
         </ul>
       </div>
       <div class="col mb-3 links-footer">
         <ul class="nav flex-column">
           <li class="nav-item mb-2">
-            <a href="index.html" class="nav-link p-0 text-body-secondary"><h6>Home</h6></a>
+            <a href="index.html" class="nav-link p-0 text-body-secondary"
+              ><h6>Home</h6></a
+            >
           </li>
           <li class="nav-item mb-2">
-            <a href="#" class="nav-link p-0 text-body-secondary"><h6>Novedades</h6></a>
+            <a href="#" class="nav-link p-0 text-body-secondary"
+              ><h6>Novedades</h6></a
+            >
           </li>
           <li class="nav-item mb-2">
-            <a href="contactoForm.html" class="nav-link p-0 text-body-secondary"><h6>Contacto</h6></a>
+            <a href="contactoForm.html" class="nav-link p-0 text-body-secondary"
+              ><h6>Contacto</h6></a
+            >
           </li>
           <li class="nav-item mb-2">
-            <a href="torneoForm.html" class="nav-link p-0 text-body-secondary"><h6>Torneos</h6></a>
+            <a href="torneoForm.html" class="nav-link p-0 text-body-secondary"
+              ><h6>Torneos</h6></a
+            >
           </li>
         </ul>
       </div>
