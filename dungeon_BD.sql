@@ -12,7 +12,7 @@ CREATE TABLE dungeon.`mensajes` (
   `id_jugador` int(11) AUTO_INCREMENT UNIQUE PRIMARY KEY NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `apellido` varchar(30) NOT NULL,
-  `dni` int(8) NOT NULL,
+  `dni` varchar(8) NOT NULL,
   `telefono` varchar(30) NOT NULL,
   `email` varchar(30) NOT NULL,
   `nacimiento` date NOT NULL);

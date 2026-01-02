@@ -18,8 +18,41 @@ CORS(app, resources={
     r"/torneos/": {
         "methods": ["GET"],
         "origins": "http://127.0.0.1:5500"
+    },
+    r"/validar-inscripcion": {
+        "methods": ["GET"],
+        "origins": "http://127.0.0.1:5500"
     }
 })
+
+# ---------------------------------------------------
+# GET JUGADOR
+# ---------------------------------------------------
+@app.route("/validar-inscripcion", methods=["GET"])
+def validar_inscripcion():
+    try:
+        dni = request.args.get("dni")
+        id_torneo = request.args.get("id_torneo")
+
+        if not dni or not id_torneo:
+            return jsonify({ "existe": False }), 200
+
+        cursor = db.cursor()
+        cursor.execute("""
+            SELECT 1
+            FROM jugadores_torneos jt
+            JOIN jugadores j ON jt.id_jugador = j.id_jugador
+            WHERE jt.id_torneo = %s
+            AND j.dni = %s
+            LIMIT 1
+        """, (id_torneo, dni))
+
+        existe = cursor.fetchone() is not None
+   
+        return jsonify({ "existe": existe }), 200
+
+    except Exception:
+        return jsonify({ "existe": False }), 200
 
 # ---------------------------------------------------
 # GET TORNEOS
@@ -108,12 +141,13 @@ def insert_jugador():
         cursor.execute(
             """
             INSERT INTO jugadores
-            (nombre, apellido, email, telefono, nacimiento)
-            VALUES (%s, %s, %s, %s, %s)
+            (nombre, apellido, dni, email, telefono, nacimiento)
+            VALUES (%s, %s, %s, %s, %s, %s)
             """,
             (
                 request.form["nombre"],
                 request.form["apellido"],
+                request.form["dni"],
                 request.form["email"],
                 request.form["telefono"],
                 request.form["nacimiento"],

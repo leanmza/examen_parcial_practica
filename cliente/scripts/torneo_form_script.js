@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Utilidades importadas desde scripts/utils/forms.js: setError, clearError, attachLiveClear
   const { setError, clearError, attachLiveClear } = window.utils.forms;
 
-  let torneos = []; 
+  let torneos = [];
   /* ------------------------------------
    Traigo los torneos del back 
    --------------------------------------*/
@@ -46,6 +46,32 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Error al obtener torneos:", error);
     });
 
+  // ----------------------------------------------------
+  // REVISO SI EL JUGADOR YA ESTA INSCRIPTO
+  // ----------------------------------------------------
+  
+  async function validarInscripcion(idTorneo, dni) {
+    try {
+      const params = new URLSearchParams({
+        id_torneo: idTorneo,
+        dni: dni,
+      });
+
+      const res = await fetch(
+        `http://localhost:5000/validar-inscripcion?${params.toString()}`,
+        { method: "GET" }
+      );
+
+ 
+
+      const data = await res.json();
+      return data.existe;
+    } catch (err) {
+      console.error(err);
+      return false;
+    }
+  }
+
   /* ===========================
    FECHAS SEGÚN SEDE
 =========================== */
@@ -68,175 +94,117 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   });
 
+  const formatearFecha = (fechaISO) => {
+    if (!fechaISO) return "-";
+    const [y, m, d] = fechaISO.split("-");
+    return `${d}-${m}-${y}`;
+  };
+
+  // Generar identificador alfanumérico aleatorio (10 caracteres)
+  const generarIdentificador = (len = 10) => {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let out = "";
+    for (let i = 0; i < len; i++) {
+      out += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return out;
+  };
+
+  const qs = (id) => document.querySelector(id);
+
   // Handler de envío (homogéneo al de contacto)
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const campos = [
+    { el: "#nombre", label: "#label-nombre", msg: "Campo obligatorio" },
+    { el: "#apellido", label: "#label-apellido", msg: "Campo obligatorio" },
+    { el: "#telefono", label: "#label-telefono", msg: "Campo obligatorio" },
+    { el: "#nacimiento", label: "#label-nacimiento", msg: "Campo obligatorio" },
+    { el: "#dni", label: "#label-dni", msg: "Campo obligatorio" },
+    { el: "#email", label: "#label-email", msg: "Campo obligatorio" },
+    { el: "#sede", label: "#label-sede", msg: "Debes seleccionar una sede" },
+    { el: "#fecha", label: "#label-fecha", msg: "Debes seleccionar una fecha" },
+  ];
 
-    // Elementos
-    const elNombre = document.querySelector("#nombre");
-    const elApellido = document.querySelector("#apellido");
-    const elNacimiento = document.querySelector("#nacimiento");
-    const elDni = document.querySelector("#dni");
-    const elTelefono = document.querySelector("#telefono");
-    const elEmail = document.querySelector("#email");
-    const elSede = document.querySelector("#sede");
-    const elFecha = document.querySelector("#fecha");
-    const elTerminos = document.querySelector("#terminos");
-
-    const spNombre = document.querySelector("#label-nombre");
-    const spApellido = document.querySelector("#label-apellido");
-    const spNacimiento = document.querySelector("#label-nacimiento");
-    const spDni = document.querySelector("#label-dni");
-    const spTelefono = document.querySelector("#label-telefono");
-    const spEmail = document.querySelector("#label-email");
-    const spSede = document.querySelector("#label-sede");
-    const spFecha = document.querySelector("#label-fecha");
-
-    // Valores
-    const nombre = (elNombre?.value || "").trim();
-    const apellido = (elApellido?.value || "").trim();
-    const telefono = (elTelefono?.value || "").trim();
-    const email = (elEmail?.value || "").trim();
-    const nacimiento = (elNacimiento.value || "").trim();
-    const dni = (elDni.value || "").trim();
-    const sede = (elSede?.value || "").trim();
-    const fecha = (elFecha?.value || "").trim();
-    const terminos = !!elTerminos?.checked;
-
-    // Limpiar errores
-    clearError(elNombre, spNombre);
-    clearError(elApellido, spApellido);
-    clearError(elTelefono, spTelefono);
-    clearError(elNacimiento, spNacimiento);
-    clearError(elDni, spDni);
-    clearError(elEmail, spEmail);
-    clearError(elSede, spSede);
-    clearError(elFecha, spFecha);
-
+  const validarCampos = () => {
     let firstInvalid = null;
 
-    if (!nombre) {
-      setError(elNombre, spNombre, "Campo obligatorio");
-      firstInvalid = firstInvalid || elNombre;
-    }
-    if (!apellido) {
-      setError(elApellido, spApellido, "Campo obligatorio");
-      firstInvalid = firstInvalid || elApellido;
-    }
+    campos.forEach(({ el, label, msg }) => {
+      const input = qs(el);
+      const span = qs(label);
 
-    if (!telefono) {
-      setError(elTelefono, spTelefono, "Campo obligatorio");
-      firstInvalid = firstInvalid || elTelefono;
-    }
-    if (!email) {
-      setError(elEmail, spEmail, "Campo obligatorio");
-      firstInvalid = firstInvalid || elEmail;
-    }
-    if (!nacimiento) {
-      setError(elNacimiento, spNacimiento, "Campo obligatorio");
-      firstInvalid = firstInvalid || elNacimiento;
-    }
-    if (!dni) {
-      setError(elDni, spDni, "Campo obligatorio");
-      firstInvalid = firstInvalid || elDni;
-    }
-    if (!sede) {
-      setError(elSede, spSede, "Debes seleccionar una sede");
-      firstInvalid = firstInvalid || elSede;
-    }
-    if (!fecha) {
-      setError(elFecha, spFecha, "Debes seleccionar una fecha");
-      firstInvalid = firstInvalid || elFecha;
-    }
-    if (!terminos) {
+      clearError(input, span);
+
+      if (!input.value.trim()) {
+        setError(input, span, msg);
+        firstInvalid ??= input;
+        attachLiveClear(input, span);
+      }
+    });
+
+    const terminos = qs("#terminos");
+    if (!terminos.checked) {
       alert("Debes aceptar los términos y condiciones");
-      firstInvalid = firstInvalid || elTerminos;
+      firstInvalid ??= terminos;
     }
 
     if (firstInvalid) {
       firstInvalid.focus();
-      attachLiveClear(elNombre, spNombre);
-      attachLiveClear(elApellido, spApellido);
-      attachLiveClear(elTelefono, spTelefono);
-      attachLiveClear(elNacimiento, spNacimiento);
-      attachLiveClear(elDni, spDni);
-      attachLiveClear(elEmail, spEmail);
-      attachLiveClear(elSede, spSede);
-      attachLiveClear(elFecha, spFecha);
-      attachLiveClear(elTerminos, null);
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!validarCampos()) return;
+
+    const identificador = generarIdentificador();
+    const idTorneo = qs("#fecha").value;
+    const dni = qs("#dni").value.trim();
+
+    const torneo = torneos.find((t) => String(t.id_torneo) === idTorneo);
+    if (!torneo) {
+      alert("Torneo inválido");
       return;
     }
 
-    // Generar identificador alfanumérico aleatorio (10 caracteres)
-    const generarIdentificador = (len = 10) => {
-      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-      let out = "";
-      for (let i = 0; i < len; i++) {
-        out += chars.charAt(Math.floor(Math.random() * chars.length));
-      }
-      return out;
-    };
-    const identificador = generarIdentificador(10);
+    const existe = await validarInscripcion(idTorneo, dni);
 
-    const sedeElegida = torneos[sede - 1].sede;
-    const fechaElegida = formatearFecha(torneos[sede - 1].fecha);
-    const nacimientoFecha = formatearFecha(nacimiento);
-
-    function formatearFecha(fechaISO) {
-      if (!fechaISO) return "-";
-
-      const partes = fechaISO.split("-");
-      if (partes.length !== 3) return fechaISO;
-
-      const [yyyy, mm, dd] = partes;
-      return `${dd}-${mm}-${yyyy}`;
+    if (existe) {
+      alert("El DNI ya está inscripto en este torneo");
+      return;
     }
-    // Generar PDF
+
     generarPDF({
-      nombre,
-      apellido,
-      telefono,
-      nacimientoFecha,
-      dni,
-      email,
-      sedeElegida,
-      fechaElegida,
+      nombre: qs("#nombre").value,
+      apellido: qs("#apellido").value,
+      telefono: qs("#telefono").value,
+      nacimientoFecha: formatearFecha(qs("#nacimiento").value),
+      dni: qs("#dni").value,
+      email: qs("#email").value,
+      sedeElegida: torneo.sede,
+      fechaElegida: formatearFecha(torneo.fecha),
       identificador,
     });
 
-    const idTorneo = elFecha.value;
-
     const data = new FormData();
-    data.append("nombre", nombre);
-    data.append("apellido", apellido);
-    data.append("telefono", telefono);
-    data.append("nacimiento", nacimiento);
-    data.append("dni", dni);
-    data.append("email", email);
+    ["nombre", "apellido", "telefono", "nacimiento", "dni", "email"].forEach(
+      (c) => data.append(c, qs(`#${c}`).value)
+    );
     data.append("identificador", identificador);
     data.append("id_torneo", idTorneo);
 
     try {
-      const response = await fetch("http://127.0.0.1:5000/torneoForm/", {
+      const res = await fetch("http://127.0.0.1:5000/torneoForm/", {
         method: "POST",
         body: data,
       });
-      if (response.ok) {
-        alert("Inscripción exitosa");
-      } else {
-        alert("Error al enviar el mensaje");
-      }
-    } catch (err) {
-      console.error(err);
-      alert("Error de conexión");
-    }
-    alert("¡Inscripción exitosa! Se ha generado tu comprobante en PDF.");
 
-    // Reset form
-    form?.reset();
-    if (fechaSelect) {
-      fechaSelect.innerHTML =
-        '<option value="" selected hidden disabled>Selecciona una fecha y horario</option>';
+      if (!res.ok) throw new Error();
+      alert("¡Inscripción exitosa! Se generó tu comprobante en PDF.");
+      form.reset();
+    } catch {
+      alert("Error al enviar la inscripción");
     }
   };
 

@@ -7,9 +7,6 @@ function generarPDF(datos) {
     return;
   }
 
-  
-  console.log(datos.fechaElegida);
-  
 
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
