@@ -37,6 +37,7 @@ CREATE TABLE dungeon.jugadores_torneos (
   identificador VARCHAR(10) NOT NULL UNIQUE,
   id_jugador INT NOT NULL,
   id_torneo INT NOT NULL,
+  fecha_inscripcion DATE NOT NULL,
 
   PRIMARY KEY (id_jugador, id_torneo),
 

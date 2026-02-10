@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector("#torneoForm");
 
   // Utilidades importadas desde scripts/utils/forms.js: setError, clearError, attachLiveClear
-  const { setError, clearError, attachLiveClear } = window.utils.forms;
+  const { qs, validarCampos } = window.utils.forms;
 
   let torneos = [];
   /* ------------------------------------
@@ -47,9 +47,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
   // ----------------------------------------------------
-  // REVISO SI EL JUGADOR YA ESTA INSCRIPTO
+  // REVISO SI EL JUGADOR YA ESTA INSCRIPTO EN EL TORNEO
   // ----------------------------------------------------
-  
+
   async function validarInscripcion(idTorneo, dni) {
     try {
       const params = new URLSearchParams({
@@ -62,13 +62,33 @@ document.addEventListener("DOMContentLoaded", () => {
         { method: "GET" }
       );
 
- 
-
       const data = await res.json();
       return data.existe;
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
       return false;
+    }
+  }
+
+  // ----------------------------------------------------
+  // REVISO SI EL JUGADOR YA EXISTE EN LA BD PARA
+  // EVITAR DUPLICADOS
+  // ----------------------------------------------------
+
+  async function validarJugador(dni) {
+    try {
+      const params = new URLSearchParams({ dni });
+
+      const res = await fetch(
+        `http://localhost:5000/validar-jugador?${params}`,
+        { method: "GET" }
+      );
+
+      const data = await res.json();
+      return data.id_jugador; // 👈 clave correcta
+    } catch (e) {
+      console.error(e);
+      return null;
     }
   }
 
@@ -110,8 +130,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return out;
   };
 
-  const qs = (id) => document.querySelector(id);
-
   // Handler de envío (homogéneo al de contacto)
   const campos = [
     { el: "#nombre", label: "#label-nombre", msg: "Campo obligatorio" },
@@ -124,43 +142,56 @@ document.addEventListener("DOMContentLoaded", () => {
     { el: "#fecha", label: "#label-fecha", msg: "Debes seleccionar una fecha" },
   ];
 
-  const validarCampos = () => {
-    let firstInvalid = null;
+  const inscribirJugadorExistente = async (
+    identificador,
+    idTorneo,
+    idJugador,
+    fechaInscripcion,
+    torneo
+  ) => {
+    const data = new FormData();
+    data.append("identificador", identificador);
+    data.append("id_torneo", idTorneo);
+    data.append("fecha_inscripcion", fechaInscripcion);
+    data.append("id_jugador", idJugador);
 
-    campos.forEach(({ el, label, msg }) => {
-      const input = qs(el);
-      const span = qs(label);
+    try {
+      const res = await fetch("http://127.0.0.1:5000/torneoForm/", {
+        method: "POST",
+        body: data,
+      });
 
-      clearError(input, span);
+      if (!res.ok) throw new Error("HTTP error");
 
-      if (!input.value.trim()) {
-        setError(input, span, msg);
-        firstInvalid ??= input;
-        attachLiveClear(input, span);
-      }
-    });
+      generarPDF({
+        nombre: qs("#nombre").value,
+        apellido: qs("#apellido").value,
+        telefono: qs("#telefono").value,
+        nacimientoFecha: formatearFecha(qs("#nacimiento").value),
+        dni: qs("#dni").value,
+        email: qs("#email").value,
+        sedeElegida: torneo.sede,
+        fechaElegida: formatearFecha(torneo.fecha),
+        identificador,
+        fechaInscripcion,
+      });
 
-    const terminos = qs("#terminos");
-    if (!terminos.checked) {
-      alert("Debes aceptar los términos y condiciones");
-      firstInvalid ??= terminos;
+      alert("¡Inscripción exitosa! Se generó tu comprobante en PDF.");
+      form.reset();
+    } catch (e) {
+      console.error(e);
+      alert("Error al enviar la inscripción");
     }
-
-    if (firstInvalid) {
-      firstInvalid.focus();
-      return false;
-    }
-
-    return true;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validarCampos()) return;
+    if (!validarCampos(campos)) return;
 
     const identificador = generarIdentificador();
     const idTorneo = qs("#fecha").value;
     const dni = qs("#dni").value.trim();
+    const fechaInscripcion = new Date().toISOString().split("T")[0];
 
     const torneo = torneos.find((t) => String(t.id_torneo) === idTorneo);
     if (!torneo) {
@@ -168,24 +199,24 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const existe = await validarInscripcion(idTorneo, dni);
+    const idJugador = await validarJugador(dni);
 
-    if (existe) {
-      alert("El DNI ya está inscripto en este torneo");
+    if (idJugador != null) {
+      const existe = await validarInscripcion(idTorneo, dni);
+
+      if (existe) {
+        alert("El DNI ya está inscripto en este torneo");
+        return;
+      }
+      inscribirJugadorExistente(
+        identificador,
+        idTorneo,
+        idJugador,
+        fechaInscripcion,
+        torneo
+      );
       return;
     }
-
-    generarPDF({
-      nombre: qs("#nombre").value,
-      apellido: qs("#apellido").value,
-      telefono: qs("#telefono").value,
-      nacimientoFecha: formatearFecha(qs("#nacimiento").value),
-      dni: qs("#dni").value,
-      email: qs("#email").value,
-      sedeElegida: torneo.sede,
-      fechaElegida: formatearFecha(torneo.fecha),
-      identificador,
-    });
 
     const data = new FormData();
     ["nombre", "apellido", "telefono", "nacimiento", "dni", "email"].forEach(
@@ -193,12 +224,27 @@ document.addEventListener("DOMContentLoaded", () => {
     );
     data.append("identificador", identificador);
     data.append("id_torneo", idTorneo);
+    data.append("fecha_inscripcion", fechaInscripcion);
 
     try {
-      const res = await fetch("http://127.0.0.1:5000/torneoForm/", {
+      const res = await fetch("http://127.0.0.1:5000/torneo-jugador-form/", {
         method: "POST",
         body: data,
       });
+      if (res.ok) {
+        generarPDF({
+          nombre: qs("#nombre").value,
+          apellido: qs("#apellido").value,
+          telefono: qs("#telefono").value,
+          nacimientoFecha: formatearFecha(qs("#nacimiento").value),
+          dni: qs("#dni").value,
+          email: qs("#email").value,
+          sedeElegida: torneo.sede,
+          fechaElegida: formatearFecha(torneo.fecha),
+          identificador,
+          fechaInscripcion,
+        });
+      }
 
       if (!res.ok) throw new Error();
       alert("¡Inscripción exitosa! Se generó tu comprobante en PDF.");

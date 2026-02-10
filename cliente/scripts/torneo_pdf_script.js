@@ -110,9 +110,9 @@ function generarPDF(datos) {
   });
 
   // Pie de página
-  const fechaInscripcion = new Date().toLocaleDateString("es-ES");
+ 
   doc.setFontSize(10);
-  doc.text(`Fecha de inscripción: ${fechaInscripcion}`, margin, 280);
+  doc.text(`Fecha de inscripción: ${datos.fechaInscripcion}`, margin, 280);
   doc.text("ROL DUNGEON - www.roldungeon.com", pageWidth - margin, 280, {
     align: "right",
   });
