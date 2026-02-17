@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
       );
 
       const data = await res.json();
-      return data.id_jugador; // 👈 clave correcta
+      return data.id_usuario; // 👈 clave correcta
     } catch (e) {
       console.error(e);
       return null;
@@ -153,7 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
     data.append("identificador", identificador);
     data.append("id_torneo", idTorneo);
     data.append("fecha_inscripcion", fechaInscripcion);
-    data.append("id_jugador", idJugador);
+    data.append("id_usuario", idJugador);
 
     try {
       const res = await fetch("http://127.0.0.1:5000/torneoForm/", {
