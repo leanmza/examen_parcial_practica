@@ -42,6 +42,11 @@ CORS(app, supports_credentials=True, resources={
         "methods":["GET","POST", "DELETE", "PUT", "PATCH"],
         "origins":"http://127.0.0.1:5500"
     }
+    ,
+    r"/user/*":{
+        "methods":["GET","POST", "DELETE", "PUT", "PATCH"],
+        "origins":"http://127.0.0.1:5500"
+    }
 })
 
 # ---------------------------------------------------
@@ -215,7 +220,7 @@ def registrar():
     if not cursor:
         return jsonify({"error": MENSAJE_ERROR_CONEXION}), 500
 
-    data = request.get_json(silent=True)
+    data = request.form  
 
     if not data:
         return jsonify({"error": "JSON inválido"}), 400

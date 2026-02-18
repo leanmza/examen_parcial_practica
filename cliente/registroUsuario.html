@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registrarse</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/formStyle.css" />
+
+    <!-- fuentes google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- iconos font awesome -->
+    <script
+      src="https://kit.fontawesome.com/eaa90bc584.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- script de formularios -->
+    <script src="scripts/utils/forms.js"></script>
+    <script src="scripts/registro_form_script.js"></script>
+  </head>
+  <body>
+    <!-- HEADER / NAVBAR -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
+      <div class="container-fluid">
+        <div class="logo">
+          <a href="index.html" class="link-home">
+            <img src="assets/d20.png" alt="Bootstrap" width="24" height="24" />
+            <span class="nombreWeb">Rol Dungeon</span>
+          </a>
+        </div>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse mx-4" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Juegos
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="dndDetail.html"
+                    >Dungeons & Dragons</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="magicDetail.html"
+                    >Magic: The Gathering</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="pathfinderDetail.html"
+                    >Pathfinder</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="novedades_DnD.html">Novedades</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contactoForm.html">Contacto</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="torneoForm.html">Torneos</a>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Buscar"
+              aria-label="Buscar"
+            />
+            <button class="btn btn-outline-light" type="submit">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="container-fluid">
+      <section class="encabezado-section header-torneoMagic">
+        <div class="header-title header-section">
+          <h1>Crear cuenta</h1>
+          <p>
+            Registrate en la página y vas a poder inscribirte en los torneos,
+            participar de concursos y acceder a beneficios exclusivos.
+          </p>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <form id="torneoForm">
+          <!-- nombre de usuario y contraseña -->
+          <div class="row d-flex justify-content-center g-3">
+            <div class="col-12 col-sm-6 form-input">
+              <label for="usuario" class="form-label"
+                >Nombre de usuario
+                <span id="label-usuario" class="span-error"></span
+              ></label>
+              <input
+                type="text"
+                class="form-control"
+                id="usuario"
+                placeholder="Nombre de usuario"
+                required
+              />
+              <div class="invalid-feedback">Campo obligatorio</div>
+            </div>
+            <div class="col-12 col-sm-6 form-input">
+              <label for="password" class="form-label"
+                >Contraseña <span id="label-password" class="span-error"></span
+              ></label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                placeholder="Contraseña"
+                required
+              />
+              <div class="invalid-feedback">Campo obligatorio</div>
+            </div>
+          </div>
+
+          <!-- nombre y apellido -->
+          <div class="row d-flex justify-content-center g-3 mt-3">
+            <div class="col-12 col-sm-6 form-input">
+              <label for="nombre" class="form-label"
+                >Nombre <span id="label-nombre" class="span-error"></span
+              ></label>
+              <input
+                type="text"
+                class="form-control"
+                id="nombre"
+                placeholder="Nombre"
+                required
+              />
+              <div class="invalid-feedback">Campo obligatorio</div>
+            </div>
+            <div class="col-12 col-sm-6 form-input">
+              <label for="apellido" class="form-label"
+                >Apellido <span id="label-apellido" class="span-error"></span
+              ></label>
+              <input
+                type="text"
+                class="form-control"
+                id="apellido"
+                placeholder="Apellido"
+                required
+              />
+              <div class="invalid-feedback">Campo obligatorio</div>
+            </div>
+          </div>
+
+          <!-- dni y fecha de nacimiento  -->
+          <div class="row d-flex justify-content-center g-3 mt-3">
+            <div class="col-12 col-sm-6 form-input">
+              <label for="dni" class="form-label"
+                >DNI <span id="label-dni" class="span-error"></span
+              ></label>
+              <input
+                type="text"
+                class="form-control"
+                id="dni"
+                placeholder="DNI"
+                required
+              />
+              <div class="invalid-feedback">Campo obligatorio</div>
+            </div>
+            <div class="col-12 col-sm-6 form-input">
+              <label for="nacimiento" class="form-label"
+                >Fecha de nacimiento
+                <span id="label-nacimiento" class="span-error"></span
+              ></label>
+              <input
+                type="date"
+                class="form-control"
+                id="nacimiento"
+                placeholder="Fecha de nacimiento"
+                required
+              />
+              <div class="invalid-feedback">Campo obligatorio</div>
+            </div>
+          </div>
+
+          <!-- email y telefono -->
+          <div class="row d-flex justify-content-center g-3 mt-3">
+            <div class="col-12 col-sm-6 form-input">
+              <label for="email" class="form-label"
+                >Email <span id="label-email" class="span-error"></span
+              ></label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder="Email"
+                required
+              />
+              <div class="invalid-feedback">Campo obligatorio</div>
+            </div>
+            <div class="col-12 col-sm-6 form-input">
+              <label for="telefono" class="form-label"
+                >Teléfono <span id="label-telefono" class="span-error"></span
+              ></label>
+              <input
+                type="text"
+                class="form-control"
+                id="telefono"
+                placeholder="Teléfono"
+                required
+              />
+              <div class="invalid-feedback">Campo obligatorio</div>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-center row my-4">
+            <button
+              class="btn btn-primary btn-lg col-xl-2 col-lg-3 col-sm-4 col-6 btn-submit"
+              type="submit"
+              id="inscribirse"
+            >
+              Registrar
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="banner banner-form"></section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="row row-cols-1 row-cols-3 row-cols-md-5 py-5 border-top">
+      <div class="col mb-3">
+        <div class="row d-flex justify-content-start gap-1">
+          <a href="https://www.facebook.com" class="col-1">
+            <i class="fa-brands fa-facebook-f fa-lg"></i>
+          </a>
+          <a href="https://www.instagram.com" class="col-1">
+            <i class="fa-brands fa-instagram fa-lg"></i>
+          </a>
+          <a href="https://www.x.com" class="col-1">
+            <i class="fa-brands fa-x-twitter fa-lg"></i>
+          </a>
+          <a href="https://www.tiktok.com" class="col-1">
+            <i class="fa-brands fa-tiktok fa-lg"></i>
+          </a>
+        </div>
+        <p class="text-body-secondary">&copy; 2025</p>
+      </div>
+
+      <div class="col mb-3 relleno"></div>
+      <div class="col mb-3 relleno"></div>
+      <div class="col mb-3 links-footer">
+        <h6>Juegos</h6>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2">
+            <a href="dndDetail.html" class="nav-link p-0 text-body-secondary"
+              >Dungeons & Dragons</a
+            >
+          </li>
+          <li class="nav-item mb-2">
+            <a href="magicDetail.html" class="nav-link p-0 text-body-secondary"
+              >Magic: The Gathering</a
+            >
+          </li>
+          <li class="nav-item mb-2">
+            <a
+              href="pathfinderDetail.html"
+              class="nav-link p-0 text-body-secondary"
+              >Pathfinder</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="col mb-3 links-footer">
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2">
+            <a href="index.html" class="nav-link p-0 text-body-secondary"
+              ><h6>Home</h6></a
+            >
+          </li>
+          <li class="nav-item mb-2">
+            <a href="#" class="nav-link p-0 text-body-secondary"
+              ><h6>Novedades</h6></a
+            >
+          </li>
+          <li class="nav-item mb-2">
+            <a href="contactoForm.html" class="nav-link p-0 text-body-secondary"
+              ><h6>Contacto</h6></a
+            >
+          </li>
+          <li class="nav-item mb-2">
+            <a href="torneoForm.html" class="nav-link p-0 text-body-secondary"
+              ><h6>Torneos</h6></a
+            >
+          </li>
+        </ul>
+      </div>
+    </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
