@@ -3,54 +3,69 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Utilidades importadas desde scripts/utils/forms.js: setError, clearError, attachLiveClear
   const { qs, validarCampos } = window.utils.forms;
+  const API = "http://127.0.0.1:5000";
 
   let torneos = [];
+  let user;
 
   /* ===========================
    Cargo usuario logueado
 =========================== */
 
-async function cargarUsuarioLogueado() {
-  try {
-    const res = await fetch("http://127.0.0.1:5000/user/me", {
-      method: "GET",
-      credentials: "include" 
-    });
-
-    const data = await res.json();
-
-    if (!data.logged) return;
-
-    const user = data.usuario;
-
-    // Autocompletar
-    qs("#nombre").value = user.nombre;
-    qs("#apellido").value = user.apellido;
-    qs("#dni").value = user.dni;
-    qs("#telefono").value = user.telefono;
-    qs("#email").value = user.email;
-    qs("#nacimiento").value = user.nacimiento?.split("T")[0] || "";
-
-    // Bloquear campos
-    ["#nombre", "#apellido", "#dni", "#telefono", "#email", "#nacimiento"]
-      .forEach(sel => {
-        qs(sel).setAttribute("readonly", true);
+  async function cargarUsuarioLogueado() {
+    try {
+      const res = await fetch(`${API}/user/me`, {
+        method: "GET",
+        credentials: "include",
       });
 
-  } catch (e) {
-    console.error("No hay sesión activa");
+      const data = await res.json();
+
+      if (!data.logged) return;
+
+      user = data.usuario; //inicializo user
+
+      // Autocompletar
+      qs("#nombre").value = user.nombre;
+      qs("#apellido").value = user.apellido;
+      qs("#dni").value = user.dni;
+      qs("#telefono").value = user.telefono;
+      qs("#email").value = user.email;
+      if (user.nacimiento) {
+        const fecha = new Date(user.nacimiento);
+
+        const anio = fecha.getFullYear();
+        const mes = String(fecha.getMonth() + 1).padStart(2, "0");
+        const dia = String(fecha.getDate() + 1).padStart(2, "0");
+
+        qs("#nacimiento").value = `${anio}-${mes}-${dia}`;
+      }
+
+      console.log(anio, mes, dia);
+
+      // Bloquear campos
+      [
+        "#nombre",
+        "#apellido",
+        "#dni",
+        "#telefono",
+        "#email",
+        "#nacimiento",
+      ].forEach((sel) => {
+        qs(sel).setAttribute("readonly", true);
+      });
+    } catch (e) {
+      console.error("No hay sesión activa");
+    }
   }
-}
 
-cargarUsuarioLogueado();
-
-
+  cargarUsuarioLogueado();
 
   /* ------------------------------------
    Traigo los torneos del back 
    --------------------------------------*/
 
-  fetch("http://127.0.0.1:5000/torneos")
+  fetch(`${API}/torneos`)
     .then((response) => {
       if (!response.ok) {
         throw new Error("Error HTTP: " + response.status);
@@ -91,45 +106,24 @@ cargarUsuarioLogueado();
   // REVISO SI EL JUGADOR YA ESTA INSCRIPTO EN EL TORNEO
   // ----------------------------------------------------
 
-  async function validarInscripcion(idTorneo, dni) {
+  async function validarInscripcion(idTorneo, idJugador) {
     try {
       const params = new URLSearchParams({
         id_torneo: idTorneo,
-        dni: dni,
+        id_usuario: idJugador,
       });
 
       const res = await fetch(
-        `http://localhost:5000/torneos/validar-inscripcion?${params.toString()}`,
-        { method: "GET" }
+        `${API}/torneos/validar-inscripcion?${params.toString()}`,
+        { method: "GET" },
       );
 
       const data = await res.json();
+
       return data.existe;
     } catch (e) {
       console.error(e);
       return false;
-    }
-  }
-
-  // ----------------------------------------------------
-  // REVISO SI EL JUGADOR YA EXISTE EN LA BD PARA
-  // EVITAR DUPLICADOS
-  // ----------------------------------------------------
-
-  async function validarJugador(dni) {
-    try {
-      const params = new URLSearchParams({ dni });
-
-      const res = await fetch(
-        `http://localhost:5000/torneos/validar-jugador?${params}`,
-        { method: "GET" }
-      );
-
-      const data = await res.json();
-      return data.id_usuario; // 👈 clave correcta
-    } catch (e) {
-      console.error(e);
-      return null;
     }
   }
 
@@ -183,55 +177,14 @@ cargarUsuarioLogueado();
     { el: "#fecha", label: "#label-fecha", msg: "Debes seleccionar una fecha" },
   ];
 
-  const inscribirJugadorExistente = async (
-    identificador,
-    idTorneo,
-    idJugador,
-    fechaInscripcion,
-    torneo
-  ) => {
-    const data = new FormData();
-    data.append("identificador", identificador);
-    data.append("id_torneo", idTorneo);
-    data.append("fecha_inscripcion", fechaInscripcion);
-    data.append("id_usuario", idJugador);
-
-    try {
-      const res = await fetch("http://127.0.0.1:5000/torneos/registro", {
-        method: "POST",
-        body: data,
-      });
-
-      if (!res.ok) throw new Error("HTTP error");
-
-      generarPDF({
-        nombre: qs("#nombre").value,
-        apellido: qs("#apellido").value,
-        telefono: qs("#telefono").value,
-        nacimientoFecha: formatearFecha(qs("#nacimiento").value),
-        dni: qs("#dni").value,
-        email: qs("#email").value,
-        sedeElegida: torneo.sede,
-        fechaElegida: formatearFecha(torneo.fecha),
-        identificador,
-        fechaInscripcion,
-      });
-
-      alert("¡Inscripción exitosa! Se generó tu comprobante en PDF.");
-      form.reset();
-    } catch (e) {
-      console.error(e);
-      alert("Error al enviar la inscripción");
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validarCampos(campos)) return;
 
+    console.log(user);
+    
     const identificador = generarIdentificador();
     const idTorneo = qs("#fecha").value;
-    const dni = qs("#dni").value.trim();
     const fechaInscripcion = new Date().toISOString().split("T")[0];
 
     const torneo = torneos.find((t) => String(t.id_torneo) === idTorneo);
@@ -240,37 +193,18 @@ cargarUsuarioLogueado();
       return;
     }
 
-    const idJugador = await validarJugador(dni);
+   const data = new FormData();
 
-    if (idJugador != null) {
-      const existe = await validarInscripcion(idTorneo, dni);
-
-      if (existe) {
-        alert("El DNI ya está inscripto en este torneo");
-        return;
-      }
-      inscribirJugadorExistente(
-        identificador,
-        idTorneo,
-        idJugador,
-        fechaInscripcion,
-        torneo
-      );
-      return;
-    }
-
-    const data = new FormData();
-    ["nombre", "apellido", "telefono", "nacimiento", "dni", "email"].forEach(
-      (c) => data.append(c, qs(`#${c}`).value)
-    );
+    data.append("id_usuario", user.id_usuario);
     data.append("identificador", identificador);
     data.append("id_torneo", idTorneo);
     data.append("fecha_inscripcion", fechaInscripcion);
 
     try {
-      const res = await fetch("http://127.0.0.1:5000/torneos/usuario-registro", {
+      const res = await fetch(`${API}/torneos/usuario-registro`, {
         method: "POST",
         body: data,
+        credentials: "include",
       });
       if (res.ok) {
         generarPDF({
@@ -289,7 +223,9 @@ cargarUsuarioLogueado();
 
       if (!res.ok) throw new Error();
       alert("¡Inscripción exitosa! Se generó tu comprobante en PDF.");
-      form.reset();
+      qs("#sede").value = "";
+      qs("#fecha").value = "";
+   
     } catch {
       alert("Error al enviar la inscripción");
     }
