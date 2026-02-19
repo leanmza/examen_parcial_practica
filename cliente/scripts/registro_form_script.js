@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Utilidades importadas desde scripts/utils/forms.js: setError, clearError, attachLiveClear
   const { qs, validarCampos } = window.utils.forms;
   
-    // Handler de envío (homogéneo al de contacto)
+   
   const campos = [
     { el: "#usuario", label: "#label-usuario", msg: "Campo obligatorio" },
     { el: "#password", label: "#label-password", msg: "Campo obligatorio" },

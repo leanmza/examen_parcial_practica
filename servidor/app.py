@@ -18,33 +18,40 @@ CORS(app, supports_credentials=True, resources={
         "methods": ["POST"],
         "origins": "http://127.0.0.1:5500"
     },
-    r"/torneo-usuario-form/": {
+    r"/torneos/usuario-registro": {
         "methods": ["POST"],
         "origins": "http://127.0.0.1:5500"
     },
-    r"/torneoForm/": {
+    r"/torneos/registro": {
         "methods": ["POST"],
         "origins": "http://127.0.0.1:5500"
     },
-    r"/torneos/": {
+    r"/torneos": {
         "methods": ["GET"],
         "origins": "http://127.0.0.1:5500"
     },
-    r"/validar-inscripcion": {
+    r"/torneos/validar-inscripcion": {
         "methods": ["GET"],
         "origins": "http://127.0.0.1:5500"
     },
-    r"/validar-usuario": {
+    r"/torneos/validar-usuario": {
         "methods": ["GET"],
         "origins": "http://127.0.0.1:5500"
     },
     r"/user":{
         "methods":["GET","POST", "DELETE", "PUT", "PATCH"],
         "origins":"http://127.0.0.1:5500"
-    }
-    ,
+    },
     r"/user/*":{
         "methods":["GET","POST", "DELETE", "PUT", "PATCH"],
+        "origins":"http://127.0.0.1:5500"
+    },
+    r"/login":{
+        "methods":["POST"],
+        "origins":"http://127.0.0.1:5500"
+    },
+    r"/logout":{
+        "methods":["DELETE"],
         "origins":"http://127.0.0.1:5500"
     }
 })
@@ -263,11 +270,32 @@ def registrar():
         db.rollback()
         return jsonify({"error": MENSAJE_ERROR_UNIQUE}), 400
 
+@app.get("/user/me")
+@jwt_required(optional=True)
+def me():
+    identity = get_jwt_identity()
+
+    if not identity:
+        return jsonify({"logged": False}), 200
+
+    cursor.execute("""
+        SELECT id_usuario, usuario, nombre, apellido, dni, telefono, email, nacimiento
+        FROM usuario
+        WHERE usuario = %s
+    """, (identity,))
+
+    usuario = cursor.fetchone()
+
+    return jsonify({
+        "logged": True,
+        "usuario": usuario
+    }), 200
+
 # ---------------------------------------------------
 # GET USUARIO
 # ---------------------------------------------------
 
-@app.get("/validar-usuario")
+@app.get("/torneos/validar-usuario")
 def get_jugador_por_dni():
 
     dni = request.args.get("dni")
@@ -298,7 +326,7 @@ def get_jugador_por_dni():
 # ---------------------------------------------------
 
 
-@app.get("/validar-inscripcion")
+@app.get("/torneos/validar-inscripcion")
 def validar_inscripcion():
     try:
         dni = request.args.get("dni")
@@ -332,7 +360,7 @@ def validar_inscripcion():
 # ---------------------------------------------------
 
 
-@app.get("/torneos/")
+@app.get("/torneos")
 def get_all_torneos():
     cursor = db.cursor(dictionary=True)
     if not cursor:
@@ -368,41 +396,14 @@ def get_all_torneos():
     return jsonify(torneos), 200
 
 
-# ---------------------------------------------------
-# POST CONTACTO
-# ---------------------------------------------------
-@app.post("/contactoForm/")
-def insert_mensaje():
-    if not cursor:
-        return Response(MENSAJE_ERROR_CONEXION, status=500)
 
-    try:
-        cursor.execute(
-            """
-            INSERT INTO mensajes(nombre, apellido, email, motivo, mensaje)
-            VALUES (%s, %s, %s, %s, %s)
-            """,
-            (
-                request.form["nombre"],
-                request.form["apellido"],
-                request.form["email"],
-                request.form["motivo"],
-                request.form["mensaje"]
-            )
-        )
-        db.commit()
-        return jsonify({"ok": True}), 201
-
-    except IntegrityError as e:
-        db.rollback()
-        logger.error(e)
-        return jsonify({"error": "Error al insertar mensaje"}), 400
+   
 
 
 # ---------------------------------------------------
 # POST USUARIO / TORNEO CON USUARIO NUEVO
 # ---------------------------------------------------
-@app.post("/torneo-usuario-form/")
+@app.post("/torneos/usuario-registro")
 def insert_jugador():
 
     if not cursor:
@@ -458,7 +459,7 @@ def insert_jugador():
 # ---------------------------------------------------
 # POST USUARIO / TORNEO CON USUARIO EXISTENTE
 # ---------------------------------------------------
-@app.post("/torneoForm/")
+@app.post("/torneos/registro")
 @jwt_required()
 def insert_inscripcion():
     
@@ -492,12 +493,36 @@ def insert_inscripcion():
         return jsonify({"error": "Error al insertar usuario"}), 400
 
 
+
 # ---------------------------------------------------
-# Usuarios - registro, login, logout
+# POST CONTACTO
 # ---------------------------------------------------
+@app.post("/contactoForm/")
+def insert_mensaje():
+    if not cursor:
+        return Response(MENSAJE_ERROR_CONEXION, status=500)
 
+    try:
+        cursor.execute(
+            """
+            INSERT INTO mensajes(nombre, apellido, email, motivo, mensaje)
+            VALUES (%s, %s, %s, %s, %s)
+            """,
+            (
+                request.form["nombre"],
+                request.form["apellido"],
+                request.form["email"],
+                request.form["motivo"],
+                request.form["mensaje"]
+            )
+        )
+        db.commit()
+        return jsonify({"ok": True}), 201
 
-
+    except IntegrityError as e:
+        db.rollback()
+        logger.error(e)
+        return jsonify({"error": "Error al insertar mensaje"}), 400
 
 # ---------------------------------------------------
 # MAIN

@@ -5,11 +5,52 @@ document.addEventListener("DOMContentLoaded", () => {
   const { qs, validarCampos } = window.utils.forms;
 
   let torneos = [];
+
+  /* ===========================
+   Cargo usuario logueado
+=========================== */
+
+async function cargarUsuarioLogueado() {
+  try {
+    const res = await fetch("http://127.0.0.1:5000/user/me", {
+      method: "GET",
+      credentials: "include" 
+    });
+
+    const data = await res.json();
+
+    if (!data.logged) return;
+
+    const user = data.usuario;
+
+    // Autocompletar
+    qs("#nombre").value = user.nombre;
+    qs("#apellido").value = user.apellido;
+    qs("#dni").value = user.dni;
+    qs("#telefono").value = user.telefono;
+    qs("#email").value = user.email;
+    qs("#nacimiento").value = user.nacimiento?.split("T")[0] || "";
+
+    // Bloquear campos
+    ["#nombre", "#apellido", "#dni", "#telefono", "#email", "#nacimiento"]
+      .forEach(sel => {
+        qs(sel).setAttribute("readonly", true);
+      });
+
+  } catch (e) {
+    console.error("No hay sesión activa");
+  }
+}
+
+cargarUsuarioLogueado();
+
+
+
   /* ------------------------------------
    Traigo los torneos del back 
    --------------------------------------*/
 
-  fetch("http://127.0.0.1:5000/torneos/")
+  fetch("http://127.0.0.1:5000/torneos")
     .then((response) => {
       if (!response.ok) {
         throw new Error("Error HTTP: " + response.status);
@@ -58,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       const res = await fetch(
-        `http://localhost:5000/validar-inscripcion?${params.toString()}`,
+        `http://localhost:5000/torneos/validar-inscripcion?${params.toString()}`,
         { method: "GET" }
       );
 
@@ -80,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const params = new URLSearchParams({ dni });
 
       const res = await fetch(
-        `http://localhost:5000/validar-jugador?${params}`,
+        `http://localhost:5000/torneos/validar-jugador?${params}`,
         { method: "GET" }
       );
 
@@ -156,7 +197,7 @@ document.addEventListener("DOMContentLoaded", () => {
     data.append("id_usuario", idJugador);
 
     try {
-      const res = await fetch("http://127.0.0.1:5000/torneoForm/", {
+      const res = await fetch("http://127.0.0.1:5000/torneos/registro", {
         method: "POST",
         body: data,
       });
@@ -227,7 +268,7 @@ document.addEventListener("DOMContentLoaded", () => {
     data.append("fecha_inscripcion", fechaInscripcion);
 
     try {
-      const res = await fetch("http://127.0.0.1:5000/torneo-jugador-form/", {
+      const res = await fetch("http://127.0.0.1:5000/torneos/usuario-registro", {
         method: "POST",
         body: data,
       });

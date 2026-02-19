@@ -38,6 +38,10 @@ a > i {
   color: var(--bs-secondary-color) !important;
 }
 
+.login{
+  margin-right: 4.5rem;
+}
+
 .carousel-item {
   height: 800px;
   justify-content: center !important;
