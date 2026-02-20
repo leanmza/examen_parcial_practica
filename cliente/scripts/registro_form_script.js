@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       if (!res.ok) throw new Error();
       alert("¡Inscripción exitosa! ");
-      form.reset();
+      window.location.href = "login.html";
     } catch {
       alert("Error al enviar la inscripción");
     }

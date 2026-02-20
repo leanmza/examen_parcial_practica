@@ -1,12 +1,39 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.querySelector("#torneoForm");
-
-  // Utilidades importadas desde scripts/utils/forms.js: setError, clearError, attachLiveClear
+document.addEventListener("DOMContentLoaded", async () => {
+    // Utilidades importadas desde scripts/utils/forms.js: setError, clearError, attachLiveClear
   const { qs, validarCampos } = window.utils.forms;
-  const API = "http://127.0.0.1:5000";
+  const API = "http://127.0.0.1:5000"; 
+  
+  try {
+    const response = await fetch(`${API}/auth/check`, {
+      method: "GET",
+      credentials: "include"
+    });
+
+    if (!response.ok) {
+
+      window.location.href = "login.html ? redirect=torneoForm.html";
+   
+    }
+
+  } catch (error) {
+    window.location.href = "login.html";
+  }
+
+
+  const form = document.querySelector("#torneoForm");
+  
+
 
   let torneos = [];
   let user;
+
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) {
+      return parts.pop().split(";").shift();
+    }
+  }
 
   /* ===========================
    Cargo usuario logueado
@@ -181,8 +208,14 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
     if (!validarCampos(campos)) return;
 
-    console.log(user);
-    
+    if (!user) {
+      alert("Debes iniciar sesión para inscribirte.");
+      window.location.href = "login.html";
+      return;
+    }
+
+    const csrf = getCookie("csrf_access_token");
+
     const identificador = generarIdentificador();
     const idTorneo = qs("#fecha").value;
     const fechaInscripcion = new Date().toISOString().split("T")[0];
@@ -193,9 +226,8 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-   const data = new FormData();
+    const data = new FormData();
 
-    data.append("id_usuario", user.id_usuario);
     data.append("identificador", identificador);
     data.append("id_torneo", idTorneo);
     data.append("fecha_inscripcion", fechaInscripcion);
@@ -205,6 +237,9 @@ document.addEventListener("DOMContentLoaded", () => {
         method: "POST",
         body: data,
         credentials: "include",
+        headers: {
+          "X-CSRF-TOKEN": csrf,
+        },
       });
       if (res.ok) {
         generarPDF({
@@ -225,7 +260,6 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("¡Inscripción exitosa! Se generó tu comprobante en PDF.");
       qs("#sede").value = "";
       qs("#fecha").value = "";
-   
     } catch {
       alert("Error al enviar la inscripción");
     }
