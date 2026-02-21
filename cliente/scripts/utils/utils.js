@@ -34,14 +34,29 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("logout").addEventListener("click", async (e) => {
       e.preventDefault();
 
+      const csrf = getCookie("csrf_access_token");
+
       await fetch(`${API}/logout`, {
         method: "DELETE",
         credentials: "include",
+        headers: {
+          "X-CSRF-TOKEN": csrf,
+        },
       });
-      alert("Sesión cerrada")
-      renderLoggedOutMenu(); // 👈 volvemos al menú original
+
+      alert("Sesión cerrada");
+      window.location.reload(); 
     });
   };
+
+  function getCookie(name) {
+    const cookies = document.cookie.split("; ");
+    for (let cookie of cookies) {
+      const [key, value] = cookie.split("=");
+      if (key === name) return value;
+    }
+    return null;
+  }
 
   try {
     const res = await fetch(`${API}/user/me`, {

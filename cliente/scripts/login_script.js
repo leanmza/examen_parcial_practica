@@ -3,6 +3,47 @@ document.addEventListener("DOMContentLoaded", () => {
   const errorDiv = document.getElementById("loginError");
   const btnLogin = document.getElementById("btnLogin");
 
+  const mensaje = sessionStorage.getItem("toastMensaje");
+  const tipo = sessionStorage.getItem("toastTipo");
+
+  
+
+function mostrarToast(mensaje, tipo = "warning") {
+  const toastContainer = document.querySelector(".toast-container");
+
+  const toastHTML = `
+    <div class="toast align-items-center text-bg-${tipo} border-0" role="alert">
+      <div class="d-flex">
+        <div class="toast-body">
+          ${mensaje}
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    </div>
+  `;
+
+  toastContainer.insertAdjacentHTML("beforeend", toastHTML);
+
+  const toastElement = toastContainer.lastElementChild;
+  const toast = new bootstrap.Toast(toastElement);
+  toast.show();
+
+  toastElement.addEventListener("hidden.bs.toast", () => {
+    toastElement.remove();
+  });
+}
+
+
+
+
+  if (mensaje) {
+    mostrarToast(mensaje, tipo || "warning");
+
+    // Limpiar después de usarlo
+    sessionStorage.removeItem("toastMensaje");
+    sessionStorage.removeItem("toastTipo");
+  }
+
   const API_URL = "http://127.0.0.1:5000";
 
   const mostrarError = (mensaje) => {
@@ -28,7 +69,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     btnLogin.disabled = true;
-    btnLogin.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Entrando...';
+    btnLogin.innerHTML =
+      '<span class="spinner-border spinner-border-sm me-2"></span>Entrando...';
 
     const formData = new FormData();
     formData.append("usuario", usuario);
@@ -50,10 +92,13 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     } catch (err) {
       console.error(err);
-      mostrarError("Error de conexión. Verificá que el servidor esté corriendo.");
+      mostrarError(
+        "Error de conexión. Verificá que el servidor esté corriendo.",
+      );
     } finally {
       btnLogin.disabled = false;
-      btnLogin.innerHTML = '<i class="fa-solid fa-right-to-bracket me-2"></i>Entrar';
+      btnLogin.innerHTML =
+        '<i class="fa-solid fa-right-to-bracket me-2"></i>Entrar';
     }
   });
 });

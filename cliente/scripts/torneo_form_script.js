@@ -1,28 +1,30 @@
 document.addEventListener("DOMContentLoaded", async () => {
-    // Utilidades importadas desde scripts/utils/forms.js: setError, clearError, attachLiveClear
+  // Utilidades importadas desde scripts/utils/forms.js: setError, clearError, attachLiveClear
   const { qs, validarCampos } = window.utils.forms;
-  const API = "http://127.0.0.1:5000"; 
-  
+  const API = "http://127.0.0.1:5000";
+  const toast = new bootstrap.Toast(document.getElementById("miToast"));
   try {
-    const response = await fetch(`${API}/auth/check`, {
-      method: "GET",
-      credentials: "include"
+    const res = await fetch(`${API}/user/me`, {
+      credentials: "include",
     });
+    const data = await res.json();
 
-    if (!response.ok) {
+    if (!data.logged) {
+      sessionStorage.setItem(
+        "toastMensaje",
+        "Tenés que iniciar sesión para inscribirte en los torneos",
+      );
 
-      window.location.href = "login.html ? redirect=torneoForm.html";
-   
+      sessionStorage.setItem("toastTipo", "warning");
+
+      window.location.href = "login.html?redirect=torneoForm.html";
+      return;
     }
-
   } catch (error) {
     window.location.href = "login.html";
   }
 
-
   const form = document.querySelector("#torneoForm");
-  
-
 
   let torneos = [];
   let user;

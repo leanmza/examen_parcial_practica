@@ -79,6 +79,7 @@
   font-size: 12px;
 }
 
+
 /* Pantallas hasta small */
 @media (max-width: 575px) {
   .form-section {

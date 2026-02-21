@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-bs-theme="dark">
   <head>
     <meta charset="UTF-8" />
@@ -24,16 +24,21 @@
     <!-- iconos font awesome -->
     <script
       src="https://kit.fontawesome.com/eaa90bc584.js"
-      crossorigin="anonymous"
+      crossorigin="anonymous" defer
     ></script>
 
+        <!-- scripts -->
+     <script src="scripts/utils/utils.js" defer></script>
+     <script src="scripts/utils/forms.js" defer></script>
+      <script src="scripts/torneo_form_script.js" defer></script>
+
     <!-- Script para generar PDF -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="scripts/torneo_pdf_script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+    <script src="scripts/torneo_pdf_script.js" defer></script>
   </head>
   <body>
     <!-- HEADER / NAVBAR -->
- <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
       <div class="container-fluid">
         <div class="logo">
           <a href="index.html" class="link-home">
@@ -117,10 +122,15 @@
               </a>
               <ul class="dropdown-menu" id="user-menu">
                 <li>
-                  <a class="dropdown-item" href="login.html" id="login">Iniciar sesión</a>
+                  <a class="dropdown-item" href="login.html" id="login"
+                    >Iniciar sesión</a
+                  >
                 </li>
                 <li>
-                  <a class="dropdown-item" href="registroUsuario.html" id="register"
+                  <a
+                    class="dropdown-item"
+                    href="registroUsuario.html"
+                    id="register"
                     >Registrame</a
                   >
                 </li>
@@ -377,7 +387,7 @@
       integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
       crossorigin="anonymous"
     ></script>
-    <script src="scripts/utils/forms.js"></script>
-    <script src="scripts/torneo_form_script.js"></script>
+ 
+   
   </body>
 </html>

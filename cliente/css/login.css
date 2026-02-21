@@ -63,3 +63,8 @@ main {
 .btn-login:disabled {
   opacity: 0.7;
 }
+
+.toast-body{
+  font-size: 16px;
+
+}
