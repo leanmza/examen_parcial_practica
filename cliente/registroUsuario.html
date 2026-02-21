@@ -33,7 +33,7 @@
   </head>
   <body>
     <!-- HEADER / NAVBAR -->
-<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
       <div class="container-fluid">
         <div class="logo">
           <a href="index.html" class="link-home">
@@ -104,29 +104,44 @@
             </button>
           </form> -->
 
-          <ul class="navbar-nav login mb-2 mb-lg-0">
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <i class="fa-solid fa-user fa-lg"></i>
-              </a>
-              <ul class="dropdown-menu" id="user-menu">
-                <li>
-                  <a class="dropdown-item" href="login.html" id="login">Iniciar sesión</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="registroUsuario.html" id="register"
-                    >Registrame</a
-                  >
-                </li>
-              </ul>
-            </li>
-          </ul>
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center" id="auth-area">
+  
+  <!-- Opciones cuando NO está logueado -->
+  <li class="nav-item" id="nav-login">
+    <a class="nav-link" href="login.html">Iniciar sesión</a>
+  </li>
+
+  <li class="nav-item" id="nav-register">
+    <a class="nav-link" href="registroUsuario.html">Registrarme</a>
+  </li>
+
+  <!-- Dropdown cuando está logueado -->
+  <li class="nav-item dropdown d-none nav-user" id="nav-user">
+    <a
+      class="nav-link dropdown-toggle"
+      href="#"
+      role="button"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+      id="user-toggle"
+    >
+      Usuario
+    </a>
+    <ul class="dropdown-menu">
+      <li>
+        <a class="dropdown-item" href="userDashboard.html">
+          Mi cuenta
+        </a>
+      </li>
+      <li>
+        <a class="dropdown-item" href="#" id="logout">
+          Cerrar sesión
+        </a>
+      </li>
+    </ul>
+  </li>
+
+</ul>
         </div>
       </div>
     </nav>

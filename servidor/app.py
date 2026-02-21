@@ -233,97 +233,97 @@ def editar_clave():
         db.close()
 
 
-@app.patch("/user/photo")
-@jwt_required()
-def editar_foto():
+# @app.patch("/user/photo")
+# @jwt_required()
+# def editar_foto():
 
-    try:
-        db = get_db()
-    except Error:
-        return jsonify({"error": MENSAJE_ERROR_CONEXION}), 500
+#     try:
+#         db = get_db()
+#     except Error:
+#         return jsonify({"error": MENSAJE_ERROR_CONEXION}), 500
 
-    try:
-        cursor = db.cursor(dictionary=True)
+#     try:
+#         cursor = db.cursor(dictionary=True)
 
-        usuario_identity = get_jwt_identity()
+#         usuario_identity = get_jwt_identity()
 
-        # 📸 Si viene archivo
-        if "foto" in request.files and request.files["foto"].filename:
+#         # 📸 Si viene archivo
+#         if "foto" in request.files and request.files["foto"].filename:
 
-            archivo = request.files["foto"]
-            carpeta_usuario = os.path.join(app.static_folder, usuario_identity)
-            os.makedirs(carpeta_usuario, exist_ok=True)
+#             archivo = request.files["foto"]
+#             carpeta_usuario = os.path.join(app.static_folder, usuario_identity)
+#             os.makedirs(carpeta_usuario, exist_ok=True)
 
-            ruta_archivo = os.path.join(carpeta_usuario, archivo.filename)
+#             ruta_archivo = os.path.join(carpeta_usuario, archivo.filename)
 
-            with open(ruta_archivo, "wb") as img:
-                bytes_escritos = img.write(archivo.read())
+#             with open(ruta_archivo, "wb") as img:
+#                 bytes_escritos = img.write(archivo.read())
 
-            if bytes_escritos <= 0:
-                return jsonify({"error": "Error al almacenar archivo."}), 500
+#             if bytes_escritos <= 0:
+#                 return jsonify({"error": "Error al almacenar archivo."}), 500
 
-            url = f"http://127.0.0.1:5000/static/{usuario_identity}/{archivo.filename}"
+#             url = f"http://127.0.0.1:5000/static/{usuario_identity}/{archivo.filename}"
 
-            cursor.execute(
-                "UPDATE usuario SET foto=%s WHERE usuario=%s;",
-                [url, usuario_identity]
-            )
+#             cursor.execute(
+#                 "UPDATE usuario SET foto=%s WHERE usuario=%s;",
+#                 [url, usuario_identity]
+#             )
 
-        else:
-            # 🗑 Si no viene archivo → borrar foto
-            cursor.execute(
-                "UPDATE usuario SET foto=NULL WHERE usuario=%s;",
-                [usuario_identity]
-            )
+#         else:
+#             # 🗑 Si no viene archivo → borrar foto
+#             cursor.execute(
+#                 "UPDATE usuario SET foto=NULL WHERE usuario=%s;",
+#                 [usuario_identity]
+#             )
 
-        db.commit()
+#         db.commit()
 
-        # 🔄 Consultar usuario actualizado
-        cursor.execute("""
-            SELECT id_usuario, usuario, nombre, apellido, dni,
-                   telefono, email, nacimiento, foto
-            FROM usuario
-            WHERE usuario=%s
-        """, (usuario_identity,))
+#         # 🔄 Consultar usuario actualizado
+#         cursor.execute("""
+#             SELECT id_usuario, usuario, nombre, apellido, dni,
+#                    telefono, email, nacimiento, foto
+#             FROM usuario
+#             WHERE usuario=%s
+#         """, (usuario_identity,))
 
-        usuario_actualizado = cursor.fetchone()
+#         usuario_actualizado = cursor.fetchone()
 
-        response = jsonify({
-            "ok": True,
-            "usuario": usuario_actualizado
-        })
+#         response = jsonify({
+#             "ok": True,
+#             "usuario": usuario_actualizado
+#         })
 
-        return generar_token(response, usuario_identity, usuario_actualizado), 200
+#         return generar_token(response, usuario_identity, usuario_actualizado), 200
 
-    except Error as e:
-        db.rollback()
-        return jsonify({"error": str(e)}), 500
+#     except Error as e:
+#         db.rollback()
+#         return jsonify({"error": str(e)}), 500
 
-    finally:
-        cursor.close()
-        db.close()
+#     finally:
+#         cursor.close()
+#         db.close()
 
 
-def post_consultar_foto():
-    try:
-        db = get_db()
-    except Error:
-        return jsonify({"error": MENSAJE_ERROR_CONEXION}), 500
-    try:
-        cursor = db.cursor(dictionary=True)
-        if get_jwt()["foto"] and os.path.exists(f"{app.static_folder}/{get_jwt_identity()}/{request.files['foto'].filename}"):
-            os.remove(
-                f"{app.static_folder}/{get_jwt_identity()}/{os.path.basename(get_jwt()['foto'])}")
-        cursor.execute(QUERY_PRE_TOKEN, [get_jwt()["usuario"]])
-        return generar_token(jsonify({"ok": True}), get_jwt_identity(), cursor.fetchone()), 200
+# def post_consultar_foto():
+#     try:
+#         db = get_db()
+#     except Error:
+#         return jsonify({"error": MENSAJE_ERROR_CONEXION}), 500
+#     try:
+#         cursor = db.cursor(dictionary=True)
+#         if get_jwt()["foto"] and os.path.exists(f"{app.static_folder}/{get_jwt_identity()}/{request.files['foto'].filename}"):
+#             os.remove(
+#                 f"{app.static_folder}/{get_jwt_identity()}/{os.path.basename(get_jwt()['foto'])}")
+#         cursor.execute(QUERY_PRE_TOKEN, [get_jwt()["usuario"]])
+#         return generar_token(jsonify({"ok": True}), get_jwt_identity(), cursor.fetchone()), 200
 
-    except Error as e:
-        db.rollback()
-        return jsonify({"error": str(e)}), 500
+#     except Error as e:
+#         db.rollback()
+#         return jsonify({"error": str(e)}), 500
 
-    finally:
-        cursor.close()
-        db.close()
+#     finally:
+#         cursor.close()
+#         db.close()
 
 
 @app.post("/user/signup")
