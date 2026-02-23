@@ -25,12 +25,30 @@ footer {
   margin: 0 !important;
 }
 
-.nav-user{
+.nav-user {
   padding-right: 4rem;
 }
 .link-home {
   text-decoration: none;
   color: white;
+}
+
+/* Transición suave para todos los links del navbar */
+.navbar .nav-link {
+  transition: all 0.3s ease;
+}
+
+/* Cuando el mouse está sobre el contenedor del menú */
+.navbar-nav:hover .nav-link {
+  opacity: 0.4;
+  filter: blur(1px);
+}
+
+/* El que está siendo hover vuelve a estado normal */
+.navbar-nav .nav-link:hover {
+  opacity: 1;
+  filter: blur(0);
+  transform: scale(1.05);
 }
 .nombreWeb {
   margin: 8px;
@@ -41,7 +59,7 @@ a > i {
   color: var(--bs-secondary-color) !important;
 }
 
-.login{
+.login {
   margin-right: 4.5rem;
 }
 
@@ -83,7 +101,8 @@ a > i {
   margin-inline: 0;
 }
 .carousel-item-1 {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url(../assets/modular-game-table-rustic-walnut-hex-game-cover.jpg);
   background-size: cover;
   background-position: center;
@@ -91,14 +110,16 @@ a > i {
 }
 
 .carousel-item-2 {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url(../assets/magic-the-gathering-lord-of-the-rings-tales.jpg);
   background-size: cover;
   background-position: center;
 }
 
 .carousel-item-3 {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url(../assets/orcs_and_ogre_minis.jpg);
   background-size: cover;
   background-position: center;
@@ -320,4 +341,25 @@ footer {
   footer {
     padding-inline: 2dvh !important;
   }
+}
+
+.carousel-item {
+  transition: opacity 1s ease-in-out;
+}
+
+.btn-outline-carrousel {
+  color: #fff;
+  border: 2px solid #fff;
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-carrousel:hover {
+  background-color: rgba(6, 182, 212, 0.8);
+  color: #fff !important;
+  border-color: rgba(6, 182, 212, 1);
+
+  box-shadow: 0 6px 20px rgba(6, 182, 212, 0.4);
+
+  transform: translateY(-2px) scale(1.03);
 }
