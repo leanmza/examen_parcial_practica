@@ -507,10 +507,12 @@ def get_all_torneos():
         cursor.execute("""
             SELECT 
                 t.id_torneo,
+                t.nombre_torneo,
                 t.fecha,
                 s.id_sede,
                 s.nombre AS sede_nombre,
-                s.ciudad AS sede_ciudad
+                s.ciudad AS sede_ciudad,
+                s.direccion AS sede_direccion
             FROM torneos t
             JOIN sedes s ON t.id_sede = s.id_sede
         """)
@@ -523,11 +525,13 @@ def get_all_torneos():
 
             torneos.append({
                 "id_torneo": row["id_torneo"],
+                "nombre_torneo": row["nombre_torneo"],
                 "fecha": fecha_formateada,
                 "sede": {
                     "id_sede": row["id_sede"],
                     "nombre": row["sede_nombre"],
-                    "ciudad": row["sede_ciudad"]
+                    "ciudad": row["sede_ciudad"],
+                    "direccion":row["sede_direccion"]
                 }
             })
 

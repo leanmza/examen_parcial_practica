@@ -7,9 +7,12 @@ function generarPDF(datos) {
     return;
   }
 
-
   const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
+  const doc = new jsPDF({
+  orientation: "landscape", // o "landscape"
+  unit: "mm",               // mm, pt, px, etc
+  format: "a5",             // a4, letter, legal, etc
+});
 
   // Configuración del documento
   const pageWidth = doc.internal.pageSize.getWidth();
@@ -19,7 +22,7 @@ function generarPDF(datos) {
   // Título
   doc.setFontSize(20);
   doc.setFont(undefined, "bold");
-  doc.text("COMPROBANTE DE INSCRIPCIÓN", pageWidth / 2, 30, {
+  doc.text("COMPROBANTE DE INSCRIPCIÓN", pageWidth / 2, 15, {
     align: "center",
   });
 
@@ -32,68 +35,69 @@ function generarPDF(datos) {
   }
 
   // Información del torneo
-  doc.setFontSize(16);
+  doc.setFontSize(14);
   doc.setFont(undefined, "bold");
-  doc.text("ROL DUNGEON - TORNEO OFICIAL", margin, 50);
+  doc.text("ROL DUNGEON - TORNEO OFICIAL", margin, 25);
 
   doc.setFontSize(12);
   doc.setFont(undefined, "normal");
   doc.text(
     "Gracias por inscribirte a nuestro torneo. A continuación encontrarás los detalles de tu inscripción:",
     margin,
-    60
+   30,
   );
 
   // Identificador de inscripción (si fue provisto)
   doc.setFont(undefined, "bold");
-  doc.text("IDENTIFICADOR:", margin, 70);
-  doc.setFont(undefined, "normal");
-  doc.text(`${datos.identificador || "-"}`, margin + 40, 70);
-
+  doc.text(`IDENTIFICADOR: ${datos.identificador || "-"}`, margin, 37);
+  
   // Datos del participante
-  let yPos = 80;
+  let yPos = 45;
 
   doc.setFont(undefined, "bold");
   doc.text("DATOS DEL PARTICIPANTE:", margin, yPos);
-  yPos += 10;
+  yPos += 7;
 
   doc.setFont(undefined, "normal");
   doc.text(`Nombre: ${datos.nombre} ${datos.apellido}`, margin, yPos);
-  yPos += 7;
+  yPos += 5;
   doc.text(
     `DNI: ${datos.dni}     Fecha de nacimiento: ${datos.nacimientoFecha}`,
     margin,
-    yPos
+    yPos,
   );
 
-  yPos += 7;
+  yPos += 5;
   doc.text(`Teléfono: ${datos.telefono}`, margin, yPos);
-  yPos += 7;
+  yPos += 5;
   doc.text(`Email: ${datos.email}`, margin, yPos);
-  yPos += 15;
+  yPos += 7;
 
   // Detalles del torneo
   doc.setFont(undefined, "bold");
   doc.text("DETALLES DEL TORNEO:", margin, yPos);
-  yPos += 10;
+  yPos += 7;
 
   doc.setFont(undefined, "normal");
-  doc.text(`Sede: ${datos.sedeElegida.nombre}`, margin, yPos);
-  yPos += 7;
-  doc.text(`Dirección: ${datos.sedeElegida.direccion}, ${datos.sedeElegida.ciudad}`, margin, yPos);
-  yPos += 7;
+  console.log(datos);
+  
+  
+  doc.text(`${datos.torneo}`, margin, yPos);
+  yPos += 5;
   doc.text(`Fecha: ${datos.fechaElegida}`, margin, yPos);
-  yPos += 15;
+  yPos += 5;
+  doc.text(`Sede: ${datos.sedeElegida.nombre}, ${datos.sedeElegida.direccion}, ${datos.sedeElegida.ciudad}`, margin, yPos);
+  yPos += 7;
 
   // Instrucciones
   doc.setFont(undefined, "bold");
   doc.text("INFORMACIÓN IMPORTANTES:", margin, yPos);
-  yPos += 10;
+  yPos += 7;
 
   const instrucciones = [
     "• El horario de inicio se comunicará en nuestras redes sociales.",
     "• Presentarse 15 minutos antes del inicio del torneo.",
-    "• Traer identificación oficial.",
+    "• Traer dni o pasaporte",
     "• El uso de mazos preconstruidos está permitido.",
     "• Cualquier comportamiento antideportivo será sancionado.",
     "• Los resultados serán publicados en nuestra web al finalizar.",
@@ -106,14 +110,14 @@ function generarPDF(datos) {
     }
     doc.setFont(undefined, "normal");
     doc.text(inst, margin, yPos);
-    yPos += 7;
+    yPos += 5;
   });
 
   // Pie de página
- 
-  doc.setFontSize(10);
-  doc.text(`Fecha de inscripción: ${datos.fechaInscripcion}`, margin, 280);
-  doc.text("ROL DUNGEON - www.roldungeon.com", pageWidth - margin, 280, {
+
+  doc.setFontSize(8);
+  doc.text(`Fecha de inscripción: ${datos.fechaInscripcion}`, margin, 140);
+  doc.text("ROL DUNGEON - www.roldungeon.com", pageWidth - margin, 140, {
     align: "right",
   });
 

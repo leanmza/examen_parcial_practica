@@ -1,3 +1,4 @@
+-- DROP SCHEMA dungeon;
 CREATE SCHEMA IF NOT EXISTS dungeon;
 
 CREATE TABLE dungeon.`mensajes` (
@@ -29,13 +30,14 @@ CREATE TABLE dungeon.`mensajes` (
    
 CREATE TABLE dungeon.`torneos` (
   `id_torneo` bigint(20) AUTO_INCREMENT UNIQUE PRIMARY KEY NOT NULL,
+  `nombre_torneo` VARCHAR(200) NOT NULL UNIQUE,
   `id_sede` bigint NOT NULL,
   `fecha` DATE NOT NULL,
   CONSTRAINT fk_torneo_sede
     FOREIGN KEY (id_sede) REFERENCES sedes(id_sede)
 );
 
-CREATE TABLE dungeon.`jugadores_torneos` (
+CREATE TABLE dungeon.`usuarios_torneos` (
   `identificador` VARCHAR(10) NOT NULL UNIQUE,
   `id_usuario` bigint(20) NOT NULL,
   `id_torneo` bigint(20) NOT NULL,
@@ -62,7 +64,10 @@ INSERT INTO dungeon.sedes (nombre, direccion, ciudad, pais) VALUES
 ('Arena Magic', 'España 456', 'San Juan', 'Argentina'),
 ('Gathering Vault', 'San Martin 789', 'San Luis', 'Argentina');
 
-INSERT INTO dungeon.torneos (id_sede, fecha) VALUES
-(1, '2025-03-15'),
-(2, '2025-03-22'),
-(3, '2025-04-05');
+INSERT INTO dungeon.torneos (nombre_torneo, id_sede, fecha) VALUES
+('Batalla por Rávnica - Formato Standard', 1, '2025-03-15'),
+('Guerra de los Planeswalkers - Modern', 2, '2025-03-22'),
+('Dominio de los Cinco Colores - Commander', 3, '2025-04-05'),
+('Draft Especial - Innistrad Nocturno', 1, '2025-04-12'),
+('Clasificatorio Pioneer - Senderos del Multiverso', 2, '2025-04-19'),
+('Copa Commander - Reliquias de Zendikar', 3, '2025-04-26');
