@@ -43,11 +43,13 @@
 
 .form-textarea {
   height: 15rem;
-  width: 100%;
+  width: 120ch;
   max-width: 1200px;
+  justify-content: center;
+  display: flex;
 }
 
-.form-checkbox{
+.form-checkbox {
   width: 20px;
   height: 20px;
 }
@@ -74,10 +76,21 @@
   max-width: 75ch;
 }
 
-.span-error{
+.span-error {
   color: red;
   font-size: 12px;
 }
+
+.input-mensaje {
+  display: grid;
+  justify-content: center;
+}
+
+
+
+/* .col-datos{
+
+} */
 
 /* Pantallas hasta small */
 @media (max-width: 575px) {
@@ -104,7 +117,7 @@
   }
 
   .banner-form {
-  background-image: url(../assets/hoja_personajes.jpg);
-  background-position-x: 10%;
-}
+    background-image: url(../assets/hoja_personajes.jpg);
+    background-position-x: 10%;
+  }
 }

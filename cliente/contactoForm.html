@@ -25,9 +25,9 @@
       src="https://kit.fontawesome.com/eaa90bc584.js"
       crossorigin="anonymous"
     ></script>
-
-    <script src="scripts/utils/forms.js"></script>
-    <script src="scripts/form_script.js"></script>
+    <script src="scripts/utils/utils.js"></script>
+    <script src="scripts/utils/forms.js" defer></script>
+    <script src="scripts/form_script.js" defer></script>
   </head>
   <body>
     <!-- HEADER / NAVBAR -->
@@ -50,7 +50,7 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse mx-4" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item dropdown">
               <a
@@ -90,7 +90,7 @@
               <a class="nav-link" href="torneoForm.html">Torneos</a>
             </li>
           </ul>
-          <form class="d-flex" role="search">
+          <!-- <form class="d-flex" role="search">
             <input
               class="form-control me-2"
               type="search"
@@ -100,7 +100,46 @@
             <button class="btn btn-outline-light" type="submit">
               <i class="fa-solid fa-magnifying-glass"></i>
             </button>
-          </form>
+          </form> -->
+
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center" id="auth-area">
+  
+  <!-- Opciones cuando NO está logueado -->
+  <li class="nav-item" id="nav-login">
+    <a class="nav-link" href="login.html">Iniciar sesión</a>
+  </li>
+
+  <li class="nav-item" id="nav-register">
+    <a class="nav-link" href="registroUsuario.html">Registrarme</a>
+  </li>
+
+  <!-- Dropdown cuando está logueado -->
+  <li class="nav-item dropdown d-none nav-user" id="nav-user">
+    <a
+      class="nav-link dropdown-toggle"
+      href="#"
+      role="button"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+      id="user-toggle"
+    >
+      Usuario
+    </a>
+    <ul class="dropdown-menu">
+      <li>
+        <a class="dropdown-item" href="userDashboard.html">
+          Mi cuenta
+        </a>
+      </li>
+      <li>
+        <a class="dropdown-item" href="#" id="logout">
+          Cerrar sesión
+        </a>
+      </li>
+    </ul>
+  </li>
+
+</ul>
         </div>
       </div>
     </nav>
@@ -118,7 +157,7 @@
       </section>
       <section class="form-section">
         <form
-          action="http://127.0.0.1:5000/contactoForm/"
+       
           method="post"
           id="contactoForm"
         >
@@ -188,8 +227,8 @@
           </div>
           <hr class="my-4 col-8 offset-2" />
 
-          <div class="row d-flex justify-content-center g-3">
-            <div class="col-12 col-xxl-8">
+          <div class="row justify-content-center g-3">
+            <div class="col-12 form-input input-mensaje">
               <label for="mensaje" class="form-label">
                 Mensaje <span id="label-mensaje" class="span-error"></span>
               </label>
@@ -197,7 +236,7 @@
                 name="comentario"
                 id="mensaje"
                 placeholder="Dejanos tu consulta"
-                class="form-textarea w-100"
+                class="form-textarea"
                 required
                 minlength="30"
               ></textarea>

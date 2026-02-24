@@ -26,6 +26,9 @@
       src="https://kit.fontawesome.com/eaa90bc584.js"
       crossorigin="anonymous"
     ></script>
+
+        <!-- scripts -->
+     <script src="scripts/utils/utils.js" defer></script>
   </head>
   <body>
     <!-- HEADER / NAVBAR -->
@@ -48,7 +51,7 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse mx-4" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item dropdown">
               <a
@@ -62,16 +65,24 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="dndDetail.html">Dungeons & Dragons</a>
+                  <a class="dropdown-item" href="dndDetail.html"
+                    >Dungeons & Dragons</a
+                  >
                 </li>
                 <li>
-                  <a class="dropdown-item" href="magicDetail.html">Magic: The Gathering</a>
+                  <a class="dropdown-item" href="magicDetail.html"
+                    >Magic: The Gathering</a
+                  >
                 </li>
-                <li><a class="dropdown-item" href="pathfinderDetail.html">Pathfinder</a></li>
+                <li>
+                  <a class="dropdown-item" href="pathfinderDetail.html"
+                    >Pathfinder</a
+                  >
+                </li>
               </ul>
             </li>
             <li class="nav-item">
-               <a class="nav-link" href="novedades_DnD.html">Novedades</a>
+              <a class="nav-link" href="novedades_DnD.html">Novedades</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="contactoForm.html">Contacto</a>
@@ -80,7 +91,7 @@
               <a class="nav-link" href="torneoForm.html">Torneos</a>
             </li>
           </ul>
-          <form class="d-flex" role="search">
+          <!-- <form class="d-flex" role="search">
             <input
               class="form-control me-2"
               type="search"
@@ -90,11 +101,49 @@
             <button class="btn btn-outline-light" type="submit">
               <i class="fa-solid fa-magnifying-glass"></i>
             </button>
-          </form>
+          </form> -->
+
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center" id="auth-area">
+  
+  <!-- Opciones cuando NO está logueado -->
+  <li class="nav-item" id="nav-login">
+    <a class="nav-link" href="login.html">Iniciar sesión</a>
+  </li>
+
+  <li class="nav-item" id="nav-register">
+    <a class="nav-link" href="registroUsuario.html">Registrarme</a>
+  </li>
+
+  <!-- Dropdown cuando está logueado -->
+  <li class="nav-item dropdown d-none nav-user" id="nav-user">
+    <a
+      class="nav-link dropdown-toggle"
+      href="#"
+      role="button"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+      id="user-toggle"
+    >
+      Usuario
+    </a>
+    <ul class="dropdown-menu">
+      <li>
+        <a class="dropdown-item" href="userDashboard.html">
+          Mi cuenta
+        </a>
+      </li>
+      <li>
+        <a class="dropdown-item" href="#" id="logout">
+          Cerrar sesión
+        </a>
+      </li>
+    </ul>
+  </li>
+
+</ul>
         </div>
       </div>
     </nav>
-
     <!-- MAIN -->
     <main class="container-fluid">
       <section class="encabezado-section header-pathfinder">

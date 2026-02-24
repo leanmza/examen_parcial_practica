@@ -1,0 +1,70 @@
+
+main {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  background-image: url(../assets/fondo-login.jpeg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.login-card {
+  background-color: rgba(44, 48, 54);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  min-width: 400px;
+}
+
+.login-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  text-align: center;
+  background: linear-gradient(135deg, #06b6d4, #dbdadf);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  margin-bottom: 0.25rem;
+}
+
+.login-subtitle {
+  text-align: center;
+  color: #adb5bd;
+  margin-bottom: 1.5rem;
+}
+
+.login-form .form-control {
+  background-color: rgba(33, 37, 41, 0.8);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.login-form .form-control:focus {
+  background-color: rgba(33, 37, 41, 0.9);
+  border-color: #06b6d4;
+  box-shadow: 0 0 0 0.25rem rgba(6, 182, 212, 0.25);
+}
+
+.btn-login {
+  background-color: #06b6d4 !important;
+  border-color: #06b6d4;
+  font-weight: 600;
+}
+
+.btn-login:hover {
+  background-color: #0891b2 !important;
+  border-color: #0891b2;
+}
+
+.btn-login:disabled {
+  opacity: 0.7;
+}
+
+.toast-body{
+  font-size: 16px;
+
+}

@@ -34,6 +34,8 @@
       const input = qs(el);
       const span = qs(label);
 
+      if (!input) return; // ← AGREGAR ESTO
+
       clearError(input, span);
 
       if (!input.value.trim()) {
@@ -41,7 +43,6 @@
         firstInvalid ??= input;
         attachLiveClear(input, span);
       }
-      
     });
 
     const mensaje = qs("#mensaje");
@@ -55,7 +56,7 @@
         setError(
           mensaje,
           labelMensaje,
-          `El mensaje debe tener al menos ${MIN_MESSAGE_LENGTH} caracteres`
+          `El mensaje debe tener al menos ${MIN_MESSAGE_LENGTH} caracteres`,
         );
 
         firstInvalid ??= mensaje;

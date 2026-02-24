@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-bs-theme="dark">
   <head>
     <meta charset="UTF-8" />
@@ -13,6 +13,7 @@
 
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/formStyle.css" />
+    <link rel="stylesheet" href="css/torneoForm.css" />
 
     <!-- fuentes google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -25,11 +26,20 @@
     <script
       src="https://kit.fontawesome.com/eaa90bc584.js"
       crossorigin="anonymous"
+      defer
     ></script>
 
+    <!-- scripts -->
+    <script src="scripts/utils/utils.js" defer></script>
+    <script src="scripts/utils/forms.js" defer></script>
+    <script src="scripts/torneo_form_script.js" defer></script>
+
     <!-- Script para generar PDF -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="scripts/torneo_pdf_script.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
+      defer
+    ></script>
+    <script src="scripts/torneo_pdf_script.js" defer></script>
   </head>
   <body>
     <!-- HEADER / NAVBAR -->
@@ -52,7 +62,7 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse mx-4" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item dropdown">
               <a
@@ -89,10 +99,10 @@
               <a class="nav-link" href="contactoForm.html">Contacto</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="torneoForm.html">Torneos</a>
+              <a class="nav-link" href="torneoForm.html">Torneos</a>
             </li>
           </ul>
-          <form class="d-flex" role="search">
+          <!-- <form class="d-flex" role="search">
             <input
               class="form-control me-2"
               type="search"
@@ -102,11 +112,50 @@
             <button class="btn btn-outline-light" type="submit">
               <i class="fa-solid fa-magnifying-glass"></i>
             </button>
-          </form>
+          </form> -->
+
+          <ul
+            class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center"
+            id="auth-area"
+          >
+            <!-- Opciones cuando NO está logueado -->
+            <li class="nav-item" id="nav-login">
+              <a class="nav-link" href="login.html">Iniciar sesión</a>
+            </li>
+
+            <li class="nav-item" id="nav-register">
+              <a class="nav-link" href="registroUsuario.html">Registrarme</a>
+            </li>
+
+            <!-- Dropdown cuando está logueado -->
+            <li class="nav-item dropdown d-none nav-user" id="nav-user">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                id="user-toggle"
+              >
+                Usuario
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="userDashboard.html">
+                    Mi cuenta
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#" id="logout">
+                    Cerrar sesión
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
-
     <!-- MAIN -->
     <main class="container-fluid">
       <section class="encabezado-section header-torneoMagic">
@@ -121,156 +170,138 @@
       </section>
 
       <section class="form-section">
-        <form id="torneoForm">
-          <!-- nombre y apellido -->
-          <div class="row d-flex justify-content-center g-3">
-            <div class="col-12 col-sm-6 form-input">
-              <label for="nombre" class="form-label"
-                >Nombre <span id="label-nombre" class="span-error"></span
-              ></label>
-              <input
-                type="text"
-                class="form-control"
-                id="nombre"
-                placeholder="Nombre"
-                required
-              />
-              <div class="invalid-feedback">Campo obligatorio</div>
-            </div>
-            <div class="col-12 col-sm-6 form-input">
-              <label for="apellido" class="form-label"
-                >Apellido <span id="label-apellido" class="span-error"></span
-              ></label>
-              <input
-                type="text"
-                class="form-control"
-                id="apellido"
-                placeholder="Apellido"
-                required
-              />
-              <div class="invalid-feedback">Campo obligatorio</div>
+        <form id="torneoForm" class="row">
+          <!-- COLUMNA CARD CON LOS TORNEOS -->
+
+          <div class="col-cards col-4">
+            <div class="card h-100 torneos-card">
+              <h4 class="mb-3">Seleccioná el torneo</h4>
+              <div
+                id="torneos-container"
+                class="d-flex flex-column gap-3"
+              ></div>
             </div>
           </div>
 
-          <!-- dni y fecha de nacimiento  -->
-          <div class="row d-flex justify-content-center g-3 mt-3">
-            <div class="col-12 col-sm-6 form-input">
-              <label for="dni" class="form-label"
-                >DNI <span id="label-dni" class="span-error"></span
-              ></label>
+          <!-- COLUMANA DATOS -->
+          <div class="col-datos col-4">
+            <div class="card card-datos">
               <input
-                type="text"
-                class="form-control"
-                id="dni"
-                placeholder="DNI"
-                required
+                type="hidden"
+                id="torneoSeleccionado"
+                name="torneoSeleccionado"
               />
-              <div class="invalid-feedback">Campo obligatorio</div>
-            </div>
-            <div class="col-12 col-sm-6 form-input">
-              <label for="nacimiento" class="form-label"
-                >Fecha de nacimiento
-                <span id="label-nacimiento" class="span-error"></span
-              ></label>
-              <input
-                type="date"
-                class="form-control"
-                id="nacimiento"
-                placeholder="Fecha de nacimiento"
-                required
-              />
-              <div class="invalid-feedback">Campo obligatorio</div>
-            </div>
-          </div>
+              <!-- nombre y apellido -->
 
-          <!-- email y telefono -->
-          <div class="row d-flex justify-content-center g-3 mt-3">
-            <div class="col-12 col-sm-6 form-input">
-              <label for="email" class="form-label"
-                >Email <span id="label-email" class="span-error"></span
-              ></label>
-              <input
-                type="email"
-                class="form-control"
-                id="email"
-                placeholder="Email"
-                required
-              />
-              <div class="invalid-feedback">Campo obligatorio</div>
-            </div>
-            <div class="col-12 col-sm-6 form-input">
-              <label for="telefono" class="form-label"
-                >Teléfono <span id="label-telefono" class="span-error"></span
-              ></label>
-              <input
-                type="text"
-                class="form-control"
-                id="telefono"
-                placeholder="Teléfono"
-                required
-              />
-              <div class="invalid-feedback">Campo obligatorio</div>
-            </div>
-          </div>
-
-          <hr class="my-4 col-8 offset-2" />
-          <!-- info torneo -->
-          <div class="row d-flex justify-content-center g-3 mt-3">
-            <div class="col-12 col-sm-6 form-input">
-              <!-- todo traer los valores desde una api, se tiene que cargar dinámicamente,
-                tabla sedes, atributos id_sede, nombre, ciudad, direccion, provincia, pais -->
-              <label for="sede" class="form-label"
-                >Sede del Torneo <span id="label-sede" class="span-error"></span
-              ></label>
-              <select class="form-select" id="sede" required>
-                <option value="" selected hidden disabled>
-                  Selecciona una sede
-                </option>
-              </select>
-              <div class="invalid-feedback">Debes seleccionar una sede</div>
-            </div>
-            <div class="col-12 form-input">
-              <label for="fecha" class="form-label"
-                >Fecha <span id="label-fecha" class="span-error"></span
-              ></label>
-              <select class="form-select" id="fecha" required>
-                <option value="" selected hidden disabled>
-                  Selecciona una fecha
-                </option>
-                <!-- Las opciones se cargarán dinámicamente con JavaScript -->
-              </select>
-              <div class="invalid-feedback">
-                Debes seleccionar una fecha y horario
+              <div class="col-12 form-input">
+                <label for="nombre" class="form-label"
+                  >Nombre <span id="label-nombre" class="span-error"></span
+                ></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nombre"
+                  placeholder="Nombre"
+                  required
+                />
+                <div class="invalid-feedback">Campo obligatorio</div>
               </div>
+              <div class="col-12 form-input">
+                <label for="apellido" class="form-label"
+                  >Apellido <span id="label-apellido" class="span-error"></span
+                ></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="apellido"
+                  placeholder="Apellido"
+                  required
+                />
+                <div class="invalid-feedback">Campo obligatorio</div>
+              </div>
+
+              <!-- dni y fecha de nacimiento  -->
+              <div class="col-12 form-input">
+                <label for="dni" class="form-label"
+                  >DNI <span id="label-dni" class="span-error"></span
+                ></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="dni"
+                  placeholder="DNI"
+                  required
+                />
+                <div class="invalid-feedback">Campo obligatorio</div>
+              </div>
+              <div class="col-12 form-input">
+                <label for="nacimiento" class="form-label"
+                  >Fecha de nacimiento
+                  <span id="label-nacimiento" class="span-error"></span
+                ></label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="nacimiento"
+                  placeholder="Fecha de nacimiento"
+                  required
+                />
+                <div class="invalid-feedback">Campo obligatorio</div>
+              </div>
+
+              <!-- email y telefono -->
+
+              <div class="col-12 form-input">
+                <label for="email" class="form-label"
+                  >Email <span id="label-email" class="span-error"></span
+                ></label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  placeholder="Email"
+                  required
+                />
+                <div class="invalid-feedback">Campo obligatorio</div>
+              </div>
+              <div class="col-12 form-input">
+                <label for="telefono" class="form-label"
+                  >Teléfono <span id="label-telefono" class="span-error"></span
+                ></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="telefono"
+                  placeholder="Teléfono"
+                  required
+                />
+                <div class="invalid-feedback">Campo obligatorio</div>
+              </div>
+
+              <!-- casilla de verificación y submit -->
+
+              <div
+                class="my-4 col-12 form-check d-flex justify-content-center robot"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input form-checkbox"
+                  id="terminos"
+                  required
+                />
+                <label class="form-check-label ms-2" for="terminos">
+                  Acepto los términos y condiciones del torneo
+                </label>
+              </div>
+
+              <button
+                class="btn btn-primary btn-lg col-12 btn-submit"
+                type="submit"
+                id="inscribirse"
+              >
+                Inscribirme
+              </button>
             </div>
-          </div>
-
-          <hr class="my-4 col-8 offset-2" />
-
-          <div class="d-flex justify-content-center row">
-            <div
-              class="mb-4 col-12 form-check d-flex justify-content-center robot"
-            >
-              <input
-                type="checkbox"
-                class="form-check-input form-checkbox"
-                id="terminos"
-                required
-              />
-              <label class="form-check-label ms-2" for="terminos">
-                Acepto los términos y condiciones del torneo
-              </label>
-            </div>
-          </div>
-
-          <div class="d-flex justify-content-center row">
-            <button
-              class="btn btn-primary btn-lg col-xl-2 col-lg-3 col-sm-4 col-6 btn-submit"
-              type="submit"
-              id="inscribirse"
-            >
-              Inscribirse
-            </button>
           </div>
         </form>
       </section>
@@ -353,7 +384,5 @@
       integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
       crossorigin="anonymous"
     ></script>
-    <script src="scripts/utils/forms.js"></script>
-    <script src="scripts/torneo_form_script.js"></script>
   </body>
 </html>

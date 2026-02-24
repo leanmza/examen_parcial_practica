@@ -13,6 +13,7 @@
     />
 
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/userDashboard.css" />
 
     <!-- fuentes google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -29,6 +30,8 @@
 
     <!-- scripts -->
     <script src="scripts/utils/utils.js" defer></script>
+    <script src="scripts/utils/forms.js"></script>
+    <script src="scripts/userDashboard.js"></script>
   </head>
   <body>
     <!-- HEADER / NAVBAR -->
@@ -146,193 +149,192 @@
     </nav>
     <!-- MAIN -->
     <main class="container-fluid">
-      <!-- CAROUSEL -->
-      <section class="carrousel-section">
-        <div
-          id="carouselExample"
-          class="carousel slide carousel-fade"
-          data-bs-ride="carousel"
-          data-bs-interval="2000"
-        >
-          <div class="carousel-inner">
-            <div class="carousel-item active carousel-item-1">
-              <div class="carousel-texto">
-                <h1>Aventuras Épicas</h1>
-                <h4>
-                  Descubrí el mundo de los juegos de rol de mesa como D&D,
-                  cartas Magic y muchos más. Tu próxima aventura te espera
-                </h4>
-              </div>
-            </div>
-            <div class="carousel-item carousel-item-2">
-              <div class="carousel-texto">
-                <h2>Magic: The Gathering</h2>
-                <h4>
-                  El juego de cartas donde estrategia, fantasía y poder se
-                  combinan. ¡Invocá criaturas, lanzá hechizos y enfrentate a
-                  oponentes en batallas épicas!
-                </h4>
-                <a href="magicDetail.html"
-                  ><button class="btn btn-outline-carrousel">
-                    Conocer más
-                  </button></a
-                >
-              </div>
-            </div>
-            <div class="carousel-item carousel-item-3">
-              <div class="carousel-texto">
-                <h2>Dungeon & Dragons</h2>
-                <h4>
-                  Viví aventuras legendarias. Creá tu héroe, explorá mazmorras,
-                  enfrentá dragones y dejá volar tu imaginación en el juego de
-                  rol más famoso del mundo.
-                </h4>
-                <a href="dndDetail.html"
-                  ><button class="btn btn-outline-carrousel">
-                    Conocer más
-                  </button></a
-                >
-              </div>
-            </div>
-          </div>
-          <button
-            class="carousel-control-prev"
-            type="button"
-            data-bs-target="#carouselExample"
-            data-bs-slide="prev"
-          >
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button
-            class="carousel-control-next"
-            type="button"
-            data-bs-target="#carouselExample"
-            data-bs-slide="next"
-          >
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-        </div>
+      <!-- Encabezado -->
+      <section class="encabezado-section">
+        <h1>Mi cuenta</h1>
+        <p class="encabezado-text">
+          Administrá tu perfil y tus inscripciones a los torneos.
+        </p>
       </section>
+      <section class="contenido-section row">
+        <!-- perfil -->
+        <section class="perfil-section col-3">
+          <!-- card -->
 
-      <section class="populares-section">
-        <div class="header-title header-section">
-          <h2>Juegos más populares</h2>
-        </div>
-        <!-- cards -->
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-          <div class="col">
-            <a href="dndDetail.html" class="linkCard">
-              <div class="card h-100">
-                <div class="img-card card-dnd"></div>
-                <div class="card-body">
-                  <h5 class="card-title">Dungeon & Dragons</h5>
-                  <p class="card-text">
-                    El más grande juego de rol del mundo. Crea personajes,
-                    explora mazmorras y pelea contra montruos legendarios junto
-                    a tus amigos.
-                  </p>
+          <div class="card h-100 perfil-card">
+            <div class="card-title perfil-title">
+              <h5>Ajustes de perfil</h5>
+              <p>Actualizá tus datos</p>
+            </div>
+            <div class="card-body">
+              <form id="datosForm">
+                <div class="col-12 form-input">
+                  <label for="usuario" class="form-label"
+                    >Nombre de usuario</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="usuario"
+                    placeholder="Nombre de usuario"
+                    readonly
+                    disabled
+                  />
                 </div>
-              </div>
-            </a>
+
+                <div class="col-12 form-input">
+                  <label for="nombre" class="form-label"
+                    >Nombre <span id="label-nombre" class="span-error"></span
+                  ></label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nombre"
+                    placeholder="Nombre"
+                  />
+                  <div class="invalid-feedback">No puede ser nulo o vacío</div>
+                </div>
+                <div class="col-12 form-input">
+                  <label for="apellido" class="form-label"
+                    >Apellido
+                    <span id="label-apellido" class="span-error"></span
+                  ></label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="apellido"
+                    placeholder="Apellido"
+                  />
+                  <div class="invalid-feedback">Campo obligatorio</div>
+                </div>
+
+                <div class="col-12 form-input">
+                  <label for="dni" class="form-label">DNI </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="dni"
+                    placeholder="DNI"
+                    readonly
+                    disabled
+                  />
+                </div>
+                <div class="col-12 form-input">
+                  <label for="nacimiento" class="form-label"
+                    >Fecha de nacimiento
+                    <span id="label-nacimiento" class="span-error"></span
+                  ></label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="nacimiento"
+                    placeholder="Fecha de nacimiento"
+                    required
+                  />
+                  <div class="invalid-feedback">Campo obligatorio</div>
+                </div>
+
+                <div class="col-12 form-input">
+                  <label for="email" class="form-label"
+                    >Email <span id="label-email" class="span-error"></span
+                  ></label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    placeholder="Email"
+                    required
+                  />
+                  <div class="invalid-feedback">Campo obligatorio</div>
+                </div>
+                <div class="col-12 form-input">
+                  <label for="telefono" class="form-label"
+                    >Teléfono
+                    <span id="label-telefono" class="span-error"></span
+                  ></label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="telefono"
+                    placeholder="Teléfono"
+                    required
+                  />
+                  <div class="invalid-feedback">Campo obligatorio</div>
+                </div>
+
+                <div class="d-flex justify-content-center row my-4">
+                  <button
+                    class="btn btn-primary btn col-6 btn-submit actualizar"
+                    type="submit"
+                    id="actualizar"
+                  >
+                    Actualizar
+                  </button>
+                </div>
+              </form>
+              <hr class="my-4 col-8 offset-2" />
+              <form id="passwordForm">
+                <div class="col-12 form-input">
+                  <label for="password" class="form-label"
+                    >Contraseña actual
+                    <span id="label-password" class="span-error"></span
+                  ></label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="password"
+                    placeholder="Contraseña actual"
+                    required
+                  />
+                  <div class="invalid-feedback">Campo obligatorio</div>
+                </div>
+                <div class="col-12 form-input">
+                  <label for="clave_nueva" class="form-label"
+                    >Contraseña nueva
+                    <span id="label-clave_nueva" class="span-error"></span
+                  ></label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="clave_nueva"
+                    placeholder="Contraseña nueva"
+                    required
+                  />
+                  <div class="invalid-feedback">Campo obligatorio</div>
+                </div>
+                <div class="d-flex justify-content-center row my-4">
+                  <button
+                    class="btn btn-primary btn col-6 btn-submit updatePassword"
+                    type="submit"
+                    id="password-update"
+                  >
+                    Actualizar contraseña
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
-          <div class="col">
-            <a href="magicDetail.html" class="linkCard">
-              <div class="card h-100">
-                <div class="img-card card-magic"></div>
-                <div class="card-body">
-                  <h5 class="card-title">Magic: The Gathering</h5>
-                  <p class="card-text">
-                    Invoca criaturas, lanza hechizos y pelea contra oponentes en
-                    el más grande juego de cartas coleccionables del multiverso.
-                  </p>
-                </div>
+        </section>
+        <section class="torneos-section col-9">
+          <div class="card h-100 torneos-card">
+            <div class="row">
+              <div class="card-title torneos-title col-9">
+                <h5>Mis torneos</h5>
+                <p>Administrá tus inscripciones a los proximos torneos</p>
               </div>
-            </a>
-          </div>
-          <div class="col">
-            <a href="pathfinderDetail.html" class="linkCard">
-              <div class="card h-100">
-                <div class="img-card card-pathfinder"></div>
-                <div class="card-body">
-                  <h5 class="card-title">Pathfinder</h5>
-                  <p class="card-text">
-                    Viví combates tacticos y ricas historias en este querido
-                    sistema de juego de roles.
-                  </p>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-      </section>
-      <section class="caracteristicas-section">
-        <div class="header-title header-section">
-          <h2>¿Por qué elegirnos?</h2>
-          <p>
-            Tenemos todo lo que necesitas para sumergirte en el mundo de los
-            juegos de rol de mesa
-          </p>
-        </div>
-        <div class="cards">
-          <!-- cards -->
-          <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col">
-              <div class="card">
-                <div class="icon-card card-comunidad">
-                  <i class="fa-solid fa-people-group fa-xl"></i>
-                </div>
-                <div class="card-body">
-                  <h6 class="card-title">Gran comunidad</h6>
-                  <p class="card-text">
-                    Unite a miles de jugadores alrededor del mundo. Encontrá
-                    grupo, compartí historias y encontrá nuevos amigos a través
-                    de épicas aventuras.
-                  </p>
-                </div>
+              <div class="enlace-torneos col-3">
+                <a href="torneoForm.html"
+                  ><button class="btn btn-torneos btn-primary">
+                    <i class="fa-solid fa-plus"></i> Inscribirme en torneos
+                  </button></a
+                >
               </div>
             </div>
-            <div class="col">
-              <div class="card">
-                <div class="icon-card card-contenido">
-                  <i class="fa-solid fa-book fa-xl"></i>
-                </div>
-                <div class="card-body">
-                  <h6 class="card-title">Mucho contenido</h6>
-                  <p class="card-text">
-                    Accedé a guías completas y fáciles de entender, creador de
-                    personajes y recursos para D&D, Pathfinder y otros sistemas.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card">
-                <div class="icon-card card-tools">
-                  <i class="fa-solid fa-dice fa-xl"></i>
-                </div>
-                <div class="card-body">
-                  <h6 class="card-title">Herramientas Digitales</h6>
-                  <p class="card-text">
-                    Dados virtuales, hojas de personajes, gestión de campañas y
-                    todo lo que necesitas para jugar.
-                  </p>
-                </div>
-              </div>
-            </div>
+            <div class="card-body card-tabla" id="card-tabla"></div>
           </div>
-        </div>
+        </section>
       </section>
-      <section class="listo-section">
-        <div class="header-title header-section">
-          <h2>¿Listo para empezar tu aventura?</h2>
-          <p>Unite a miles de aventureros con alguno de estos juegos</p>
-          <div>
-            <a class="btn btn-games">Ver Juegos de Rol</a>
-          </div>
-        </div>
-      </section>
+      <section class="banner-section"></section>
     </main>
     <!-- FOOTER -->
     <footer class="row row-cols-1 row-cols-3 row-cols-md-5 py-5 border-top">

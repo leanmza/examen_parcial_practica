@@ -1,0 +1,107 @@
+.encabezado-section {
+  padding: 2rem 3rem 1.5rem;
+}
+.banner-section {
+  background-image: url(../assets/banner\ personajes.png);
+  background-position-y: 27%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 200px;
+}
+
+p {
+  color: rgb(156 163 175);
+}
+.perfil-card {
+  margin: 0 0 0 3rem;
+}
+.torneos-card {
+  max-width: none;
+  margin: 0 3rem 0 0;
+}
+
+.perfil-title {
+  margin-bottom: 0 !important;
+  text-align: center;
+}
+.perfil-title > p,
+.torneos-title > p {
+  color: rgb(156 163 175);
+  font-size: 14px;
+  margin: 0 !important;
+}
+
+.torneos-title {
+  padding: 0 2rem;
+}
+.card-title {
+  margin: 2rem 0;
+}
+.card-tabla {
+  padding: 0 !important;
+}
+h5 {
+  margin: 0 !important;
+}
+
+thead {
+  background-color: rgb(55 65 81);
+}
+
+.tabla-torneos {
+  width: 100%;
+  text-align: justify;
+}
+tbody > tr {
+  border-bottom: 1px solid rgb(55 65 81);
+}
+
+tbody > tr > td {
+  padding: 2rem;
+}
+
+.borrar {
+  cursor: pointer;
+  color: rgb(206, 3, 3);
+}
+
+td,
+th {
+  padding: 1rem 2rem;
+}
+
+.identificador {
+  background-color: rgb(55 65 81);
+  color: rgb(6 182 212);
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+}
+
+.mensaje {
+  padding-left: 2rem;
+
+  color: rgb(156 163 175);
+}
+
+.btn-submit {
+  background-color: #695ca5;
+  border-color: #695ca5;
+}
+.btn-submit:hover {
+  background-color: #5847a3;
+  border-color: #5847a3;
+}
+
+.enlace-torneos {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 2rem;
+}
+a {
+  text-decoration: none;
+}
+
+.contenido-section {
+  margin-bottom: 2rem;
+}
