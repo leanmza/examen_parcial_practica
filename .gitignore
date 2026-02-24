@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Entornos virtuales
+venv/
+.env
+
+# VSCode
+.vscode/
+
+# Logs
+*.log
+
+# Archivos del sistema
+.DS_Store
