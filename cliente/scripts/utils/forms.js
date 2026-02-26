@@ -4,16 +4,21 @@
 (function () {
   const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
+  // Muestra visualmente un error agragando la clase is-invalid e inyecta el mensaje en el span
   function setError(inputEl, labelSpanEl, message) {
     if (inputEl) inputEl.classList.add("is-invalid");
     if (labelSpanEl) labelSpanEl.textContent = `- ${message}`;
   }
 
+  // Elimina la clase is-invalid y limpia el contenido del mensaje de error
   function clearError(inputEl, labelSpanEl) {
     if (inputEl) inputEl.classList.remove("is-invalid");
     if (labelSpanEl) labelSpanEl.textContent = "";
   }
 
+  // Escucha cuando el usuario interactúa con un campo
+  // (input para texto o change para selects/checkboxes).
+  // En cuanto el usuario escribe o cambia algo, llama a clearError .
   function attachLiveClear(inputEl, labelSpanEl) {
     if (!inputEl) return;
     const evt =
@@ -23,10 +28,15 @@
     inputEl.addEventListener(evt, () => clearError(inputEl, labelSpanEl));
   }
 
-  function qs(id) {
-    return document.querySelector(id);
+  //  Selecciona elementos del DOM, simplifica tener que
+  // escribir siempre document.querySelector()
+  function qs(selector) {
+    return document.querySelector(selector);
   }
 
+  // Recibe una lista de objetos con los campos a revisar
+  // Verifica si están vacíos, la longitud del campo "mensaje" y
+  // si los checkbox están seleccionados 
   function validarCampos(campos) {
     let firstInvalid = null;
 

@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const tipo = sessionStorage.getItem("toastTipo");
 
   
-
+// Muestra un toast si alguien es redirigido al login sin estar logueado
 function mostrarToast(mensaje, tipo = "warning") {
   const toastContainer = document.querySelector(".toast-container");
 
@@ -46,11 +46,13 @@ function mostrarToast(mensaje, tipo = "warning") {
 
   const API_URL = "http://127.0.0.1:5000";
 
+  // Inyecta un mensaje si hay un campo vacío
   const mostrarError = (mensaje) => {
     errorDiv.textContent = mensaje;
     errorDiv.classList.remove("d-none");
   };
 
+  // Oculta el mensaje de error
   const ocultarError = () => {
     errorDiv.classList.add("d-none");
     errorDiv.textContent = "";
@@ -72,10 +74,12 @@ function mostrarToast(mensaje, tipo = "warning") {
     btnLogin.innerHTML =
       '<span class="spinner-border spinner-border-sm me-2"></span>Entrando...';
 
+    // Crea un objeto con los datos 
     const formData = new FormData();
     formData.append("usuario", usuario);
     formData.append("password", password);
 
+    // Envia los datos a servidor
     try {
       const response = await fetch(`${API_URL}/login`, {
         method: "POST",

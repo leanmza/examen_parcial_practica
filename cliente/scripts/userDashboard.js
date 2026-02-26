@@ -1,6 +1,7 @@
 const { qs, validarCampos } = window.utils.forms;
 const API = "http://127.0.0.1:5000";
 
+// Cargo los torneos donde el usuario esta inscripto
 async function cargarMisTorneos() {
   const response = await fetch(`${API}/user/torneos`, {
     method: "GET",
@@ -70,6 +71,8 @@ async function cargarMisTorneos() {
 
   container.innerHTML = tabla;
 }
+
+// Lee datos almacenados en el navegador, específicamente obtiene el token CSRF
 function getCookie(name) {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
@@ -78,6 +81,7 @@ function getCookie(name) {
   }
 }
 
+// Borro al usuario de un torneo específico
 async function eliminarTorneo(idTorneo) {
   const csrf = getCookie("csrf_access_token");
 
@@ -113,10 +117,7 @@ document.addEventListener("click", function (e) {
   }
 });
 
-/* ===========================
-   Cargo usuario logueado
-=========================== */
-
+//  Cargo usuario logueado
 async function cargarUsuarioLogueado() {
   try {
     const res = await fetch(`${API}/user/me`, {
@@ -173,7 +174,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const datosForm = document.getElementById("datosForm");
   const passwordForm = document.getElementById("passwordForm");
 
-  // Handler de envío (homogéneo al de contacto)
+  // Especifíco los elementos del DOM a revisar: el id del input "#",
+  // el id del label y el mensaje de error
   const campos = [
     { el: "#nombre", label: "#label-nombre", msg: "Campo obligatorio" },
     { el: "#apellido", label: "#label-apellido", msg: "Campo obligatorio" },
@@ -185,14 +187,17 @@ document.addEventListener("DOMContentLoaded", () => {
   datosForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    // Llamo a la función de validar campos y si devuelve false detiene el envio del formulario
     if (!validarCampos(campos)) return;
 
+    // Muestro un mensaje de confirmación
     if (!confirm("¿Seguro que querés actualizar tus datos?")) {
       return;
     }
 
     const csrf = getCookie("csrf_access_token");
 
+    // Creo el body con los valores de los inputs
     const body = {
       nombre: qs("#nombre").value,
       apellido: qs("#apellido").value,
@@ -202,6 +207,8 @@ document.addEventListener("DOMContentLoaded", () => {
       nacimiento: qs("#nacimiento").value,
     };
 
+    // Hago un put para actulizar los datos de usuario, si no hay problemas 
+    // muestra un mensaje de exito, caso contrario, un mensaje de error 
     const response = await fetch(`${API}/user`, {
       method: "PUT",
       credentials: "include",
@@ -224,16 +231,20 @@ document.addEventListener("DOMContentLoaded", () => {
   passwordForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    // Muestro un mensaje de confimación
     if (!confirm("¿Seguro que querés cambiar tu contraseña?")) {
       return;
     }
 
     const csrf = getCookie("csrf_access_token");
 
+    // Creo un objeto con los datos necesarios
     const formData = new FormData();
     formData.append("password", qs("#password").value);
     formData.append("clave_nueva", qs("#clave_nueva").value);
 
+    // Hago un patch para actualizar la contraseña, si no hay problemas 
+    // muestra un mensaje de exito, caso contrario, un mensaje de error
     const response = await fetch(`${API}/user/password`, {
       method: "PATCH",
       credentials: "include",

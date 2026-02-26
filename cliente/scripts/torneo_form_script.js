@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   const { qs, validarCampos } = window.utils.forms;
   const API = "http://127.0.0.1:5000";
   const toast = new bootstrap.Toast(document.getElementById("miToast"));
+
+  // Primero controlo que el usuario este logueado
   try {
     const res = await fetch(`${API}/user/me`, {
       credentials: "include",
@@ -29,6 +31,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   let torneos = [];
   let user;
 
+  // Lee datos almacenados en el navegador, específicamente obtiene el token CSRF
   function getCookie(name) {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
@@ -37,10 +40,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  /* ===========================
-   Cargo usuario logueado
-=========================== */
-
+  // Cargo usuario logueado
   async function cargarUsuarioLogueado() {
     try {
       const res = await fetch(`${API}/user/me`, {
@@ -90,10 +90,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   cargarUsuarioLogueado();
 
-  /* ------------------------------------
-   Traigo los torneos del back 
-   --------------------------------------*/
-
+  // Cargo los torneos en cards
   fetch(`${API}/torneos`)
     .then((response) => {
       if (!response.ok) {
@@ -121,6 +118,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   </div>
 `;
 
+        // Seteo los efectos visuales al hacer click
         card.addEventListener("click", () => {
           const hiddenInput = qs("#torneoSeleccionado");
           hiddenInput.value = t.id_torneo;
@@ -145,38 +143,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       console.error("Error al obtener torneos:", error);
     });
 
-  // ----------------------------------------------------
-  // REVISO SI EL JUGADOR YA ESTA INSCRIPTO EN EL TORNEO
-  // ----------------------------------------------------
-
-  async function validarInscripcion(idTorneo, idJugador) {
-    try {
-      const params = new URLSearchParams({
-        id_torneo: idTorneo,
-        id_usuario: idJugador,
-      });
-
-      const res = await fetch(
-        `${API}/torneos/validar-inscripcion?${params.toString()}`,
-        { method: "GET" },
-      );
-
-      const data = await res.json();
-
-      return data.existe;
-    } catch (e) {
-      console.error(e);
-      return false;
-    }
-  }
-
+  // Doy formato a la fecha de nacimiento dd-mm-aaaa
   const formatearFecha = (fechaISO) => {
     if (!fechaISO) return "-";
     const [y, m, d] = fechaISO.split("-");
     return `${d}-${m}-${y}`;
   };
 
-  // Generar identificador alfanumérico aleatorio (10 caracteres)
+  // Genero identificador alfanumérico aleatorio (10 caracteres)
   const generarIdentificador = (len = 10) => {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     let out = "";
@@ -186,7 +160,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     return out;
   };
 
-  // Handler de envío (homogéneo al de contacto)
+  // Especifíco los elementos del DOM a revisar: el id del input "#",
+  // el id del label y el mensaje de erro
   const campos = [
     { el: "#nombre", label: "#label-nombre", msg: "Campo obligatorio" },
     { el: "#apellido", label: "#label-apellido", msg: "Campo obligatorio" },
@@ -198,11 +173,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     { el: "#fecha", label: "#label-fecha", msg: "Debes seleccionar una fecha" },
   ];
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+       // Llamo a la función de validar campos y si devuelve false detiene el envio del formulario
     if (!validarCampos(campos)) return;
 
+       // Llamo a la función para validar si el usuario está logueado y si devuelve false me manda al login
     if (!user) {
       window.location.href = "login.html";
       return;
@@ -229,12 +207,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       alert("Torneo inválido");
       return;
     }
-
+   // Creo un objeto con lo datos a persistir, el idUsuario lo saca el backend
     const data = new FormData();
     data.append("identificador", identificador);
     data.append("id_torneo", idTorneo);
     data.append("fecha_inscripcion", fechaInscripcion);
 
+    // Envió el objeto, si no hay problemas muestra un mensaje de exito,
+    // caso contrario, un mensaje de error
     try {
       const res = await fetch(`${API}/torneos/usuario-registro`, {
         method: "POST",
@@ -247,19 +227,19 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       const responseData = await res.json();
 
-      // 🔴 Usuario ya inscripto
+      // Usuario ya inscripto
       if (res.status === 409) {
         alert("⚠️ Ya estás inscripto en este torneo.");
         return;
       }
 
-      // 🔴 Otros errores del backend
+      // Otros errores del backend
       if (!res.ok) {
         alert(responseData.error || "Error al enviar la inscripción");
         return;
       }
 
-      // 🟢 Éxito
+      // Éxito
       generarPDF({
         nombre: qs("#nombre").value,
         apellido: qs("#apellido").value,

@@ -59,21 +59,21 @@ def autenticar():
     try:
         cursor = db.cursor(dictionary=True)
 
-        # Buscar usuario y hash
+        # Busca al usuario y la contraseña hasheada
         cursor.execute(QUERY_HASHED_PWD, [request.form["usuario"]])
         usuario = cursor.fetchone()
 
         if not usuario:
             return jsonify({"error": "Usuario o contraseña incorrectos"}), 401
 
-        # Verificar contraseña
+        # Verifica la contraseña
         if not bcrypt.checkpw(
             request.form["password"].encode(),
             usuario["password"].encode()
         ):
             return jsonify({"error": "Usuario o contraseña incorrectos"}), 401
 
-        # Obtener datos para el token
+        # Obtenengo los datos para el token
         cursor.execute(QUERY_PRE_TOKEN, [request.form["usuario"]])
         fila = cursor.fetchone()
 
@@ -100,13 +100,13 @@ def cerrar_sesion():
 # USER - POST, PUT, GET
 # ---------------------------------------------------
 
-
+# Verifico que el usuario esté autenticado y devuelvo los datos guardados dentro del token JWT.
 @app.get("/user")
 @jwt_required()  # access token
 def get_usuario():
     return jsonify(get_jwt())
 
-
+# Edito los datos del usuario
 @app.put("/user")
 @jwt_required()
 def editar_usuario():
@@ -177,7 +177,7 @@ def editar_usuario():
         cursor.close()
         db.close()
 
-
+# Edito la contraseña del usuario logueado
 @app.patch("/user/password")
 @jwt_required()
 def editar_clave():
@@ -247,7 +247,7 @@ def editar_clave():
 
 #         usuario_identity = get_jwt_identity()
 
-#         # 📸 Si viene archivo
+#         #  Si viene archivo
 #         if "foto" in request.files and request.files["foto"].filename:
 
 #             archivo = request.files["foto"]
@@ -278,7 +278,7 @@ def editar_clave():
 
 #         db.commit()
 
-#         # 🔄 Consultar usuario actualizado
+#         #  Consultar usuario actualizado
 #         cursor.execute("""
 #             SELECT id_usuario, usuario, nombre, apellido, dni,
 #                    telefono, email, nacimiento, foto
@@ -326,6 +326,7 @@ def editar_clave():
 #         db.close()
 
 
+# Guardo un usuario nuevo en la BD
 @app.post("/user/signup")
 def registrar():
 
@@ -407,7 +408,8 @@ def registrar():
 # GET USUARIO
 # ---------------------------------------------------
 
-
+#  Veo si hay una sesión activa al cargar la web
+#  Muestro el perfil con datos reales
 @app.get("/user/me")
 @jwt_required(optional=True)
 def me():
@@ -447,53 +449,10 @@ def me():
         db.close()
 
 # ---------------------------------------------------
-# GET USUARIO-TORNEO
-# ---------------------------------------------------
-
-
-@app.get("/torneos/validar-inscripcion")
-@jwt_required(optional=True)
-def validar_inscripcion():
-
-    dni = request.args.get("dni")
-    id_torneo = request.args.get("id_torneo")
-
-    if not dni or not id_torneo:
-        return jsonify({"existe": False}), 200
-
-    try:
-        db = get_db()
-    except Error:
-        return jsonify({"error": MENSAJE_ERROR_CONEXION}), 500
-
-    try:
-        cursor = db.cursor()
-
-        cursor.execute("""
-            SELECT 1
-            FROM usuarios_torneos jt
-            JOIN usuario j ON jt.id_usuario = j.id_usuario
-            WHERE jt.id_torneo = %s
-            AND j.dni = %s
-            LIMIT 1
-        """, (id_torneo, dni))
-
-        existe = cursor.fetchone() is not None
-
-        return jsonify({"existe": existe}), 200
-
-    except Error as e:
-        return jsonify({"error": str(e)}), 500
-
-    finally:
-        cursor.close()
-        db.close()
-
-# ---------------------------------------------------
 # GET TORNEOS
 # ---------------------------------------------------
 
-
+# Trigo todos los torneos con las sedes
 @app.get("/torneos")
 def get_all_torneos():
     try:
@@ -548,14 +507,13 @@ def get_all_torneos():
 # POST USUARIO EN TORNEO
 # ---------------------------------------------------
 
-
+# Inscribo a un usuario en un torneo
 @app.post("/torneos/usuario-registro")
 @jwt_required()
 def insert_jugador():
 
     identity = get_jwt_identity()
 
-    # Validar campos mínimos
     required_fields = [
         "id_torneo",
         "identificador",
@@ -574,21 +532,12 @@ def insert_jugador():
     try:
         cursor = db.cursor(dictionary=True)
 
-        #  Obtener id_usuario real desde el token
-        cursor.execute("""
-            SELECT id_usuario
-            FROM usuario
-            WHERE usuario = %s
-        """, (identity,))
+        id_usuario = get_id_usuario_from_identity(identity, db)
 
-        user = cursor.fetchone()
-
-        if not user:
+        if not id_usuario:
             return jsonify({"error": "Usuario no encontrado"}), 404
 
-        id_usuario = user["id_usuario"]
-
-        #  Verificar si ya está inscripto
+        # Verificar si ya está inscripto
         cursor.execute("""
             SELECT 1
             FROM usuarios_torneos
@@ -620,10 +569,6 @@ def insert_jugador():
             "mensaje": "Inscripción realizada correctamente"
         }), 201
 
-    except IntegrityError:
-        db.rollback()
-        return jsonify({"error": MENSAJE_ERROR_UNIQUE}), 400
-
     except Error as e:
         db.rollback()
         return jsonify({"error": str(e)}), 500
@@ -637,7 +582,7 @@ def insert_jugador():
 # DELETE USUARIO EN TORNEO
 # ---------------------------------------------------
 
-
+# Elimino un usuario de un torneo
 @app.delete("/torneos/baja-usuario")
 @jwt_required()
 def baja_usuario_torneo():
@@ -648,8 +593,6 @@ def baja_usuario_torneo():
     if not data or "id_torneo" not in data:
         return jsonify({"error": "Falta id_torneo"}), 400
 
-    id_torneo = data["id_torneo"]
-
     try:
         db = get_db()
     except Error:
@@ -658,25 +601,16 @@ def baja_usuario_torneo():
     try:
         cursor = db.cursor(dictionary=True)
 
-        # 🔎 Obtener id_usuario real desde username
-        cursor.execute("""
-            SELECT id_usuario
-            FROM usuario
-            WHERE usuario = %s
-        """, (identity,))
+        
+        id_usuario = get_id_usuario_from_identity(identity, db)
 
-        user = cursor.fetchone()
-
-        if not user:
+        if not id_usuario:
             return jsonify({"error": "Usuario no encontrado"}), 404
 
-        id_usuario = user["id_usuario"]
-
-        # 🗑️ Eliminar inscripción
         cursor.execute("""
             DELETE FROM usuarios_torneos
             WHERE id_usuario = %s AND id_torneo = %s
-        """, (id_usuario, id_torneo))
+        """, (id_usuario, data["id_torneo"]))
 
         db.commit()
 
@@ -702,6 +636,7 @@ def baja_usuario_torneo():
 # GET TORNEOS INSCRIPTOS POR USUARIO
 # ---------------------------------------------------
 
+# Trigo los torneos donde esta inscripto el usuario logueado
 @app.get("/user/torneos")
 @jwt_required()
 def get_all_torneos_inscripto():
@@ -716,21 +651,12 @@ def get_all_torneos_inscripto():
     try:
         cursor = db.cursor(dictionary=True)
 
-        # Obtener id_usuario real desde username
-        cursor.execute("""
-            SELECT id_usuario
-            FROM usuario
-            WHERE usuario = %s
-        """, (identity,))
+    
+        id_usuario = get_id_usuario_from_identity(identity, db)
 
-        user = cursor.fetchone()
-
-        if not user:
+        if not id_usuario:
             return jsonify([]), 200
 
-        id_usuario = user["id_usuario"]
-
-        # Traer torneos donde está inscripto
         cursor.execute("""
             SELECT
                 t.id_torneo,
@@ -773,6 +699,7 @@ def get_all_torneos_inscripto():
 # POST CONTACTO
 # ---------------------------------------------------
 
+# Guardo los mensajes 
 @app.post("/contactoForm/")
 def insert_mensaje():
 
@@ -838,6 +765,7 @@ def insert_mensaje():
 def check_auth():
     return jsonify({"logged": True}), 200
 
+# Convierte username (JWT) → id_usuario (DB)
 def get_id_usuario_from_identity(identity, db):
     cursor = db.cursor(dictionary=True)
 

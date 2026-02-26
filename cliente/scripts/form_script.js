@@ -2,26 +2,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnSubmit = document.querySelector("button#submit");
   const form = document.querySelector("#contactoForm");
 
-  // =============================================================
-  // Validaciones del formulario de contacto (cliente)
-  // -------------------------------------------------------------
-  // Reglas solicitadas:
-  // - Campos no vacíos ni nulos (nombre, apellido, email, motivo, mensaje, humano)
-  // - Email con formato válido
-  // - Mensaje con un mínimo de caracteres
-  // Notas de UX:
-  // - Se muestran errores en línea usando Bootstrap (.is-invalid)
-  // - Se enfocará el primer campo inválido para agilizar la corrección
-  // - Los errores desaparecen cuando el usuario corrige el campo
-  // =============================================================
-
   // Parámetros y utilidades compartidas
   const { validarCampos } = window.utils?.forms || window;
 
-  // Handler único para envío (click en botón o submit con Enter)
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    // Especifíco los elementos del DOM a revisar: el id del input/checkbox "#",
+    // el id del label y el mensaje de error 
     const campos = [
       { el: "#nombre", label: "#label-nombre", msg: "Campo obligatorio" },
       { el: "#apellido", label: "#label-apellido", msg: "Campo obligatorio" },
@@ -43,15 +31,19 @@ document.addEventListener("DOMContentLoaded", () => {
       },
     ];
 
+    // Llamo a la función de validar campos y si devuelve false detiene el envio del formulario
     if (!validarCampos(campos)) {
       return;
     }
 
+    // Creo un objeto con los valores de los campos
     const data = new FormData();
     ["nombre", "apellido", "email", "motivo", "mensaje"].forEach((c) =>
       data.append(c, qs(`#${c}`).value)
     );
 
+    // Envió el objeto, si no hay problemas muestra un mensaje de exito, 
+    // caso contrario, un mensaje de error
     try {
       const response = await fetch("http://127.0.0.1:5000/contactoForm/", {
         method: "POST",

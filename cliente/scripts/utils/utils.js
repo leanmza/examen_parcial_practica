@@ -1,3 +1,4 @@
+// Gestiona las sesiones sesiones de usuario, cookies y seguridad básica
 document.addEventListener("DOMContentLoaded", async () => {
   const API = "http://127.0.0.1:5000";
 
@@ -6,6 +7,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const navUser = document.getElementById("nav-user");
   const userToggle = document.getElementById("user-toggle");
 
+  // Lee datos almacenados en el navegador, específicamente obtiene el token CSRF 
   function getCookie(name) {
     const cookies = document.cookie.split("; ");
     for (let cookie of cookies) {
@@ -15,6 +17,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     return null;
   }
 
+  // Consulta el servidor si el usuario esta logueado, si lo esta oculta
+  // los botones iniciar sesion y registrame, y muestra el menú de usuario
   try {
     const res = await fetch(`${API}/user/me`, {
       credentials: "include",
