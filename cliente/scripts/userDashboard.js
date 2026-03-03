@@ -3,7 +3,7 @@ const API = "http://127.0.0.1:5000";
 
 // Cargo los torneos donde el usuario esta inscripto
 async function cargarMisTorneos() {
-  const response = await fetch(`${API}/user/torneos`, {
+  const response = await fetch(`${API}/torneos/user`, {
     method: "GET",
     credentials: "include",
   });
@@ -209,7 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Hago un put para actulizar los datos de usuario, si no hay problemas 
     // muestra un mensaje de exito, caso contrario, un mensaje de error 
-    const response = await fetch(`${API}/user`, {
+    const response = await fetch(`${API}/user/`, {
       method: "PUT",
       credentials: "include",
       headers: {

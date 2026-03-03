@@ -81,7 +81,7 @@ function mostrarToast(mensaje, tipo = "warning") {
 
     // Envia los datos a servidor
     try {
-      const response = await fetch(`${API_URL}/login`, {
+      const response = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
         body: formData,
         credentials: "include",

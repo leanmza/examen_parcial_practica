@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Envió el objeto, si no hay problemas muestra un mensaje de exito, 
     // caso contrario, un mensaje de error
     try {
-      const response = await fetch("http://127.0.0.1:5000/contactoForm/", {
+      const response = await fetch("http://127.0.0.1:5000/contacto/", {
         method: "POST",
         body: data,
       });

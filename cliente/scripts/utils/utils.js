@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const csrf = getCookie("csrf_access_token");
 
-        await fetch(`${API}/logout`, {
+        await fetch(`${API}/auth/logout`, {
           method: "DELETE",
           credentials: "include",
           headers: {
