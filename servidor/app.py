@@ -1,6 +1,5 @@
 from flask import request, jsonify
-from db import get_db,  MENSAJE_ERROR_CONEXION, MENSAJE_ERROR_UNIQUE, IntegrityError, Error
-from flask import Flask, jsonify, Response, request
+from flask import Flask, jsonify,request
 from flask_cors import CORS
 from logger import logger
 from waitress import serve

@@ -1,43 +1,5 @@
-from service.db_session import db_session
 from repository.torneo_repository import *
 from repository.user_repository import obtener_id_usuario_por_username
-
-
-# ---------------------------------------------------
-# Helpers
-# ---------------------------------------------------
-
-def get_id_usuario_from_identity(identity):
-    with db_session() as cursor:
-        cursor.execute("""
-        SELECT id_usuario
-        FROM usuario
-        WHERE usuario = %s
-    """, (identity,))
-    user = cursor.fetchone()
-    return user["id_usuario"] if user else None
-
-
-def obtener_id_usuario(identity, cursor):
-    """
-    Convierte username (JWT identity) → id_usuario (DB)
-    Requiere cursor activo.
-    """
-
-    cursor.execute("""
-        SELECT id_usuario
-        FROM usuario
-        WHERE usuario = %s
-    """, (identity,))
-
-    user = cursor.fetchone()
-    if not user:
-        raise ValueError("Usuario no encontrado")
-
-    if not user:
-        return None
-
-    return user["id_usuario"]
 
 # ---------------------------------------------------
 # LÓGICA DE NEGOCIO
@@ -45,9 +7,7 @@ def obtener_id_usuario(identity, cursor):
 
 
 def obtener_torneos():
-    with db_session() as cursor:
-
-        rows = obtener_todos_torneos(cursor)
+    rows = obtener_todos_torneos()
 
     torneos = []
     for row in rows:
@@ -65,25 +25,39 @@ def obtener_torneos():
 
     return torneos
 
+def obtener_inscriptos(id_torneo):
+    rows = obtener_inscriptos_por_torneo(id_torneo)
+    inscriptos = []
+    for row in rows:
+        inscriptos.append({
+                "id_usuario": row["id_usuario"],
+                "usuario": row["usuario"],
+                "nombre": row["nombre"],
+                "apellido": row["apellido"],
+                "dni": row["dni"],
+                "telefono": row["telefono"],
+                "email": row["email"],
+                "fecha_inscripcion": row["fecha_inscripcion"]
+                
+            })
+    return inscriptos
+
 
 def inscribir_usuario(identity, data):
-
     required = ["id_torneo", "identificador", "fecha_inscripcion"]
     for field in required:
         if field not in data:
             raise ValueError(f"Falta el campo {field}")
+    
+    id_usuario = obtener_id_usuario_por_username(identity)
 
-    with db_session() as cursor:
-
-        id_usuario = obtener_id_usuario_por_username(cursor, identity)
-
-        if not id_usuario:
+    if not id_usuario:
             raise ValueError("Usuario no encontrado")
 
-        if usuario_ya_inscripto(cursor, id_usuario, data["id_torneo"]):
+    if usuario_ya_inscripto(id_usuario, data["id_torneo"]):
             raise ValueError("El usuario ya está inscripto")
 
-        insertar_inscripcion(cursor, id_usuario, data)
+    insertar_inscripcion(id_usuario, data)
 
     return {"ok": True,
             "mensaje": "Inscripción realizada correctamente"
@@ -94,18 +68,15 @@ def baja_usuario_torneo(identity, data):
 
     if not data or "id_torneo" not in data:
         raise ValueError("Falta id_torneo")
+    id_usuario = obtener_id_usuario_por_username(identity)
 
-    with db_session() as cursor:
-
-        id_usuario = obtener_id_usuario_por_username(cursor, identity)
-
-        if not id_usuario:
+    if not id_usuario:
             raise ValueError("Usuario no encontrado")
 
-        filas = eliminar_usuario_de_torneo(
-            cursor, id_usuario, data["id_torneo"])
+    filas = eliminar_usuario_de_torneo(
+            id_usuario, data["id_torneo"])
 
-        if filas == 0:
+    if filas == 0:
             raise ValueError("No se encontró el registro")
 
     return {"ok": True,
@@ -115,14 +86,12 @@ def baja_usuario_torneo(identity, data):
 
 def obtener_torneos_usuario(identity):
 
-    with db_session() as cursor:
-
-        id_usuario = obtener_id_usuario_por_username(cursor, identity)
+        id_usuario = obtener_id_usuario_por_username(identity)
 
         if not id_usuario:
             return []
 
-        rows = obtener_torneos_por_usuario(cursor, id_usuario)
+        rows = obtener_torneos_por_usuario(id_usuario)
 
         return [
             {
