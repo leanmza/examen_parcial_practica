@@ -58,6 +58,24 @@ CREATE TABLE dungeon.`usuarios_torneos` (
     ON UPDATE CASCADE
 );
 
+CREATE TABLE dungeon.roles (
+  id_rol BIGINT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+  rol VARCHAR(20) UNIQUE NOT NULL
+);
+
+INSERT INTO dungeon.roles (rol) VALUES
+('admin'),
+('user');
+
+CREATE TABLE dungeon.usuario_roles (
+    id_usuario BIGINT,
+    id_rol BIGINT,
+    PRIMARY KEY (id_usuario, id_rol),
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
+    FOREIGN KEY (id_rol) REFERENCES roles(id_rol)
+);
+
+
 
 INSERT INTO dungeon.sedes (nombre, direccion, ciudad, pais) VALUES
 ('Magic house', 'Rivadavia 123', 'Mendoza', 'Argentina'), 

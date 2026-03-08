@@ -19,14 +19,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       sessionStorage.setItem("toastTipo", "warning");
 
-      window.location.href = "login.html?redirect=torneoForm.html";
+      window.location.href = "login.html?redirect=torneos.html";
       return;
     }
   } catch (error) {
     window.location.href = "login.html";
   }
 
-  const form = document.querySelector("#torneoForm");
+  const form = document.querySelector("#torneos");
 
   let torneos = [];
   let user;

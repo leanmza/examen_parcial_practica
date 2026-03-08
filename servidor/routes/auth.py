@@ -1,15 +1,12 @@
 from flask import Blueprint, request, jsonify
-from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask_jwt_extended import jwt_required
 from db import get_db,  MENSAJE_ERROR_CONEXION, Error
 from mysql.connector import Error
-from jsonwebtoken import (configurar_jwt, generar_token, get_jwt, get_jwt_identity,
-                          jwt_required, token_blacklist, TOKEN_REFRESH_ROUTE, unset_jwt_cookies)
-import bcrypt
+from security.jsonwebtoken import (generar_token, get_jwt, 
+                                   jwt_required, token_blacklist, TOKEN_REFRESH_ROUTE, unset_jwt_cookies)
+from service.auth_service import login_usuario
 
 auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
-
-QUERY_HASHED_PWD = "SELECT password FROM usuario WHERE usuario=%s;"
-QUERY_PRE_TOKEN = "SELECT foto, email, nombre, usuario FROM usuario WHERE usuario=%s;"
 
 # ---------------------------------------------------
 # LOGIN, LOGOUT
@@ -19,41 +16,17 @@ QUERY_PRE_TOKEN = "SELECT foto, email, nombre, usuario FROM usuario WHERE usuari
 @auth_bp.post("/login")
 def autenticar():
 
-    try:
-        db = get_db()
-    except Error:
-        return jsonify({"error": MENSAJE_ERROR_CONEXION}), 500
+    data = request.form
 
-    try:
-        cursor = db.cursor(dictionary=True)
+    usuario = login_usuario(data)
 
-        # Busca al usuario y la contraseña hasheada
-        cursor.execute(QUERY_HASHED_PWD, [request.form["usuario"]])
-        usuario = cursor.fetchone()
+    response = jsonify({"ok": True})
 
-        if not usuario:
-            return jsonify({"error": "Usuario o contraseña incorrectos"}), 401
-
-        # Verifica la contraseña
-        if not bcrypt.checkpw(
-            request.form["password"].encode(),
-            usuario["password"].encode()
-        ):
-            return jsonify({"error": "Usuario o contraseña incorrectos"}), 401
-
-        # Obtenengo los datos para el token
-        cursor.execute(QUERY_PRE_TOKEN, [request.form["usuario"]])
-        fila = cursor.fetchone()
-
-        response = jsonify({"ok": True})
-        return generar_token(response, fila["usuario"], fila), 201
-
-    except Error as e:
-        return jsonify({"error": str(e)}), 500
-
-    finally:
-        cursor.close()
-        db.close()
+    return generar_token(
+        response,
+        usuario["usuario"],
+        usuario["rol"]
+    ), 201
 
 
 @auth_bp.delete("/logout")

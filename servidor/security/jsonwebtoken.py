@@ -19,7 +19,11 @@ def configurar_jwt(app):
     app.config['JWT_BLACKLIST_ENABLED'] = True
     app.config['JWT_BLACKLIST_TOKEN_CHECKS'] = ['access', 'refresh']
     return JWTManager(app)
-def generar_token(response, id, claims):
+
+def generar_token(response, id, rol):
+    
+    claims = {"rol": rol}
+    
     set_access_cookies(response, create_access_token(id, additional_claims=claims))
     set_refresh_cookies(response, create_refresh_token(id, additional_claims=claims))
     return response

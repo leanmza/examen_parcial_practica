@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.querySelector("#torneoForm");
+  const form = document.querySelector("#torneos");
 
   // Utilidades importadas desde scripts/utils/forms.js: setError, clearError, attachLiveClear
   const { qs, validarCampos } = window.utils.forms;

@@ -3,8 +3,8 @@ from flask import Flask, jsonify,request
 from flask_cors import CORS
 from logger import logger
 from waitress import serve
-from jsonwebtoken import (configurar_jwt, generar_token, get_jwt, get_jwt_identity,
-                          jwt_required, token_blacklist, TOKEN_REFRESH_ROUTE, unset_jwt_cookies)
+from security.jsonwebtoken import (configurar_jwt, generar_token, get_jwt, get_jwt_identity,
+                          jwt_required, token_blacklist, TOKEN_REFRESH_ROUTE)
 from routes.user import user_bp
 from routes.torneo import torneo_bp
 from routes.auth import auth_bp
@@ -34,13 +34,24 @@ jwt = configurar_jwt(app)
 
 @jwt.token_in_blocklist_loader
 def check_if_token_revoked(_, jwt_payload):  # jwt_header ignorado
-    return jwt_payload['jti'] in token_blacklist
+    return jwt_payload.get("jti") in token_blacklist
 
 
 @app.post(TOKEN_REFRESH_ROUTE)
 @jwt_required(refresh=True)
 def refresh_token():
-    return generar_token(jsonify({"ok": True}), get_jwt_identity(), get_jwt()), 201
+
+    claims = get_jwt()
+    rol = claims["rol"]
+
+    # invalidar refresh usado
+    token_blacklist.add(claims["jti"])
+
+    return generar_token(
+        jsonify({"ok": True}),
+        get_jwt_identity(),
+        rol
+    ), 201
 
 
 @app.after_request

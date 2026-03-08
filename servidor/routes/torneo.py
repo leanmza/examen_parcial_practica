@@ -2,11 +2,12 @@ from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from db import get_db,  MENSAJE_ERROR_CONEXION, MENSAJE_ERROR_UNIQUE, IntegrityError, Error
 from mysql.connector import Error
-from jsonwebtoken import (get_jwt_identity, jwt_required, 
+from security.jsonwebtoken import (get_jwt_identity, jwt_required, 
                           token_blacklist, TOKEN_REFRESH_ROUTE)
 from service.torneo_service import (obtener_torneos, inscribir_usuario,
                                     baja_usuario_torneo, obtener_torneos_usuario,
                                     obtener_inscriptos)
+from security.roles import role_required, ADMIN, USER
 
 torneo_bp = Blueprint("torneos", __name__, url_prefix="/torneos")
 
@@ -85,7 +86,7 @@ def get_torneos_usuario():
         return jsonify({"error": str(e)}), 500
 
 @torneo_bp.get("/inscriptos")
-@jwt_required()
+@role_required(ADMIN)
 def get_inscriptos_por_torneo():
     try:
         id_torneo = request.args.get("id_torneo")

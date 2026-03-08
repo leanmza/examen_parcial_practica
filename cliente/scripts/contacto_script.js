@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const btnSubmit = document.querySelector("button#submit");
-  const form = document.querySelector("#contactoForm");
+  const form = document.querySelector("#contacto");
 
   // Parámetros y utilidades compartidas
   const { validarCampos } = window.utils?.forms || window;
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       if (response.ok) {
         alert("Mensaje enviado correctamente");
-        document.querySelector("#contactoForm").reset();
+        document.querySelector("#contacto").reset();
       } else {
         alert("Error al enviar el mensaje");
       }
@@ -61,7 +61,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // Listeners: click del botón y submit del formulario (Enter)
-  if (btnSubmit) btnSubmit.addEventListener("click", handleSubmit);
   if (form) form.addEventListener("submit", handleSubmit);
 });

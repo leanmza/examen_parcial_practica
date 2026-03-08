@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from db import get_db, MENSAJE_ERROR_CONEXION, Error, IntegrityError
+from service.contacto_service import guardar_mensaje
 
 contacto_bp = Blueprint("contacto", __name__, url_prefix="/contacto")
 
@@ -9,57 +9,16 @@ contacto_bp = Blueprint("contacto", __name__, url_prefix="/contacto")
 
 # Guardo los mensajes 
 @contacto_bp.post("/")
-def insert_mensaje():
-
-    required_fields = [
-        "nombre",
-        "apellido",
-        "email",
-        "motivo",
-        "mensaje"
-    ]
-
-    for field in required_fields:
-        if field not in request.form:
-            return jsonify({"error": f"Falta el campo {field}"}), 400
+def enviar_mensaje():
 
     try:
-        db = get_db()
-    except Error:
-        return jsonify({"error": MENSAJE_ERROR_CONEXION}), 500
+        data = request.form
 
-    try:
-        cursor = db.cursor()
+        guardar_mensaje(data)
 
-        cursor.execute("""
-            INSERT INTO mensajes
-            (nombre, apellido, email, motivo, mensaje)
-            VALUES (%s, %s, %s, %s, %s)
-        """, (
-            request.form["nombre"],
-            request.form["apellido"],
-            request.form["email"],
-            request.form["motivo"],
-            request.form["mensaje"]
-        ))
-
-        db.commit()
-
-        return jsonify({"ok": True}), 201
-
-    except IntegrityError:
-        db.rollback()
         return jsonify({
-            "error": "No se pudo enviar el mensaje"
-        }), 400
+            "ok": True
+        }), 201
 
-    except Error as e:
-        db.rollback()
-        return jsonify({
-            "error": str(e)
-        }), 500
-
-    finally:
-        cursor.close()
-        db.close()
-
+    except ValueError as e:
+        return jsonify({"error": str(e)}), 400
