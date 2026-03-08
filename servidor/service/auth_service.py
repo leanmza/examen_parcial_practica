@@ -3,18 +3,15 @@ from repository.user_repository import (
     obtener_password_hash,
     obtener_usuario_con_rol
 )
+from utils.validators import validate_fields
 
 def login_usuario(data):
 
-    if not data:
-        raise ValueError("Datos inválidos")
-
-    required_fields = [
-        "usuario", "password"
-    ]
-
-    if not all(field in data for field in required_fields):
-        raise ValueError("Campos obligatorio")
+    validate_fields(data, [
+        "usuario",
+        "password"
+    ])
+    
 
     usuario_db = obtener_password_hash(data["usuario"])
 

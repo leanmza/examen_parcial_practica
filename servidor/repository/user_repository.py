@@ -97,7 +97,6 @@ def update_usuario(data, usuario_identity):
             UPDATE usuario
             SET nombre=%s,
                 apellido=%s,
-                dni=%s,
                 telefono=%s,
                 email=%s,
                 nacimiento=%s
@@ -105,7 +104,6 @@ def update_usuario(data, usuario_identity):
         """, (
             data["nombre"],
             data["apellido"],
-            data["dni"],
             data["telefono"],
             data["email"],
             data["nacimiento"],

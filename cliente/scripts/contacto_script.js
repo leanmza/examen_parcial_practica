@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const btnSubmit = document.querySelector("button#submit");
-  const form = document.querySelector("#contacto");
+  const form = document.querySelector("#contactoForm");
 
   // Parámetros y utilidades compartidas
   const { validarCampos } = window.utils?.forms || window;
@@ -51,7 +51,8 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       if (response.ok) {
         alert("Mensaje enviado correctamente");
-        document.querySelector("#contacto").reset();
+        form.reset();
+        return;
       } else {
         alert("Error al enviar el mensaje");
       }
@@ -60,6 +61,5 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Error de conexión");
     }
   };
-
   if (form) form.addEventListener("submit", handleSubmit);
 });

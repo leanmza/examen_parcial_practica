@@ -1,8 +1,6 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required
-from db import get_db,  MENSAJE_ERROR_CONEXION, Error
-from mysql.connector import Error
-from security.jsonwebtoken import (generar_token, get_jwt, 
+from security.jsonwebtoken import (generar_token, get_jwt, get_jwt_identity,
                                    jwt_required, token_blacklist, TOKEN_REFRESH_ROUTE, unset_jwt_cookies)
 from service.auth_service import login_usuario
 
@@ -46,3 +44,18 @@ def cerrar_sesion():
 def check_auth():
     return jsonify({"logged": True}), 200
 
+@auth_bp.post(TOKEN_REFRESH_ROUTE)
+@jwt_required(refresh=True)
+def refresh_token():
+
+    claims = get_jwt()
+    rol = claims["rol"]
+
+    # invalidar refresh usado
+    token_blacklist.add(claims["jti"])
+
+    return generar_token(
+        jsonify({"ok": True}),
+        get_jwt_identity(),
+        rol
+    ), 201

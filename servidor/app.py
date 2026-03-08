@@ -30,28 +30,10 @@ app.register_blueprint(contacto_bp)
 # ---------------------------------------------------
 jwt = configurar_jwt(app)
 
-
-
 @jwt.token_in_blocklist_loader
 def check_if_token_revoked(_, jwt_payload):  # jwt_header ignorado
     return jwt_payload.get("jti") in token_blacklist
 
-
-@app.post(TOKEN_REFRESH_ROUTE)
-@jwt_required(refresh=True)
-def refresh_token():
-
-    claims = get_jwt()
-    rol = claims["rol"]
-
-    # invalidar refresh usado
-    token_blacklist.add(claims["jti"])
-
-    return generar_token(
-        jsonify({"ok": True}),
-        get_jwt_identity(),
-        rol
-    ), 201
 
 
 @app.after_request
@@ -59,9 +41,6 @@ def anotar_salida(response):
     logger.info(
         f"{request.method} {request.path} {response.mimetype} {response.status}")
     return response
-
-
-
 
 # ---------------------------------------------------
 # MAIN

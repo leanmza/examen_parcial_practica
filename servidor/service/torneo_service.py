@@ -1,5 +1,6 @@
 from repository.torneo_repository import *
 from repository.user_repository import obtener_id_usuario_por_username
+from utils.validators import validate_fields
 
 # ---------------------------------------------------
 # LÓGICA DE NEGOCIO
@@ -44,11 +45,12 @@ def obtener_inscriptos(id_torneo):
 
 
 def inscribir_usuario(identity, data):
-    required = ["id_torneo", "identificador", "fecha_inscripcion"]
-    for field in required:
-        if field not in data:
-            raise ValueError(f"Falta el campo {field}")
     
+    validate_fields(data, ["id_torneo",
+                           "identificador",
+                           "fecha_inscripcion"
+                           ])
+  
     id_usuario = obtener_id_usuario_por_username(identity)
 
     if not id_usuario:
@@ -65,9 +67,10 @@ def inscribir_usuario(identity, data):
 
 
 def baja_usuario_torneo(identity, data):
-
-    if not data or "id_torneo" not in data:
-        raise ValueError("Falta id_torneo")
+    
+    validate_fields(data, ["id_torneo"
+                           ])
+    
     id_usuario = obtener_id_usuario_por_username(identity)
 
     if not id_usuario:

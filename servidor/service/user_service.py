@@ -1,4 +1,5 @@
 from repository.user_repository import *
+from utils.validators import validate_fields
 import bcrypt
 
 
@@ -13,17 +14,15 @@ def obtener_usuario(identity):
 
 def registrar_usuario(data):
 
-    if not data:
-        raise ValueError("Datos inválidos")
-
-    required_fields = [
-        "usuario", "nombre", "apellido",
-        "dni", "telefono", "email",
-        "nacimiento", "password"
-    ]
-
-    if not all(field in data for field in required_fields):
-        raise ValueError("Campos incompletos")
+    validate_fields(data, ["usuario",
+                           "nombre",
+                           "apellido",
+                           "dni",
+                           "telefono",
+                           "email",
+                           "nacimiento",
+                           "password"
+    ])
 
     pwd_hash = bcrypt.hashpw(
         data["password"].encode(),
@@ -40,8 +39,12 @@ def registrar_usuario(data):
 
 def actualizar_usuario(data, usuario_identity):
 
-    if not data:
-        raise ValueError("Datos inválidos")
+    validate_fields(data, ["nombre",
+                           "apellido",
+                           "telefono",
+                           "email",
+                           "nacimiento"
+                           ])
 
     update_usuario(data, usuario_identity)
 
@@ -49,11 +52,14 @@ def actualizar_usuario(data, usuario_identity):
 
 def cambiar_password(data, usuario_identity):
 
+
+
+    validate_fields(data, ["password",
+                           "clave_nueva",
+    ])
+    
     password_actual = data.get("password")
     clave_nueva = data.get("clave_nueva")
-
-    if not password_actual or not clave_nueva:
-        raise ValueError("Datos incompletos")
 
     usuario_db = obtener_password_hash(usuario_identity)
 
