@@ -51,13 +51,18 @@ def inscribir_usuario(identity, data):
                            "fecha_inscripcion"
                            ])
   
+  
     id_usuario = obtener_id_usuario_por_username(identity)
 
     if not id_usuario:
             raise ValueError("Usuario no encontrado")
+        
+    if not data["id_torneo"]:
+        raise ValueError("Debe seleccionar un torneo")
+        
 
     if usuario_ya_inscripto(id_usuario, data["id_torneo"]):
-            raise ValueError("El usuario ya está inscripto")
+            raise ValueError("El usuario ya está inscripto en este torneo")
 
     insertar_inscripcion(id_usuario, data)
 
@@ -95,10 +100,11 @@ def obtener_torneos_usuario(identity):
             return []
 
         rows = obtener_torneos_por_usuario(id_usuario)
-
+    
         return [
             {
                 "id_torneo": row["id_torneo"],
+                "nombre": row["nombre_torneo"],
                 "fecha": row["fecha"].strftime("%d-%m-%Y"),
                 "sede": {
                     "nombre": row["sede_nombre"],

@@ -50,15 +50,15 @@ document.addEventListener("DOMContentLoaded", () => {
         body: data,
       });
       if (response.ok) {
-        alert("Mensaje enviado correctamente");
+        mostrarToast("Mensaje enviado correctamente", "success");
         form.reset();
         return;
       } else {
-        alert("Error al enviar el mensaje");
+        mostrarToast("Error al enviar el mensaje", "error");
       }
     } catch (err) {
       console.error(err);
-      alert("Error de conexión");
+      mostrarToast("Error de conexión con el servidor", "warning");
     }
   };
   if (form) form.addEventListener("submit", handleSubmit);

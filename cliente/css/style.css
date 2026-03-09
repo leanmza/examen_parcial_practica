@@ -33,22 +33,40 @@ footer {
   color: white;
 }
 
-/* Transición suave para todos los links del navbar */
-.navbar .nav-link {
-  transition: all 0.3s ease;
-}
-
-/* Cuando el mouse está sobre el contenedor del menú */
-.navbar-nav:hover .nav-link {
-  opacity: 0.4;
-  filter: blur(1px);
-}
-
-/* El que está siendo hover vuelve a estado normal */
-.navbar-nav .nav-link:hover {
+/* 1. Transición suave para opacidad en todos los links del nav y dropdown */
+.navbar .nav-link, 
+.navbar .dropdown-item {
+  transition: opacity 0.3s ease, transform 0.3s ease;
   opacity: 1;
-  filter: blur(0);
+}
+
+/* 2. Al hacer hover sobre la lista principal, atenuamos todos los elementos */
+.navbar-nav:hover .nav-link,
+.navbar-nav:hover .dropdown-item {
+  opacity: 0.4; /* Efecto dimmed */
+  filter: none; /* Aseguramos que no haya desenfoque */
+}
+
+/* 3. El elemento específico (link o item de menú) bajo el mouse resalta */
+.navbar-nav .nav-link:hover,
+.navbar-nav .dropdown-item:hover {
+  opacity: 1 !important;
   transform: scale(1.05);
+}
+
+/* 4. Mantenemos el brillo del padre si estamos navegando sus hijos (dropdown) */
+.nav-item.dropdown:hover > .nav-link {
+  opacity: 1 !important;
+}
+
+/* 5. Ajuste para que los items del dropdown no se pisen entre sí */
+.dropdown-menu:hover .dropdown-item {
+  opacity: 0.4;
+}
+
+.dropdown-menu .dropdown-item:hover {
+  opacity: 1 !important;
+  background-color: transparent; /* Opcional: evita que el fondo gris de Bootstrap rompa la estética */
 }
 .nombreWeb {
   margin: 8px;

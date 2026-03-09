@@ -1,76 +1,70 @@
 document.addEventListener("DOMContentLoaded", async () => {
-  // Utilidades importadas desde scripts/utils/forms.js: setError, clearError, attachLiveClear
   const { qs, validarCampos } = window.utils.forms;
   const API = "http://127.0.0.1:5000";
-  const toast = new bootstrap.Toast(document.getElementById("miToast"));
 
-  // Primero controlo que el usuario este logueado
-  try {
-    const res = await fetch(`${API}/user/me`, {
-      credentials: "include",
-    });
-    const data = await res.json();
-
-    if (!data.logged) {
-      sessionStorage.setItem(
-        "toastMensaje",
-        "Tenés que iniciar sesión para inscribirte en los torneos",
-      );
-
-      sessionStorage.setItem("toastTipo", "warning");
-
-      window.location.href = "login.html?redirect=torneos.html";
-      return;
-    }
-  } catch (error) {
-    window.location.href = "login.html";
-  }
+  // Referencias a los contenedores de la columna derecha
+  const loginRequiredDiv = document.getElementById("login-required");
+  const cardInscripcion = document.getElementById("card-inscripcion");
 
   const form = document.querySelector("#torneos");
 
   let torneos = [];
-  let user;
+  let user = null;
 
-  // Lee datos almacenados en el navegador, específicamente obtiene el token CSRF
-  function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) {
-      return parts.pop().split(";").shift();
+  // 1. CARGAR TORNEOS (Siempre se ejecuta, no depende del login)
+  cargarTorneos();
+
+  // 2. VERIFICAR SESIÓN Y MOSTRAR COLUMNA CORRESPONDIENTE
+  try {
+    const res = await fetch(`${API}/user/me`, { credentials: "include" });
+    const data = await res.json();
+
+    if (data.logged) {
+      // Usuario logueado: Mostramos formulario, ocultamos aviso
+      loginRequiredDiv.classList.add("d-none");
+      cardInscripcion.classList.remove("d-none");
+
+      // Cargamos los datos en los inputs
+      await cargarUsuarioLogueado();
+    } else {
+      // Usuario no logueado: Mostramos aviso, ocultamos formulario
+      loginRequiredDiv.classList.remove("d-none");
+      cardInscripcion.classList.add("d-none");
     }
+  } catch (error) {
+    console.error("Error al verificar sesión:", error);
+    // En caso de error de red, mostramos el aviso de login por seguridad
+    loginRequiredDiv.classList.remove("d-none");
+    cardInscripcion.classList.add("d-none");
   }
 
-  // Cargo usuario logueado
+  // --- FUNCIONES AUXILIARES ---
+
   async function cargarUsuarioLogueado() {
     try {
-      const res = await fetch(`${API}/user/me`, {
-        method: "GET",
-        credentials: "include",
-      });
-
+      const res = await fetch(`${API}/user/me`, { credentials: "include" });
       const data = await res.json();
 
       if (!data.logged) return;
 
-      user = data.usuario; //inicializo user
+      user = data.usuario;
 
-      // Autocompletar
-      qs("#nombre").value = user.nombre;
-      qs("#apellido").value = user.apellido;
-      qs("#dni").value = user.dni;
-      qs("#telefono").value = user.telefono;
-      qs("#email").value = user.email;
-      if (user.nacimiento) {
+      // Autocompletar con seguridad (si el elemento existe)
+      if (qs("#nombre")) qs("#nombre").value = user.nombre || "";
+      if (qs("#apellido")) qs("#apellido").value = user.apellido || "";
+      if (qs("#dni")) qs("#dni").value = user.dni || "";
+      if (qs("#telefono")) qs("#telefono").value = user.telefono || "";
+      if (qs("#email")) qs("#email").value = user.email || "";
+
+      if (user.nacimiento && qs("#nacimiento")) {
         const fecha = new Date(user.nacimiento);
-
         const anio = fecha.getFullYear();
         const mes = String(fecha.getMonth() + 1).padStart(2, "0");
         const dia = String(fecha.getDate() + 1).padStart(2, "0");
-
         qs("#nacimiento").value = `${anio}-${mes}-${dia}`;
+        // El console.log debe ir AQUÍ adentro para no fallar
+        console.log("Fecha cargada:", anio, mes, dia);
       }
-
-      console.log(anio, mes, dia);
 
       // Bloquear campos
       [
@@ -81,34 +75,35 @@ document.addEventListener("DOMContentLoaded", async () => {
         "#email",
         "#nacimiento",
       ].forEach((sel) => {
-        qs(sel).setAttribute("readonly", true);
+        const el = qs(sel);
+        if (el) el.setAttribute("readonly", true);
       });
     } catch (e) {
-      console.error("No hay sesión activa");
+      console.error("Error cargando datos de usuario:", e);
     }
   }
-
-  cargarUsuarioLogueado();
+  function cargarTorneos() {
+    fetch(`${API}/torneos`)
+      .then((res) => res.json())
+      .then((data) => {
+        torneos = data;
+        renderizarCards(torneos); // Función para dibujar las cards
+      })
+      .catch((err) => console.error("Error torneos:", err));
+  }
 
   // Cargo los torneos en cards
-  fetch(`${API}/torneos`)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Error HTTP: " + response.status);
-      }
-      return response.json();
-    })
-    .then((data) => {
-      torneos = data;
+  function renderizarCards(torneos) {
+    console.log(torneos);
 
-      const container = document.getElementById("torneos-container");
+    const container = document.getElementById("torneos-container");
 
-      torneos.forEach((t) => {
-        const card = document.createElement("div");
-        card.className = "card shadow-sm torneo-card";
-        card.style.cursor = "pointer";
+    torneos.forEach((t) => {
+      const card = document.createElement("div");
+      card.className = "card shadow-sm torneo-card";
+      card.style.cursor = "pointer";
 
-        card.innerHTML = `
+      card.innerHTML = `
   <div class="card-body">
     <h4 class="card-title">${t.nombre_torneo}</h4>
     <h5 class="card-title"> <span><i class="fa-regular fa-calendar"></i> </span>${t.fecha}</h5>
@@ -118,153 +113,187 @@ document.addEventListener("DOMContentLoaded", async () => {
   </div>
 `;
 
-        // Seteo los efectos visuales al hacer click
-        card.addEventListener("click", () => {
-          const hiddenInput = qs("#torneoSeleccionado");
-          hiddenInput.value = t.id_torneo;
+      // Seteo los efectos visuales al hacer click
+      card.addEventListener("click", () => {
+        const hiddenInput = qs("#torneoSeleccionado");
+        hiddenInput.value = t.id_torneo;
 
+        document.querySelectorAll(".torneo-card").forEach((c) => {
+          c.classList.remove("selected", "dimmed");
+        });
+
+        card.classList.add("selected");
+
+        document.querySelectorAll(".torneo-card").forEach((c) => {
+          if (c !== card) {
+            c.classList.add("dimmed");
+          }
+        });
+      });
+
+      container.appendChild(card);
+    });
+
+    // Doy formato a la fecha de nacimiento dd-mm-aaaa
+    const formatearFecha = (fechaISO) => {
+      if (!fechaISO) return "-";
+      const [y, m, d] = fechaISO.split("-");
+      return `${d}-${m}-${y}`;
+    };
+
+    // Genero identificador alfanumérico aleatorio (10 caracteres)
+    const generarIdentificador = (len = 10) => {
+      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+      let out = "";
+      for (let i = 0; i < len; i++) {
+        out += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return out;
+    };
+
+    // Especifíco los elementos del DOM a revisar: el id del input "#",
+    // el id del label y el mensaje de erro
+    const campos = [
+      { el: "#nombre", label: "#label-nombre", msg: "Campo obligatorio" },
+      { el: "#apellido", label: "#label-apellido", msg: "Campo obligatorio" },
+      { el: "#telefono", label: "#label-telefono", msg: "Campo obligatorio" },
+      {
+        el: "#nacimiento",
+        label: "#label-nacimiento",
+        msg: "Campo obligatorio",
+      },
+      { el: "#dni", label: "#label-dni", msg: "Campo obligatorio" },
+      { el: "#email", label: "#label-email", msg: "Campo obligatorio" },
+      { el: "#sede", label: "#label-sede", msg: "Debes seleccionar una sede" },
+      {
+        el: "#fecha",
+        label: "#label-fecha",
+        msg: "Debes seleccionar una fecha",
+      },
+    ];
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+
+      // Llamo a la función de validar campos y si devuelve false detiene el envio del formulario
+      if (!validarCampos(campos)) return;
+
+      // Llamo a la función para validar si el usuario está logueado y si devuelve false me manda al login
+      if (!user) {
+        window.location.href = "login.html";
+        return;
+      }
+
+      const csrf = getCookie("csrf_access_token");
+
+      const identificador = generarIdentificador();
+      const hiddenInput = qs("#torneoSeleccionado");
+
+      if (!hiddenInput || !hiddenInput.value) {
+        mostrarToast("Debes seleccionar un torneo", "warning");
+        return;
+      }
+
+      const idTorneo = hiddenInput.value;
+      const fechaInscripcion = new Date().toISOString().split("T")[0];
+
+      const torneo = torneos.find(
+        (t) => String(t.id_torneo) === String(idTorneo),
+      );
+
+      if (!torneo) {
+        mostrarToast("Torneo inválido", "error");
+        return;
+      }
+      // Creo un objeto con lo datos a persistir, el idUsuario lo saca el backend
+      const data = new FormData();
+      data.append("identificador", identificador);
+      data.append("id_torneo", idTorneo);
+      data.append("fecha_inscripcion", fechaInscripcion);
+      console.log(idTorneo);
+
+      // Envió el objeto, si no hay problemas muestra un mensaje de exito,
+      // caso contrario, un mensaje de error
+      try {
+        const res = await fetch(`${API}/torneos/usuario-registro`, {
+          method: "POST",
+          body: data,
+          credentials: "include",
+          headers: {
+            "X-CSRF-TOKEN": csrf,
+          },
+        });
+
+        const responseData = await res.json();
+        if (res.ok) {
+          // Generar el comprobante
+          generarPDF({
+            nombre: qs("#nombre").value,
+            apellido: qs("#apellido").value,
+            telefono: qs("#telefono").value,
+            nacimientoFecha: formatearFecha(qs("#nacimiento").value),
+            dni: qs("#dni").value,
+            email: qs("#email").value,
+            torneo: torneo.nombre_torneo,
+            sedeElegida: torneo.sede,
+            fechaElegida: torneo.fecha,
+            identificador,
+            fechaInscripcion,
+          });
+
+          mostrarToast(
+            "¡Inscripción exitosa! Se generó tu comprobante en PDF",
+            "success",
+          );
+
+          // --- LIMPIEZA DE LA COLUMNA COL-CARDS ---
+
+          // 1. Resetear el input oculto
+          hiddenInput.value = "";
+
+          
           document.querySelectorAll(".torneo-card").forEach((c) => {
             c.classList.remove("selected", "dimmed");
           });
 
-          card.classList.add("selected");
+    
+        }
 
-          document.querySelectorAll(".torneo-card").forEach((c) => {
-            if (c !== card) {
-              c.classList.add("dimmed");
-            }
-          });
+        // Otros errores del backend
+        if (!res.ok) {
+          mostrarToast(`${responseData.error}`, "error");
+          return;
+        }
+
+        // Éxito
+        generarPDF({
+          nombre: qs("#nombre").value,
+          apellido: qs("#apellido").value,
+          telefono: qs("#telefono").value,
+          nacimientoFecha: formatearFecha(qs("#nacimiento").value),
+          dni: qs("#dni").value,
+          email: qs("#email").value,
+          torneo: torneo.nombre_torneo,
+          sedeElegida: torneo.sede,
+          fechaElegida: torneo.fecha,
+          identificador,
+          fechaInscripcion,
         });
+        mostrarToast(
+          "¡Inscripción exitosa! Se generó tu comprobante en PDF",
+          "success",
+        );
 
-        container.appendChild(card);
-      });
-    })
-    .catch((error) => {
-      console.error("Error al obtener torneos:", error);
-    });
-
-  // Doy formato a la fecha de nacimiento dd-mm-aaaa
-  const formatearFecha = (fechaISO) => {
-    if (!fechaISO) return "-";
-    const [y, m, d] = fechaISO.split("-");
-    return `${d}-${m}-${y}`;
-  };
-
-  // Genero identificador alfanumérico aleatorio (10 caracteres)
-  const generarIdentificador = (len = 10) => {
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    let out = "";
-    for (let i = 0; i < len; i++) {
-      out += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return out;
-  };
-
-  // Especifíco los elementos del DOM a revisar: el id del input "#",
-  // el id del label y el mensaje de erro
-  const campos = [
-    { el: "#nombre", label: "#label-nombre", msg: "Campo obligatorio" },
-    { el: "#apellido", label: "#label-apellido", msg: "Campo obligatorio" },
-    { el: "#telefono", label: "#label-telefono", msg: "Campo obligatorio" },
-    { el: "#nacimiento", label: "#label-nacimiento", msg: "Campo obligatorio" },
-    { el: "#dni", label: "#label-dni", msg: "Campo obligatorio" },
-    { el: "#email", label: "#label-email", msg: "Campo obligatorio" },
-    { el: "#sede", label: "#label-sede", msg: "Debes seleccionar una sede" },
-    { el: "#fecha", label: "#label-fecha", msg: "Debes seleccionar una fecha" },
-  ];
-
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-       // Llamo a la función de validar campos y si devuelve false detiene el envio del formulario
-    if (!validarCampos(campos)) return;
-
-       // Llamo a la función para validar si el usuario está logueado y si devuelve false me manda al login
-    if (!user) {
-      window.location.href = "login.html";
-      return;
-    }
-
-    const csrf = getCookie("csrf_access_token");
-
-    const identificador = generarIdentificador();
-    const hiddenInput = qs("#torneoSeleccionado");
-
-    if (!hiddenInput || !hiddenInput.value) {
-      alert("Debes seleccionar un torneo");
-      return;
-    }
-
-    const idTorneo = hiddenInput.value;
-    const fechaInscripcion = new Date().toISOString().split("T")[0];
-
-    const torneo = torneos.find(
-      (t) => String(t.id_torneo) === String(idTorneo),
-    );
-
-    if (!torneo) {
-      alert("Torneo inválido");
-      return;
-    }
-   // Creo un objeto con lo datos a persistir, el idUsuario lo saca el backend
-    const data = new FormData();
-    data.append("identificador", identificador);
-    data.append("id_torneo", idTorneo);
-    data.append("fecha_inscripcion", fechaInscripcion);
-
-    // Envió el objeto, si no hay problemas muestra un mensaje de exito,
-    // caso contrario, un mensaje de error
-    try {
-      const res = await fetch(`${API}/torneos/usuario-registro`, {
-        method: "POST",
-        body: data,
-        credentials: "include",
-        headers: {
-          "X-CSRF-TOKEN": csrf,
-        },
-      });
-
-      const responseData = await res.json();
-
-      // Usuario ya inscripto
-      if (res.status === 409) {
-        alert("⚠️ Ya estás inscripto en este torneo.");
-        return;
+        hiddenInput.value = "";
+        document
+          .querySelectorAll(".torneo-card")
+          .forEach((c) => c.classList.remove("border-primary"));
+      } catch (error) {
+        console.error("Error inesperado:", error);
+        mostrarToast("Error de conexión con el servidor", "error");
       }
+    };
 
-      // Otros errores del backend
-      if (!res.ok) {
-        alert(responseData.error || "Error al enviar la inscripción");
-        return;
-      }
-
-      // Éxito
-      generarPDF({
-        nombre: qs("#nombre").value,
-        apellido: qs("#apellido").value,
-        telefono: qs("#telefono").value,
-        nacimientoFecha: formatearFecha(qs("#nacimiento").value),
-        dni: qs("#dni").value,
-        email: qs("#email").value,
-        torneo: torneo.nombre_torneo,
-        sedeElegida: torneo.sede,
-        fechaElegida: torneo.fecha,
-        identificador,
-        fechaInscripcion,
-      });
-
-      alert("¡Inscripción exitosa! Se generó tu comprobante en PDF.");
-
-      hiddenInput.value = "";
-      document
-        .querySelectorAll(".torneo-card")
-        .forEach((c) => c.classList.remove("border-primary"));
-    } catch (error) {
-      console.error("Error inesperado:", error);
-      alert("Error de conexión con el servidor");
-    }
-  };
-
-  if (form) form.addEventListener("submit", handleSubmit);
+    if (form) form.addEventListener("submit", handleSubmit);
+  }
 });

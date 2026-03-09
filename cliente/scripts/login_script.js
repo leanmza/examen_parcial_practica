@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   
 // Muestra un toast si alguien es redirigido al login sin estar logueado
-function mostrarToast(mensaje, tipo = "warning") {
+function showToast(mensaje, tipo = "warning") {
   const toastContainer = document.querySelector(".toast-container");
 
   const toastHTML = `
@@ -37,7 +37,7 @@ function mostrarToast(mensaje, tipo = "warning") {
 
 
   if (mensaje) {
-    mostrarToast(mensaje, tipo || "warning");
+    showToast(mensaje, tipo || "warning");
 
     // Limpiar después de usarlo
     sessionStorage.removeItem("toastMensaje");
@@ -93,12 +93,14 @@ function mostrarToast(mensaje, tipo = "warning") {
         window.location.href = "index.html";
       } else {
         mostrarError(data.error || "Usuario o contraseña incorrectos.");
+        mostrarToast("Usuario o contraseña incorrecto", "error");
       }
     } catch (err) {
       console.error(err);
       mostrarError(
         "Error de conexión. Verificá que el servidor esté corriendo.",
       );
+        mostrarToast("Error de conexión", "error");
     } finally {
       btnLogin.disabled = false;
       btnLogin.innerHTML =

@@ -44,10 +44,10 @@ document.addEventListener("DOMContentLoaded", () => {
         body: data,
       });
       if (!res.ok) throw new Error();
-      alert("¡Inscripción exitosa! ");
+      mostrarToast("¡Inscripción exitosa!", "success");
       window.location.href = "login.html";
     } catch {
-      alert("Error al enviar la inscripción");
+      mostrarToast("Error al enviar la inscripción", "error");
     }
   };
 

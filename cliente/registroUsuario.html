@@ -104,44 +104,45 @@
             </button>
           </form> -->
 
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center" id="auth-area">
-  
-  <!-- Opciones cuando NO está logueado -->
-  <li class="nav-item" id="nav-login">
-    <a class="nav-link" href="login.html">Iniciar sesión</a>
-  </li>
+          <ul
+            class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center"
+            id="auth-area"
+          >
+            <!-- Opciones cuando NO está logueado -->
+            <li class="nav-item" id="nav-login">
+              <a class="nav-link" href="login.html">Iniciar sesión</a>
+            </li>
 
-  <li class="nav-item" id="nav-register">
-    <a class="nav-link" href="registroUsuario.html">Registrarme</a>
-  </li>
+            <li class="nav-item" id="nav-register">
+              <a class="nav-link" href="registroUsuario.html">Registrarme</a>
+            </li>
 
-  <!-- Dropdown cuando está logueado -->
-  <li class="nav-item dropdown d-none nav-user" id="nav-user">
-    <a
-      class="nav-link dropdown-toggle"
-      href="#"
-      role="button"
-      data-bs-toggle="dropdown"
-      aria-expanded="false"
-      id="user-toggle"
-    >
-      Usuario
-    </a>
-    <ul class="dropdown-menu">
-      <li>
-        <a class="dropdown-item" href="userDashboard.html">
-          Mi cuenta
-        </a>
-      </li>
-      <li>
-        <a class="dropdown-item" href="#" id="logout">
-          Cerrar sesión
-        </a>
-      </li>
-    </ul>
-  </li>
-
-</ul>
+            <!-- Dropdown cuando está logueado -->
+            <li class="nav-item dropdown d-none nav-user" id="nav-user">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                id="user-toggle"
+              >
+                Usuario
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="userDashboard.html">
+                    Mi cuenta
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#" id="logout">
+                    Cerrar sesión
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
@@ -366,6 +367,13 @@
       </div>
     </footer>
 
+    <!-- TOASTS -->
+    <div
+      class="toast-container position-fixed bottom-0 end-0 p-3"
+      id="toast-container"
+    ></div>
+
+    <script src="scripts/utils/toast.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"

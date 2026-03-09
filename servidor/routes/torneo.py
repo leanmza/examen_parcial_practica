@@ -1,9 +1,8 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from db import get_db,  MENSAJE_ERROR_CONEXION, MENSAJE_ERROR_UNIQUE, IntegrityError, Error
+from db import Error
 from mysql.connector import Error
-from security.jsonwebtoken import (get_jwt_identity, jwt_required, 
-                          token_blacklist, TOKEN_REFRESH_ROUTE)
+from security.jsonwebtoken import (get_jwt_identity, jwt_required)
 from service.torneo_service import (obtener_torneos, inscribir_usuario,
                                     baja_usuario_torneo, obtener_torneos_usuario,
                                     obtener_inscriptos)

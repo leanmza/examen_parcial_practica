@@ -6,17 +6,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   const navRegister = document.getElementById("nav-register");
   const navUser = document.getElementById("nav-user");
   const userToggle = document.getElementById("user-toggle");
-
+  
   // Lee datos almacenados en el navegador, específicamente obtiene el token CSRF 
-  function getCookie(name) {
-    const cookies = document.cookie.split("; ");
-    for (let cookie of cookies) {
-      const [key, value] = cookie.split("=");
-      if (key === name) return value;
-    }
-    return null;
+window.getCookie = function(name) {
+  const cookies = document.cookie.split("; ");
+  for (let cookie of cookies) {
+    const [key, value] = cookie.split("=");
+    if (key === name) return value;
   }
-
+  return null;
+};
   // Consulta el servidor si el usuario esta logueado, si lo esta oculta
   // los botones iniciar sesion y registrame, y muestra el menú de usuario
   try {

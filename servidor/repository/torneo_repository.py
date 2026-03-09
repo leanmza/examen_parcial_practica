@@ -21,6 +21,7 @@ def obtener_torneos_por_usuario(id_usuario):
         cursor.execute("""
         SELECT
             t.id_torneo,
+            t.nombre_torneo,
             t.fecha,
             s.nombre AS sede_nombre,
             s.ciudad AS sede_ciudad,
@@ -87,3 +88,21 @@ def obtener_inscriptos_por_torneo(id_torneo):
                        """, (id_torneo,))
         
         return cursor.fetchall()
+    
+def  buscar_torneo_por_id(id_torneo):
+    with db_session() as cursor:
+        cursor.execute("""
+                       SELECT t.id_torneo,
+                       t.nombre_torneo,
+                       t.fecha,
+                       s.nombre,
+                       s.direccion,
+                       s.ciudad,
+                       s.pais
+                       FROM torneos t
+                       JOIN sedes s ON t.id_sede = s.id_sede
+                       WHERE t.id_torneo = %s
+                       """, (id_torneo,))
+        
+        
+        return cursor.fetchone()

@@ -40,6 +40,7 @@ async function cargarMisTorneos() {
     <table class="tabla-torneos">
       <thead>
         <tr>
+        <th>Torneo</th>
           <th>Fecha</th>
           <th>Sede</th>
           <th>Ciudad</th>
@@ -54,6 +55,7 @@ async function cargarMisTorneos() {
   torneos.forEach((t) => {
     tabla += `
       <tr data-id="${t.id_torneo}">
+        <td class="nombre">${t.nombre}</td>
         <td>${t.fecha}</td>
         <td>${t.sede.nombre}</td>
         <td>${t.sede.ciudad}</td>
@@ -100,18 +102,23 @@ async function eliminarTorneo(idTorneo) {
   const result = await response.json();
 
   if (response.ok) {
-    alert("Eliminado correctamente");
+    mostrarToast("Eliminado correctamente", "success");
     cargarMisTorneos();
   } else {
-    alert(result.error || "Error al eliminar");
+    mostrarToast("Error al eliminar, intente nuevamente más tarde", "error");
   }
 }
-document.addEventListener("click", function (e) {
+
+document.addEventListener("click", async function (e) {
   if (e.target.classList.contains("borrar")) {
     const row = e.target.closest("tr");
     const idTorneo = row.dataset.id;
+    const nombreTorneo = row.querySelector(".nombre").textContent;
 
-    if (confirm("¿Seguro que querés darte de baja?")) {
+    const ok = await confirmToast(
+      `¿Seguro que querés darte de baja del torneo <span class="nombre-torneo">${nombreTorneo}<span>?`, "danger"
+    );
+    if (ok) {
       eliminarTorneo(idTorneo);
     }
   }
@@ -190,41 +197,39 @@ document.addEventListener("DOMContentLoaded", () => {
     // Llamo a la función de validar campos y si devuelve false detiene el envio del formulario
     if (!validarCampos(campos)) return;
 
-    // Muestro un mensaje de confirmación
-    if (!confirm("¿Seguro que querés actualizar tus datos?")) {
-      return;
-    }
+    const ok = await confirmToast(`¿Seguro que querés actualizar tus datos?`);
+    if (ok) {
+      const csrf = getCookie("csrf_access_token");
 
-    const csrf = getCookie("csrf_access_token");
+      // Creo el body con los valores de los inputs
+      const body = {
+        nombre: qs("#nombre").value,
+        apellido: qs("#apellido").value,
+        dni: qs("#dni").value,
+        telefono: qs("#telefono").value,
+        email: qs("#email").value,
+        nacimiento: qs("#nacimiento").value,
+      };
 
-    // Creo el body con los valores de los inputs
-    const body = {
-      nombre: qs("#nombre").value,
-      apellido: qs("#apellido").value,
-      dni: qs("#dni").value,
-      telefono: qs("#telefono").value,
-      email: qs("#email").value,
-      nacimiento: qs("#nacimiento").value,
-    };
+      // Hago un put para actulizar los datos de usuario, si no hay problemas
+      // muestra un mensaje de exito, caso contrario, un mensaje de error
+      const response = await fetch(`${API}/user/`, {
+        method: "PUT",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-TOKEN": csrf,
+        },
+        body: JSON.stringify(body),
+      });
 
-    // Hago un put para actulizar los datos de usuario, si no hay problemas 
-    // muestra un mensaje de exito, caso contrario, un mensaje de error 
-    const response = await fetch(`${API}/user/`, {
-      method: "PUT",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRF-TOKEN": csrf,
-      },
-      body: JSON.stringify(body),
-    });
+      const result = await response.json();
 
-    const result = await response.json();
-
-    if (response.ok) {
-      alert("Datos actualizados correctamente");
-    } else {
-      alert(result.error || "Error al actualizar");
+      if (response.ok) {
+        mostrarToast("Datos actualizados correctamente", "success");
+      } else {
+        mostrarToast("Error al actualizar", "error");
+      }
     }
   });
 
@@ -232,37 +237,37 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
 
     // Muestro un mensaje de confimación
-    if (!confirm("¿Seguro que querés cambiar tu contraseña?")) {
-      return;
-    }
+    const ok = await confirmToast(`¿Seguro que querés cambiar la contraseña?`);
+    if (ok) {
+      const csrf = getCookie("csrf_access_token");
 
-    const csrf = getCookie("csrf_access_token");
+      // Creo un objeto con los datos necesarios
+      const formData = new FormData();
+      formData.append("password", qs("#password").value);
+      formData.append("clave_nueva", qs("#clave_nueva").value);
 
-    // Creo un objeto con los datos necesarios
-    const formData = new FormData();
-    formData.append("password", qs("#password").value);
-    formData.append("clave_nueva", qs("#clave_nueva").value);
+      // Hago un patch para actualizar la contraseña, si no hay problemas
+      // muestra un mensaje de exito, caso contrario, un mensaje de error
+      const response = await fetch(`${API}/user/password`, {
+        method: "PATCH",
+        credentials: "include",
+        headers: {
+          "X-CSRF-TOKEN": csrf,
+        },
+        body: formData,
+      });
 
-    // Hago un patch para actualizar la contraseña, si no hay problemas 
-    // muestra un mensaje de exito, caso contrario, un mensaje de error
-    const response = await fetch(`${API}/user/password`, {
-      method: "PATCH",
-      credentials: "include",
-      headers: {
-        "X-CSRF-TOKEN": csrf,
-      },
-      body: formData,
-    });
+      const result = await response.json();
 
-    const result = await response.json();
-
-    if (response.ok) {
-      alert(
-        "Contraseña actualizada correctamente. Se te pedirá la proxima vez que inicies sesión",
-      );
-      passwordForm.reset();
-    } else {
-      alert(result.error || "Error al actualizar contraseña");
+      if (response.ok) {
+        mostrarToast(
+          "Contraseña actualizada correctamente. Se te pedirá la proxima vez que inicies sesión",
+          "success",
+        );
+        passwordForm.reset();
+      } else {
+        mostrarToast("Error al actualizar la contraseña", "error");
+      }
     }
   });
 });
