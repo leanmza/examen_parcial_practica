@@ -15,7 +15,7 @@ torneo_bp = Blueprint("torneos", __name__, url_prefix="/torneos")
 # ---------------------------------------------------
 
 # Trigo todos los torneos con las sedes
-@torneo_bp.get("/")
+@torneo_bp.get("")
 def get_all_torneos():
     try:
         torneos = obtener_torneos()

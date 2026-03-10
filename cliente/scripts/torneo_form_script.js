@@ -62,8 +62,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const mes = String(fecha.getMonth() + 1).padStart(2, "0");
         const dia = String(fecha.getDate() + 1).padStart(2, "0");
         qs("#nacimiento").value = `${anio}-${mes}-${dia}`;
-        // El console.log debe ir AQUÍ adentro para no fallar
-        console.log("Fecha cargada:", anio, mes, dia);
+
       }
 
       // Bloquear campos
@@ -94,8 +93,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Cargo los torneos en cards
   function renderizarCards(torneos) {
-    console.log(torneos);
-
+  
     const container = document.getElementById("torneos-container");
 
     torneos.forEach((t) => {

@@ -42,3 +42,16 @@ def baja_torneo(data):
     return {"ok": True,
             "mensaje": "Torneo eliminado del exitosamente"
             }
+    
+def baja_usuario_torneo(data):
+    
+    validate_fields(data,["id_usuario",
+                          "id_torneo"])
+    
+    filas = delete_usuario_torneo_por_id(data)
+    
+    if filas == 0:
+            raise ValueError("No se se encontró el registro")
+        
+    return {"ok": True,
+            "mensaje": "Usuario borrado del torneo exitosamente"}

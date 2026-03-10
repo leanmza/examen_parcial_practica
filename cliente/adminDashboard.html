@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Inscripción Torneos</title>
+    <title>Rol Dungeon</title>
+
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -12,8 +13,7 @@
     />
 
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/formStyle.css" />
-    <link rel="stylesheet" href="css/torneoForm.css" />
+    <link rel="stylesheet" href="css/adminDashboard.css" />
     <link rel="icon" href="assets/d20.png">
 
     <!-- fuentes google font -->
@@ -27,20 +27,12 @@
     <script
       src="https://kit.fontawesome.com/eaa90bc584.js"
       crossorigin="anonymous"
-      defer
     ></script>
 
     <!-- scripts -->
     <script src="scripts/utils/utils.js" defer></script>
-    <script src="scripts/utils/forms.js" defer></script>
-    <script src="scripts/torneo_form_script.js" defer></script>
-
-    <!-- Script para generar PDF -->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
-      defer
-    ></script>
-    <script src="scripts/torneo_pdf_script.js" defer></script>
+    <script src="scripts/utils/forms.js"></script>
+    <script src="scripts/adminDashboard.js"></script>
   </head>
   <body>
     <!-- HEADER / NAVBAR -->
@@ -103,6 +95,18 @@
               <a class="nav-link" href="torneos.html">Torneos</a>
             </li>
           </ul>
+          <!-- <form class="d-flex" role="search">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Buscar"
+              aria-label="Buscar"
+            />
+            <button class="btn btn-outline-light" type="submit">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </form> -->
+
           <ul
             class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center"
             id="auth-area"
@@ -147,170 +151,52 @@
     </nav>
     <!-- MAIN -->
     <main class="container-fluid">
-      <section class="encabezado-section header-torneoMagic">
-        <div class="header-title header-section">
-          <h1>Inscripción a Torneos</h1>
-          <p>
-            ¿Listo para demostrar tus habilidades? Inscribite a nuestros torneos
-            de juegos de rol y cartas. Enfrentate a otros jugadores y demostrá
-            quién es el mejor estratega.
-          </p>
-        </div>
+      <!-- Encabezado -->
+      <section class="encabezado-section">
+        <h1>Mi cuenta</h1>
+        <p class="encabezado-text">Administrá los torneos y los usuarios.</p>
       </section>
-
-      <section class="form-section">
-        <form id="torneos" class="row">
-          <!-- COLUMNA CARD CON LOS TORNEOS -->
-
-          <div class="col-cards col-4">
+      <section class="contenido-section row">
+        <!-- perfil -->
+        <section class="torneos-section col-3">
+          <!-- card -->
+          <div class="col-cards">
             <div class="card h-100 torneos-card">
-              <h4 class="mb-3">Seleccioná el torneo</h4>
+              <h4>Próximos torneos</h4>
               <div
                 id="torneos-container"
                 class="d-flex flex-column gap-3"
               ></div>
             </div>
           </div>
+        </section>
+        <section class="detalle-section col-9">
+          <div class="card shadow-sm p-3">
+            <h4>Jugadores inscriptos</h4>
 
-          <!-- COLUMANA DATOS -->
-          <div class="col-datos col-4" id="col-datos">
-            <!-- MENSAJE SI NO ESTA LOGUEADO -->
-            <div id="login-required" class="card card-datos text-center d-none">
-              <div class="card-body d-flex flex-column justify-content-center">
-                <p class="mb-4">
-                  Para inscribirse en los torneos debe iniciar sesión.
-                </p>
+            <div class="table-responsive">
+              <table class="table table-striped" id="tabla-inscriptos">
+                <thead>
+                  <tr>
+                    <th>Usuario</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>DNI</th>
+                    <th>Teléfono</th>
+                    <th>Email</th>
+                    <th>Fecha nacimiento</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
 
-                <a href="login.html" class="btn btn-primary">
-                  Iniciar sesión
-                </a>
-              </div>
-            </div>
-            
-            <div class="card card-datos d-none " id="card-inscripcion">
-              <input
-                type="hidden"
-                id="torneoSeleccionado"
-                name="torneoSeleccionado"
-              />
-              <!-- nombre y apellido -->
-
-              <div class="col-12 form-input">
-                <label for="nombre" class="form-label"
-                  >Nombre <span id="label-nombre" class="span-error"></span
-                ></label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="nombre"
-                  placeholder="Nombre"
-                  required
-                />
-                <div class="invalid-feedback">Campo obligatorio</div>
-              </div>
-              <div class="col-12 form-input">
-                <label for="apellido" class="form-label"
-                  >Apellido <span id="label-apellido" class="span-error"></span
-                ></label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="apellido"
-                  placeholder="Apellido"
-                  required
-                />
-                <div class="invalid-feedback">Campo obligatorio</div>
-              </div>
-
-              <!-- dni y fecha de nacimiento  -->
-              <div class="col-12 form-input">
-                <label for="dni" class="form-label"
-                  >DNI <span id="label-dni" class="span-error"></span
-                ></label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="dni"
-                  placeholder="DNI"
-                  required
-                />
-                <div class="invalid-feedback">Campo obligatorio</div>
-              </div>
-              <div class="col-12 form-input">
-                <label for="nacimiento" class="form-label"
-                  >Fecha de nacimiento
-                  <span id="label-nacimiento" class="span-error"></span
-                ></label>
-                <input
-                  type="date"
-                  class="form-control"
-                  id="nacimiento"
-                  placeholder="Fecha de nacimiento"
-                  required
-                />
-                <div class="invalid-feedback">Campo obligatorio</div>
-              </div>
-
-              <!-- email y telefono -->
-
-              <div class="col-12 form-input">
-                <label for="email" class="form-label"
-                  >Email <span id="label-email" class="span-error"></span
-                ></label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="email"
-                  placeholder="Email"
-                  required
-                />
-                <div class="invalid-feedback">Campo obligatorio</div>
-              </div>
-              <div class="col-12 form-input">
-                <label for="telefono" class="form-label"
-                  >Teléfono <span id="label-telefono" class="span-error"></span
-                ></label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="telefono"
-                  placeholder="Teléfono"
-                  required
-                />
-                <div class="invalid-feedback">Campo obligatorio</div>
-              </div>
-
-              <!-- casilla de verificación y submit -->
-
-              <div
-                class="my-4 col-12 form-check d-flex justify-content-center robot"
-              >
-                <input
-                  type="checkbox"
-                  class="form-check-input form-checkbox"
-                  id="terminos"
-                  required
-                />
-                <label class="form-check-label ms-2" for="terminos">
-                  Acepto los términos y condiciones del torneo
-                </label>
-              </div>
-
-              <button
-                class="btn btn-primary btn-lg col-12 btn-submit"
-                type="submit"
-                id="inscribirse"
-              >
-                Inscribirme
-              </button>
+                <tbody id="tbody-inscriptos"></tbody>
+              </table>
             </div>
           </div>
-        </form>
+        </section>
       </section>
-
-      <section class="banner banner-form"></section>
+      <section class="banner-section"></section>
     </main>
-
     <!-- FOOTER -->
     <footer class="row row-cols-1 row-cols-3 row-cols-md-5 py-5 border-top">
       <div class="col mb-3">
@@ -318,6 +204,7 @@
           <a href="https://www.facebook.com" class="col-1">
             <i class="fa-brands fa-facebook-f fa-lg"></i>
           </a>
+
           <a href="https://www.instagram.com" class="col-1">
             <i class="fa-brands fa-instagram fa-lg"></i>
           </a>
@@ -363,18 +250,15 @@
             >
           </li>
           <li class="nav-item mb-2">
-            <a href="#" class="nav-link p-0 text-body-secondary"
+            <a
+              href="novedades_DnD.html"
+              class="nav-link p-0 text-body-secondary"
               ><h6>Novedades</h6></a
             >
           </li>
           <li class="nav-item mb-2">
             <a href="contacto.html" class="nav-link p-0 text-body-secondary"
               ><h6>Contacto</h6></a
-            >
-          </li>
-          <li class="nav-item mb-2">
-            <a href="torneos.html" class="nav-link p-0 text-body-secondary"
-              ><h6>Torneos</h6></a
             >
           </li>
         </ul>
@@ -388,7 +272,6 @@
     ></div>
 
     <script src="scripts/utils/toast.js"></script>
-
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"

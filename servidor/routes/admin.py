@@ -62,65 +62,21 @@ def eliminar_torneo():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
             
-    # Edito la contraseña del usuario logueado
+@admin_bp.delete("/baja-usuario")
+@role_required(ADMIN)
+def baja_usuario_admin():
+    try:
+        data = request.get_json()
 
+        id_usuario = data.get("id_usuario")
+        id_torneo = data.get("id_torneo")
 
-# @user_bp.patch("/password")
-# @jwt_required()
-# def editar_clave():
+        if not id_usuario or not id_torneo:
+            return jsonify({"error": "Faltan datos"}), 400
 
-#     data = request.form
-#     usuario_identity = get_jwt_identity()
+        resultado = baja_usuario_torneo(data)
 
-#     cambiar_password(data, usuario_identity)
+        return jsonify(resultado), 200
 
-#     token_blacklist.add(get_jwt()["jti"])
-
-#     claims = get_jwt()
-#     rol = claims["rol"]
-
-#     response = jsonify({"ok": True})
-
-#     return generar_token(response, usuario_identity, rol), 200
-
-# # Guardo un usuario nuevo en la BD
-
-
-# @user_bp.post("/signup")
-# def registrar():
-
-#     data = request.form
-
-#     usuario = registrar_usuario(data)
-
-#     return jsonify({
-#         "ok": True,
-#         "usuario": usuario
-#     }), 201
-
-# # ---------------------------------------------------
-# # GET USUARIO
-# # ---------------------------------------------------
-
-# #  Veo si hay una sesión activa al cargar la web
-# #  Muestro el perfil con datos reales
-
-
-# @user_bp.get("/me")
-# @jwt_required(optional=True)
-# def me():
-
-#     identity = get_jwt_identity()
-
-#     if not identity:
-#         return jsonify({"logged": False}), 200
-
-#     claims = get_jwt()
-
-#     usuario = obtener_usuario(identity)
-
-#     return jsonify({
-#         "logged": True,
-#         "rol": claims["rol"],
-#         "usuario": usuario
-#     }), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500

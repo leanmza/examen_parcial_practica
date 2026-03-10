@@ -37,3 +37,13 @@ def delete_torneo_por_id(id_torneo):
                        """, (id_torneo,)) 
         
         return cursor.rowcount       
+    
+def delete_usuario_torneo_por_id(data):
+    with db_session() as cursor:
+        cursor.execute("""
+                        DELETE FROM usuarios_torneos
+                        WHERE id_usuario = %s
+                        AND id_torneo = %s
+                        """, (data["id_usuario"],
+                              data["id_torneo"]
+                            ))
