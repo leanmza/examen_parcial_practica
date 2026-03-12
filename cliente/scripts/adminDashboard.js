@@ -164,7 +164,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   /* =========================
-     EVENTOS CLICK (UNICO)
+     EVENTOS CLICK 
   ========================= */
 
   document.addEventListener("click", manejarClicks);
@@ -250,7 +250,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const [d, m, y] = t.fecha.split("-");
     document.getElementById("fecha-torneo").value = `${y}-${m}-${d}`;
-
+  
     renderizarSelectSedes(t.sede.id_sede);
   }
 
