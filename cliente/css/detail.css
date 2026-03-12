@@ -1,7 +1,8 @@
 .encabezado-section,
 .caracteristicas-section,
 .instrucciones-section,
-.jugaSection {
+.jugaSection,
+.novedades-section {
   height: 500px;
   display: grid;
   align-items: center;
@@ -138,7 +139,7 @@ h1 > span {
 
 .news-section {
   height: fit-content;
-  padding: 10dvh 3rem;
+  padding: 3rem;
 }
 
 .news-card {

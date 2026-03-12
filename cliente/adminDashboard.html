@@ -14,7 +14,7 @@
 
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/adminDashboard.css" />
-    <link rel="icon" href="assets/d20.png">
+    <link rel="icon" href="assets/d20.png" />
 
     <!-- fuentes google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -153,8 +153,7 @@
     <main class="container-fluid">
       <!-- Encabezado -->
       <section class="encabezado-section">
-        <h1>Mi cuenta</h1>
-        <p class="encabezado-text">Administrá los torneos y los usuarios.</p>
+        <h1>Administrar torneos</h1>
       </section>
       <section class="contenido-section row">
         <!-- perfil -->
@@ -171,7 +170,62 @@
           </div>
         </section>
         <section class="detalle-section col-9">
-          <div class="card shadow-sm p-3">
+          <div class="info-torneo card">
+            <div
+              class="card-title d-flex justify-content-between align-items-center"
+            >
+              <h4>Editar torneo</h4>
+
+              <button type="button" class="btn-close cerrar-edicion"></button>
+            </div>
+            <form id="datos-torneo" class="datos-torneo">
+              <div class="row">
+                <!-- Nombre del torneo -->
+                <div class="col-5 form-input">
+                  <label for="nombre-torneo" class="form-label"
+                    >Nombre del torneo</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nombre-torneo"
+                    placeholder="Nombre del torneo"
+                  />
+                </div>
+                <!-- sede del torneo -->
+                <div class="col-4 form-input">
+                  <label for="sede-torneo" class="form-label">Sede</label>
+                  <select
+                    type="text"
+                    class="form-control"
+                    id="sede-torneo"
+                    placeholder="Sede del torneo"
+                  ></select>
+                </div>
+                <!-- fecha -->
+                <div class="col-2 form-input date">
+                  <label for="fecha-torneo" class="form-label">Fecha</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="fecha-torneo"
+                    placeholder="Fecha del torneo"
+                  />
+                </div>
+                <!-- btn editar -->
+                <div class="col-1 col-btn">
+                  <button
+                    class="btn btn-primary btn-submit editar"
+                    type="submit"
+                    id="editar"
+                  >
+                    Editar
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="card card-inscriptos shadow-sm p-3">
             <h4>Jugadores inscriptos</h4>
 
             <div class="table-responsive">

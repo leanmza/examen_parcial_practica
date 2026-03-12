@@ -8,6 +8,20 @@ document.addEventListener("DOMContentLoaded", async () => {
   let torneoSeleccionado = null;
   let nombreTorneoSeleccionado = "";
 
+  async function checkAuth() {
+    const res = await fetch(`${API}/user/me`, {
+      credentials: "include",
+    });
+
+    const data = await res.json();
+
+    if (data.usuario.rol !== "admin") {
+      window.location.href = "index.html";
+    }
+  }
+
+  checkAuth();
+
   // 1. CARGAR TORNEOS (Siempre se ejecuta, no depende del login)
   cargarTorneos();
 
@@ -25,22 +39,47 @@ document.addEventListener("DOMContentLoaded", async () => {
   function renderizarCards(torneos) {
     const container = document.getElementById("torneos-container");
 
+    container.innerHTML = "";
+
     torneos.forEach((t) => {
       const card = document.createElement("div");
       card.className = "card shadow-sm torneo-card";
       card.style.cursor = "pointer";
 
       card.innerHTML = `
-  <div class="card-body">
-    <h4 class="card-title">${t.nombre_torneo}</h4>
-    <h5 class="card-title"> <span><i class="fa-regular fa-calendar"></i> </span>${t.fecha}</h5>
-    <h6 class="card-title"> <i class="fa-solid fa-location-dot"></i> <span class="sede">${t.sede.nombre}, </span>  ${t.sede.direccion}, ${t.sede.ciudad}</h6>
-  </div>
-`;
+      <div class="card-body position-relative row">
 
-      // Seteo los efectos visuales al hacer click
+        <div class="card-info col-11">
+
+          <h4 class="card-title">${t.nombre_torneo}</h4>
+
+          <h5 class="card-title">
+            <i class="fa-regular fa-calendar"></i>
+            ${t.fecha}
+          </h5>
+
+          <h6 class="card-title">
+            <i class="fa-solid fa-location-dot"></i>
+            <span class="sede">${t.sede.nombre}, </span>
+            ${t.sede.direccion}, ${t.sede.ciudad}
+          </h6>
+        </div>  
+        <div class="torneo-actions col-1">
+          <i class="fa-solid fa-pen btn-editar" data-id="${t.id_torneo}"></i>
+          <i class="fa-solid fa-trash btn-eliminar" data-id="${t.id_torneo}"></i>
+        </div>
+
+      </div>
+    `;
+
       card.addEventListener("click", () => {
-        torneoSeleccionado = t.id_torneo;
+        // cerrar panel de edición si está abierto
+    
+        if (torneoSeleccionado?.id_torneo !== t.id_torneo) {
+          document.querySelector(".info-torneo").classList.remove("visible");
+        }
+            // document.querySelector(".info-torneo").classList.remove("visible");
+        torneoSeleccionado = t;
         nombreTorneoSeleccionado = t.nombre_torneo;
 
         document.querySelectorAll(".torneo-card").forEach((c) => {
@@ -55,13 +94,91 @@ document.addEventListener("DOMContentLoaded", async () => {
           }
         });
 
-        // 👇 NUEVO
         cargarInscriptos(t.id_torneo);
       });
 
       container.appendChild(card);
     });
   }
+
+  //Abro panel editar torneo
+  document.addEventListener("click", (e) => {
+    const editar = e.target.closest(".btn-editar");
+    if (editar) {
+      e.stopPropagation();
+      const bloque = document.querySelector(".info-torneo");
+
+      bloque.classList.add("visible");
+
+      // cargar datos en inputs
+      document.getElementById("nombre-torneo").value =
+        torneoSeleccionado.nombre_torneo;
+
+      document.getElementById("fecha-torneo").value = torneoSeleccionado.fecha;
+
+      document.getElementById("sede-torneo").value =
+        torneoSeleccionado.sede.nombre;
+    }
+
+    const eliminar = e.target.closest(".btn-eliminar");
+    if (eliminar) {
+      e.stopPropagation();
+      console.log("Eliminar torneo", eliminar.dataset.id);
+      return;
+    }
+  });
+
+  document.addEventListener("click", (e) => {
+    if (e.target.closest(".cerrar-edicion")) {
+      document.querySelector(".info-torneo").classList.remove("visible");
+    }
+  });
+
+  document
+    .getElementById("datos-torneo")
+    .addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const csrf = getCookie("csrf_access_token");
+
+      const formData = new FormData();
+
+      formData.append("id_torneo", torneoSeleccionado.id_torneo);
+      formData.append(
+        "nombre_torneo",
+        document.getElementById("nombre-torneo").value,
+      );
+      formData.append("id_sede", document.getElementById("sede-torneo").value);
+      formData.append("fecha", document.getElementById("fecha-torneo").value);
+
+      try {
+        const res = await fetch(`${API}/admin/torneo`, {
+          method: "PUT",
+          credentials: "include",
+          headers: {
+            "X-CSRF-TOKEN": csrf,
+          },
+          body: formData,
+        });
+
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.error);
+        }
+
+        mostrarToast("Torneo actualizado correctamente", "success");
+
+        const data = await res.json();
+
+        // refrescar torneos
+        cargarTorneos();
+
+        document.querySelector(".info-torneo").classList.remove("visible");
+      } catch (err) {
+        console.error(err);
+        mostrarToast("No se pudo actualizar el torneo", "error");
+      }
+    });
 
   // Doy formato a la fecha de nacimiento dd-mm-aaaa
   const formatearFecha = (fechaISO) => {
@@ -120,15 +237,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   document.addEventListener("click", async (e) => {
     const btn = e.target.closest(".btn-borrar");
+     if (!btn) return;
     const row = btn.closest("tr");
     const usuario = row.querySelector("td:nth-child(1)").textContent;
     if (!btn) return;
-    
-
-    
 
     const idUsuario = btn.dataset.id;
-    const idTorneo = torneoSeleccionado;
+    const idTorneo = torneoSeleccionado.id_torneo;
 
     const csrf = getCookie("csrf_access_token");
 
@@ -137,7 +252,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     <span class="fw-bold">${usuario}</span> 
     del torneo 
     <span class="fw-bold">${nombreTorneoSeleccionado}</span>?`,
-    "danger"
+      "danger",
     );
 
     if (!ok) return;

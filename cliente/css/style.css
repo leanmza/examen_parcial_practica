@@ -34,9 +34,11 @@ footer {
 }
 
 /* 1. Transición suave para opacidad en todos los links del nav y dropdown */
-.navbar .nav-link, 
+.navbar .nav-link,
 .navbar .dropdown-item {
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
   opacity: 1;
 }
 
@@ -173,6 +175,12 @@ a > i {
   padding-bottom: 3rem;
 }
 
+.news-section >.header-section {
+  justify-items: center;
+  padding-bottom:1rem;
+}
+
+
 .card-body > p,
 .card-body > h5,
 .card-body > h6 {
@@ -296,6 +304,12 @@ footer {
   background-image: url(../assets/party.png);
   background-size: cover;
   background-position: center;
+}
+
+.header-novedades {
+  background-image: url(../assets/orco\ stickman.png) !important; 
+  background-size: cover;
+  background-position-y: 30% !important;
 }
 
 /* Banner image used across pages (e.g., index, magic detail) */

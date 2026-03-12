@@ -1,6 +1,21 @@
 const { qs, validarCampos } = window.utils.forms;
 const API = "http://127.0.0.1:5000";
 
+  async function checkAuth() {
+    const res = await fetch(`${API}/user/me`, {
+      credentials: "include",
+    });
+
+    const data = await res.json();
+
+    if (!data.logged) {
+      window.location.href = "index.html";
+    }
+  }
+
+  checkAuth();
+
+
 // Cargo los torneos donde el usuario esta inscripto
 async function cargarMisTorneos() {
   const response = await fetch(`${API}/torneos/user`, {
