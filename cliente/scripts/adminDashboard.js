@@ -1,12 +1,15 @@
 document.addEventListener("DOMContentLoaded", async () => {
-  const { qs, validarCampos } = window.utils.forms;
   const API = "http://127.0.0.1:5000";
 
-  const form = document.querySelector("#torneos");
+  const state = {
+    torneos: [],
+    torneoSeleccionado: null,
+    sedes: [],
+  };
 
-  let torneos = [];
-  let torneoSeleccionado = null;
-  let nombreTorneoSeleccionado = "";
+  /* =========================
+     AUTH
+  ========================= */
 
   async function checkAuth() {
     const res = await fetch(`${API}/user/me`, {
@@ -20,25 +23,30 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  checkAuth();
+  await checkAuth();
 
-  // 1. CARGAR TORNEOS (Siempre se ejecuta, no depende del login)
+  /* =========================
+     TORNEOS
+  ========================= */
+
   cargarTorneos();
 
-  function cargarTorneos() {
-    fetch(`${API}/torneos`)
-      .then((res) => res.json())
-      .then((data) => {
-        torneos = data;
-        renderizarCards(torneos); // Función para dibujar las cards
-      })
-      .catch((err) => console.error("Error torneos:", err));
+  async function cargarTorneos() {
+    try {
+      const res = await fetch(`${API}/torneos`);
+      const data = await res.json();
+
+      state.torneos = data;
+
+      renderizarCards(data);
+    } catch (err) {
+      mostrarToast(`Error torneo: ${err}`, erro);
+      console.error("Error torneos:", err);
+    }
   }
 
-  // Cargo los torneos en cards
   function renderizarCards(torneos) {
     const container = document.getElementById("torneos-container");
-
     container.innerHTML = "";
 
     torneos.forEach((t) => {
@@ -47,157 +55,290 @@ document.addEventListener("DOMContentLoaded", async () => {
       card.style.cursor = "pointer";
 
       card.innerHTML = `
-      <div class="card-body position-relative row">
+        <div class="card-body position-relative row">
 
-        <div class="card-info col-11">
+          <div class="card-info col-11">
 
-          <h4 class="card-title">${t.nombre_torneo}</h4>
+            <h4 class="card-title">${t.nombre_torneo}</h4>
 
-          <h5 class="card-title">
-            <i class="fa-regular fa-calendar"></i>
-            ${t.fecha}
-          </h5>
+            <h5 class="card-title">
+              <i class="fa-regular fa-calendar"></i>
+              ${t.fecha}
+            </h5>
 
-          <h6 class="card-title">
-            <i class="fa-solid fa-location-dot"></i>
-            <span class="sede">${t.sede.nombre}, </span>
-            ${t.sede.direccion}, ${t.sede.ciudad}
-          </h6>
-        </div>  
-        <div class="torneo-actions col-1">
-          <i class="fa-solid fa-pen btn-editar" data-id="${t.id_torneo}"></i>
-          <i class="fa-solid fa-trash btn-eliminar" data-id="${t.id_torneo}"></i>
+            <h6 class="card-title">
+              <i class="fa-solid fa-location-dot"></i>
+              <span class="sede">${t.sede.nombre}, </span>
+              ${t.sede.direccion}, ${t.sede.ciudad}
+            </h6>
+
+          </div>
+
+          <div class="torneo-actions col-1">
+            <i class="fa-solid fa-pen btn-editar" data-id="${t.id_torneo}"></i>
+            <i class="fa-solid fa-trash btn-eliminar"
+              data-id="${t.id_torneo}"
+              data-nombre="${t.nombre_torneo}">
+            </i>
+          </div>
+
         </div>
+      `;
 
-      </div>
-    `;
-
-      card.addEventListener("click", () => {
-        // cerrar panel de edición si está abierto
-    
-        if (torneoSeleccionado?.id_torneo !== t.id_torneo) {
-          document.querySelector(".info-torneo").classList.remove("visible");
-        }
-            // document.querySelector(".info-torneo").classList.remove("visible");
-        torneoSeleccionado = t;
-        nombreTorneoSeleccionado = t.nombre_torneo;
-
-        document.querySelectorAll(".torneo-card").forEach((c) => {
-          c.classList.remove("selected", "dimmed");
-        });
-
-        card.classList.add("selected");
-
-        document.querySelectorAll(".torneo-card").forEach((c) => {
-          if (c !== card) {
-            c.classList.add("dimmed");
-          }
-        });
-
-        cargarInscriptos(t.id_torneo);
-      });
+      card.addEventListener("click", () => seleccionarTorneo(t, card));
 
       container.appendChild(card);
     });
   }
 
-  //Abro panel editar torneo
-  document.addEventListener("click", (e) => {
+  function seleccionarTorneo(t, card) {
+    if (state.torneoSeleccionado?.id_torneo !== t.id_torneo) {
+      cerrarEdicion();
+    }
+
+    state.torneoSeleccionado = t;
+
+    document.querySelectorAll(".torneo-card").forEach((c) => {
+      c.classList.remove("selected", "dimmed");
+    });
+
+    card.classList.add("selected");
+
+    document.querySelectorAll(".torneo-card").forEach((c) => {
+      if (c !== card) c.classList.add("dimmed");
+    });
+
+    cargarInscriptos(t.id_torneo);
+  }
+
+  async function cargarSedes() {
+    try {
+      const res = await fetch(`${API}/sedes`, {
+        credentials: "include",
+      });
+
+      const data = await res.json();
+
+      state.sedes = data;
+    } catch (err) {
+      console.error("Error cargando sedes:", err);
+    }
+  }
+
+  /* =========================
+    SEDES
+  ========================= */
+  async function cargarSedes() {
+    try {
+      const res = await fetch(`${API}/sedes`, {
+        credentials: "include",
+      });
+
+      const data = await res.json();
+
+      state.sedes = data;
+    } catch (err) {
+      console.error("Error cargando sedes:", err);
+    }
+  }
+
+  await cargarSedes();
+
+  function renderizarSelectSedes(idSedeSeleccionada) {
+    const select = document.getElementById("sede-torneo");
+
+    select.innerHTML = "";
+
+    state.sedes.forEach((sede) => {
+      const option = document.createElement("option");
+
+      option.value = sede.id_sede;
+      option.textContent = `${sede.nombre} - ${sede.ciudad} (${sede.direccion})`;
+
+      if (sede.id_sede === idSedeSeleccionada) {
+        option.selected = true;
+      }
+
+      select.appendChild(option);
+    });
+  }
+
+  /* =========================
+     EVENTOS CLICK (UNICO)
+  ========================= */
+
+  document.addEventListener("click", manejarClicks);
+
+  async function manejarClicks(e) {
     const editar = e.target.closest(".btn-editar");
     if (editar) {
       e.stopPropagation();
-      const bloque = document.querySelector(".info-torneo");
-
-      bloque.classList.add("visible");
-
-      // cargar datos en inputs
-      document.getElementById("nombre-torneo").value =
-        torneoSeleccionado.nombre_torneo;
-
-      document.getElementById("fecha-torneo").value = torneoSeleccionado.fecha;
-
-      document.getElementById("sede-torneo").value =
-        torneoSeleccionado.sede.nombre;
+      return abrirEdicion();
     }
 
     const eliminar = e.target.closest(".btn-eliminar");
     if (eliminar) {
       e.stopPropagation();
-      console.log("Eliminar torneo", eliminar.dataset.id);
-      return;
+      return eliminarTorneo(eliminar.dataset.id, eliminar.dataset.nombre);
     }
-  });
 
-  document.addEventListener("click", (e) => {
-    if (e.target.closest(".cerrar-edicion")) {
-      document.querySelector(".info-torneo").classList.remove("visible");
+    const borrar = e.target.closest(".btn-borrar");
+    if (borrar) {
+      return eliminarInscripto(borrar);
     }
-  });
+
+    const cerrar = e.target.closest(".cerrar-edicion");
+    if (cerrar) {
+      return cerrarEdicion();
+    }
+  }
+
+  /* =========================
+     ELIMINAR TORNEO
+  ========================= */
+  async function eliminarTorneo(id_torneo, nombre) {
+    const idTorneo = state.torneoSeleccionado.id_torneo;
+
+    const csrf = getCookie("csrf_access_token");
+
+    const ok = await confirmToast(
+      `¿Seguro que querés dar de baja el torneo 
+      <span class="fw-bold"> ${nombre}</span>?`,
+      "danger",
+    );
+
+    if (!ok) return;
+
+    try {
+      const res = await fetch(`${API}/admin/torneo`, {
+        method: "DELETE",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-TOKEN": csrf,
+        },
+        body: JSON.stringify({
+          id_torneo: idTorneo,
+        }),
+      });
+
+      if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.error);
+      }
+
+      mostrarToast("Torneo eliminado", "success");
+
+      await cargarTorneos();
+    } catch (err) {
+      console.error(err);
+      mostrarToast("No se pudo eliminar el torneo", "error");
+    }
+  }
+
+  /* =========================
+     EDICION TORNEO
+  ========================= */
+
+  function abrirEdicion() {
+    const bloque = document.querySelector(".info-torneo");
+    bloque.classList.add("visible");
+
+    const t = state.torneoSeleccionado;
+
+    document.getElementById("nombre-torneo").value = t.nombre_torneo;
+
+    const [d, m, y] = t.fecha.split("-");
+    document.getElementById("fecha-torneo").value = `${y}-${m}-${d}`;
+
+    renderizarSelectSedes(t.sede.id_sede);
+  }
+
+  function cerrarEdicion() {
+    document.querySelector(".info-torneo").classList.remove("visible");
+  }
 
   document
     .getElementById("datos-torneo")
-    .addEventListener("submit", async (e) => {
-      e.preventDefault();
+    .addEventListener("submit", editarTorneo);
 
-      const csrf = getCookie("csrf_access_token");
+  async function editarTorneo(e) {
+    e.preventDefault();
 
-      const formData = new FormData();
+    const csrf = getCookie("csrf_access_token");
 
-      formData.append("id_torneo", torneoSeleccionado.id_torneo);
-      formData.append(
-        "nombre_torneo",
-        document.getElementById("nombre-torneo").value,
-      );
-      formData.append("id_sede", document.getElementById("sede-torneo").value);
-      formData.append("fecha", document.getElementById("fecha-torneo").value);
+    const formData = new FormData();
 
-      try {
-        const res = await fetch(`${API}/admin/torneo`, {
-          method: "PUT",
-          credentials: "include",
-          headers: {
-            "X-CSRF-TOKEN": csrf,
-          },
-          body: formData,
-        });
+    formData.append("id_torneo", state.torneoSeleccionado.id_torneo);
+    formData.append(
+      "nombre_torneo",
+      document.getElementById("nombre-torneo").value,
+    );
+    formData.append("id_sede", document.getElementById("sede-torneo").value);
+    formData.append("fecha", document.getElementById("fecha-torneo").value);
 
-        if (!res.ok) {
-          const err = await res.json();
-          throw new Error(err.error);
-        }
+    try {
+      const res = await fetch(`${API}/admin/torneo`, {
+        method: "PUT",
+        credentials: "include",
+        headers: {
+          "X-CSRF-TOKEN": csrf,
+        },
+        body: formData,
+      });
 
-        mostrarToast("Torneo actualizado correctamente", "success");
-
-        const data = await res.json();
-
-        // refrescar torneos
-        cargarTorneos();
-
-        document.querySelector(".info-torneo").classList.remove("visible");
-      } catch (err) {
-        console.error(err);
-        mostrarToast("No se pudo actualizar el torneo", "error");
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error);
       }
-    });
 
-  // Doy formato a la fecha de nacimiento dd-mm-aaaa
-  const formatearFecha = (fechaISO) => {
-    if (!fechaISO) return "-";
-    const [y, m, d] = fechaISO.split("-");
-    return `${d}-${m}-${y}`;
-  };
+      mostrarToast("Torneo actualizado correctamente", "success");
+
+      await cargarTorneos();
+
+      cerrarEdicion();
+    } catch (err) {
+      console.error(err);
+      mostrarToast("No se pudo actualizar el torneo", "error");
+    }
+  }
+
+  /* =========================
+     INSCRIPTOS
+  ========================= */
+
+  async function cargarInscriptos(idTorneo) {
+    const tbody = document.getElementById("tbody-inscriptos");
+
+    tbody.innerHTML = `<tr><td colspan="8">Cargando...</td></tr>`;
+
+    try {
+      const res = await fetch(
+        `${API}/torneos/inscriptos?id_torneo=${idTorneo}`,
+        {
+          credentials: "include",
+        },
+      );
+
+      const data = await res.json();
+
+      renderizarTablaInscriptos(data);
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   function renderizarTablaInscriptos(inscriptos) {
     const tbody = document.getElementById("tbody-inscriptos");
-
     tbody.innerHTML = "";
 
     if (!inscriptos.length) {
       tbody.innerHTML = `
-      <tr>
-        <td colspan="8" class="text-center">No hay inscriptos</td>
-      </tr>
-    `;
+        <tr>
+          <td colspan="8" class="text-center">No hay inscriptos</td>
+        </tr>
+      `;
+
       return;
     }
 
@@ -205,53 +346,42 @@ document.addEventListener("DOMContentLoaded", async () => {
       const tr = document.createElement("tr");
 
       tr.innerHTML = `
-      <td>${u.usuario}</td>
-      <td>${u.nombre}</td>
-      <td>${u.apellido}</td>
-      <td>${u.dni}</td>
-      <td>${u.telefono}</td>
-      <td>${u.email}</td>
-      <td>${formatearFecha(u.fecha_nacimiento)}</td>
-      <td>
-        <button class="btn btn-danger btn-sm btn-borrar" data-id="${u.id_usuario}">
-          <i class="fa-solid fa-trash"></i>
-        </button>
-      </td>
-    `;
+        <td>${u.usuario}</td>
+        <td>${u.nombre}</td>
+        <td>${u.apellido}</td>
+        <td>${u.dni}</td>
+        <td>${u.telefono}</td>
+        <td>${u.email}</td>
+        <td>${formatearFecha(u.fecha_nacimiento)}</td>
+        <td>
+          <button class="btn btn-danger btn-sm btn-borrar" data-id="${u.id_usuario}">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </td>
+      `;
 
       tbody.appendChild(tr);
     });
   }
 
-  async function cargarInscriptos(idTorneo) {
-    const tbody = document.getElementById("tbody-inscriptos");
-    tbody.innerHTML = `<tr><td colspan="8">Cargando...</td></tr>`;
+  /* =========================
+     ELIMINAR INSCRIPTO
+  ========================= */
 
-    fetch(`${API}/torneos/inscriptos?id_torneo=${idTorneo}`, {
-      credentials: "include",
-    })
-      .then((res) => res.json())
-      .then((data) => renderizarTablaInscriptos(data))
-      .catch((err) => console.error(err));
-  }
-
-  document.addEventListener("click", async (e) => {
-    const btn = e.target.closest(".btn-borrar");
-     if (!btn) return;
+  async function eliminarInscripto(btn) {
     const row = btn.closest("tr");
     const usuario = row.querySelector("td:nth-child(1)").textContent;
-    if (!btn) return;
 
     const idUsuario = btn.dataset.id;
-    const idTorneo = torneoSeleccionado.id_torneo;
+    const idTorneo = state.torneoSeleccionado.id_torneo;
 
     const csrf = getCookie("csrf_access_token");
 
     const ok = await confirmToast(
       `¿Seguro que querés dar de baja al usuario 
-    <span class="fw-bold">${usuario}</span> 
-    del torneo 
-    <span class="fw-bold">${nombreTorneoSeleccionado}</span>?`,
+      <span class="fw-bold">${usuario}</span> 
+      del torneo 
+      <span class="fw-bold">${state.torneoSeleccionado.nombre_torneo}</span>?`,
       "danger",
     );
 
@@ -283,5 +413,15 @@ document.addEventListener("DOMContentLoaded", async () => {
       console.error(err);
       mostrarToast("No se pudo eliminar el usuario", "error");
     }
-  });
+  }
+
+  /* =========================
+     UTIL
+  ========================= */
+
+  function formatearFecha(fechaISO) {
+    if (!fechaISO) return "-";
+    const [y, m, d] = fechaISO.split("-");
+    return `${d}-${m}-${y}`;
+  }
 });
