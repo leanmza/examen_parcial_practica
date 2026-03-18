@@ -13,17 +13,19 @@ auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
 
 @auth_bp.post("/login")
 def autenticar():
-
     data = request.form
 
     usuario = login_usuario(data)
+
+    recordar = data.get("recordar") == "true"
 
     response = jsonify({"ok": True})
 
     return generar_token(
         response,
         usuario["usuario"],
-        usuario["rol"]
+        usuario["rol"],
+        recordar
     ), 201
 
 

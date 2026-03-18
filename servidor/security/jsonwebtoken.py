@@ -20,11 +20,31 @@ def configurar_jwt(app):
     app.config['JWT_BLACKLIST_TOKEN_CHECKS'] = ['access', 'refresh']
     return JWTManager(app)
 
-def generar_token(response, id, rol):
-    
+def generar_token(response, id, rol, recordar=False):
+
     claims = {"rol": rol}
-    
-    set_access_cookies(response, create_access_token(id, additional_claims=claims))
-    set_refresh_cookies(response, create_refresh_token(id, additional_claims=claims))
+
+    if recordar:
+        access_expires = timedelta(days=7)
+        refresh_expires = timedelta(days=30)
+    else:
+        access_expires = timedelta(minutes=30)
+        refresh_expires = timedelta(days=1)
+
+    access_token = create_access_token(
+        identity=id,
+        additional_claims=claims,
+        expires_delta=access_expires
+    )
+
+    refresh_token = create_refresh_token(
+        identity=id,
+        additional_claims=claims,
+        expires_delta=refresh_expires
+    )
+
+    set_access_cookies(response, access_token)
+    set_refresh_cookies(response, refresh_token)
+
     return response
 __all__ = ["get_jwt", "get_jwt_identity", "jwt_required", "unset_jwt_cookies"]

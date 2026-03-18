@@ -9,8 +9,6 @@ from service.admin_service import registrar_torneo, actualizar_torneo, baja_torn
 
 admin_bp = Blueprint("admin", __name__, url_prefix="/admin")
 
-# Edito los datos del usuario
-
 
 @admin_bp.post("/torneo")
 @role_required(ADMIN)

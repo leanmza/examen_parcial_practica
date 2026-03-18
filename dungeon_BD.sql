@@ -83,9 +83,9 @@ INSERT INTO dungeon.sedes (nombre, direccion, ciudad, pais) VALUES
 ('Gathering Vault', 'San Martin 789', 'San Luis', 'Argentina');
 
 INSERT INTO dungeon.torneos (nombre_torneo, id_sede, fecha) VALUES
-('Batalla por Rávnica - Formato Standard', 1, '2025-03-15'),
-('Guerra de los Planeswalkers - Modern', 2, '2025-03-22'),
-('Dominio de los Cinco Colores - Commander', 3, '2025-04-05'),
-('Draft Especial - Innistrad Nocturno', 1, '2025-04-12'),
-('Clasificatorio Pioneer - Senderos del Multiverso', 2, '2025-04-19'),
-('Copa Commander - Reliquias de Zendikar', 3, '2025-04-26');
+('Batalla por Rávnica - Formato Standard', 1, '2026-03-15'),
+('Guerra de los Planeswalkers - Modern', 2, '2026-03-22'),
+('Dominio de los Cinco Colores - Commander', 3, '2026-04-05'),
+('Draft Especial - Innistrad Nocturno', 1, '2026-04-12'),
+('Clasificatorio Pioneer - Senderos del Multiverso', 2, '2026-04-19'),
+('Copa Commander - Reliquias de Zendikar', 3, '2026-04-26');

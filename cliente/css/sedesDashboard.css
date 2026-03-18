@@ -12,10 +12,8 @@
 p {
   color: rgb(156 163 175);
 }
-.perfil-card {
-  margin: 0 0 0 3rem;
-}
-.torneos-card {
+
+.sedes-card {
   max-width: none;
   margin: 0 3rem 0 0;
 }
@@ -32,61 +30,28 @@ h6 {
   color: var(--bs-secondary-color) !important;
 }
 
-.torneos-card > h4, 
-.info-torneo > .card-title> h4,
-.crear-torneo > .card-title> h4 {
+
+.info-sede > .card-title> h4,
+.crear-sede > .card-title> h4 {
   font-size: 1.5rem;
 }
 
-.perfil-title {
-  margin-bottom: 0 !important;
-  text-align: center;
-}
-.perfil-title > p,
-.torneos-title > p {
-  color: rgb(156 163 175);
-  font-size: 14px;
-  margin: 0 !important;
-}
 
-.torneos-title {
-  padding: 0 2rem;
-}
+
 .card-title {
   margin: 0.5rem 0;
+
 }
-.card-tabla {
-  padding: 0 !important;
+
+.info-sede > .card-title, .crear-sede > .card-title {
+  display: flex;
+  justify-content: space-between;
 }
+
 h5 {
   margin: 0 !important;
 }
 
-thead {
-  background-color: rgb(55 65 81);
-}
-
-.tabla-torneos {
-  width: 100%;
-  text-align: justify;
-}
-tbody > tr {
-  border-bottom: 1px solid rgb(55 65 81);
-}
-
-tbody > tr > td {
-  padding: 2rem;
-}
-
-.borrar {
-  cursor: pointer;
-  color: rgb(206, 3, 3);
-}
-
-td,
-th {
-  padding: 1rem 2rem;
-}
 
 a {
   text-decoration: none;
@@ -95,18 +60,19 @@ a {
 .contenido-section {
   margin-bottom: 2rem;
   width: 99dvw;
+  justify-content: center;
 }
-.torneo-card {
+.sede-card {
   height: fit-content;
 }
 
-.nombre-torneo {
+.nombre-sede {
   font-weight: 700;
 }
 
 /* adfasfdafadf */
 
-.torneos-card {
+.sedes-card {
   display: grid;
   justify-content: stretch;
   width: 100%;
@@ -117,32 +83,29 @@ a {
   margin-left: 1rem;
 }
 
-.torneos-container {
-  width: 100%;
-  padding-inline: 2rem;
-}
+
 
 .card-body {
   border-radius: 8px;
   background-color: #212529;
 }
 
-.torneo-card:hover {
+.sede-card:hover {
   transform: scale(1.02);
   transition: 0.2s;
 }
 
-.torneo-card.selected {
+.sede-card.selected {
   border: 2px solid #0d6efd;
   transform: scale(1.02);
   z-index: 2;
 }
 
-.torneo-card.dimmed {
+.sede-card.dimmed {
   opacity: 0.35;
 }
 
-.torneo-card.selected {
+.sede-card.selected {
   border: 2px solid #0d6efd;
   transform: scale(1.03);
   opacity: 1 !important;
@@ -156,7 +119,7 @@ a {
   background-color: #2c3036;
 }
 
-.info-torneo, .crear-torneo {
+.info-sede, .crear-sede {
   overflow: hidden;
   opacity: 0;
   transform: translateY(-10px);
@@ -169,9 +132,10 @@ a {
     opacity 0.25s ease,
     transform 0.25s ease,
     margin-bottom 0.25s ease;
+ 
 }
 
-.info-torneo.visible, .crear-torneo.visible {
+.info-sede.visible, .crear-sede.visible {
   max-height: 300px; /* un poco más grande que el form */
   opacity: 1;
   transform: translateY(0);
@@ -180,7 +144,7 @@ a {
   padding: 2rem 1rem;
 }
 
-.col-1 > button {
+.col-btn button {
   font-size: 14px;
 
 }
@@ -190,9 +154,6 @@ a {
   padding-bottom: 0.2rem;
 }
 
-.card-inscriptos {
-  margin-left: 1rem;
-}
 
 .detalle-section {
   display: flex;
@@ -201,16 +162,16 @@ a {
 }
 
 
-.datos-torneo > .row {
+.datos-sede > .row, .nueva-sede > .row {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
 }
 
-.torneo-card {
+.sede-card {
   position: relative;
 }
 
-.torneo-actions {
+.sede-actions {
   position: absolute;
   top: 10px;
   right: 12px;
@@ -228,7 +189,7 @@ a {
     transform 0.25s ease;
 }
 
-.torneo-card.selected .torneo-actions {
+.sede-card.selected .sede-actions {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
@@ -243,10 +204,10 @@ a {
   color: #3f4349;
 }
 
-.btn-nuevo-torneo{
+.btn-nueva-sede{
   font-size: 14px;
 }
-.torneos-card>.row{
+.sedes-card>.row{
   display: flex;
   justify-content: space-between;
 }
@@ -256,24 +217,26 @@ a {
   height: 34px;
 }
 
-.btn-nuevo-torneo >a,
-.btn-nuevo-torneo >a > i{
-  color: white !important;
-}
 
 .filter-icon{
   font-size: 14px
   ;
 }
 
-.filtros-torneos {
+.filtros-sedes {
   display: none;
 }
 
-.filtros-torneos.visible {
+.filtros-sedes.visible {
   display: flex;
 }
 
-.filtros-torneos *{
+.filtros-sedes *{
 font-size: 14px;
+}
+
+.form-input{
+  max-width: 50ch;
+  min-width: 25ch;
+  margin-bottom: 0.5rem;
 }

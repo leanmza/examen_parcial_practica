@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const data = await res.json();
 
-    if (data.usuario.rol !== "admin") {
+    if (data.rol !== "admin") {
       window.location.href = "index.html";
     }
   }
@@ -111,20 +111,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     cargarInscriptos(t.id_torneo);
   }
 
-  async function cargarSedes() {
-    try {
-      const res = await fetch(`${API}/sedes`, {
-        credentials: "include",
-      });
-
-      const data = await res.json();
-
-      state.sedes = data;
-    } catch (err) {
-      console.error("Error cargando sedes:", err);
-    }
-  }
-
   /* =========================
     SEDES
   ========================= */
@@ -144,14 +130,23 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   await cargarSedes();
 
+  document
+    .querySelectorAll("#filtro-estado, #filtro-ciudad, #filtro-sede")
+    .forEach((el) => {
+      el.addEventListener("input", aplicarFiltros);
+      el.addEventListener("change", aplicarFiltros);
+    });
+
   function renderizarSelectSedes(idSedeSeleccionada) {
-    const select = document.getElementById("sede-torneo");
+    let select = document.getElementById("sede-torneo");
+    if (idSedeSeleccionada === null) {
+      select = document.getElementById("sede-nuevo-torneo");
+    }
 
     select.innerHTML = "";
 
     state.sedes.forEach((sede) => {
       const option = document.createElement("option");
-
       option.value = sede.id_sede;
       option.textContent = `${sede.nombre} - ${sede.ciudad} (${sede.direccion})`;
 
@@ -191,6 +186,28 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (cerrar) {
       return cerrarEdicion();
     }
+
+    const close = e.target.closest(".cerrar-guardar");
+    if (close) {
+      return cerrarGuardar();
+    }
+
+    const guardar = e.target.closest(".btn-nuevo-torneo");
+    if (guardar) {
+      e.stopPropagation();
+      return abrirGuardar();
+    }
+
+    const filtrar = e.target.closest(".filter-icon");
+    if (filtrar) {
+      e.stopPropagation();
+      return mostrarFiltros();
+    }
+  }
+
+  async function mostrarFiltros() {
+    const bloqueFiltros = document.querySelector(".filtros-torneos");
+    bloqueFiltros.classList.toggle("visible");
   }
 
   /* =========================
@@ -241,6 +258,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   ========================= */
 
   function abrirEdicion() {
+    cerrarGuardar();
+
     const bloque = document.querySelector(".info-torneo");
     bloque.classList.add("visible");
 
@@ -250,7 +269,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const [d, m, y] = t.fecha.split("-");
     document.getElementById("fecha-torneo").value = `${y}-${m}-${d}`;
-  
+
     renderizarSelectSedes(t.sede.id_sede);
   }
 
@@ -300,6 +319,72 @@ document.addEventListener("DOMContentLoaded", async () => {
     } catch (err) {
       console.error(err);
       mostrarToast("No se pudo actualizar el torneo", "error");
+    }
+  }
+
+  /* =========================
+     GUARDAR TORNEO
+  ========================= */
+
+  function abrirGuardar() {
+    cerrarEdicion();
+    const bloque = document.querySelector(".crear-torneo");
+    bloque.classList.add("visible");
+
+    renderizarSelectSedes(null);
+  }
+
+  function cerrarGuardar() {
+    document.querySelector(".crear-torneo").classList.remove("visible");
+  }
+
+  document
+    .getElementById("nuevo-torneo")
+    .addEventListener("submit", guardarTorneo);
+
+  async function guardarTorneo(e) {
+    e.preventDefault();
+
+    const csrf = getCookie("csrf_access_token");
+
+    const formData = new FormData();
+
+    formData.append(
+      "nombre_torneo",
+      document.getElementById("nombre-nuevo-torneo").value,
+    );
+    formData.append(
+      "id_sede",
+      document.getElementById("sede-nuevo-torneo").value,
+    );
+    formData.append(
+      "fecha",
+      document.getElementById("fecha-nuevo-torneo").value,
+    );
+
+    try {
+      const res = await fetch(`${API}/admin/torneo`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "X-CSRF-TOKEN": csrf,
+        },
+        body: formData,
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error);
+      }
+
+      mostrarToast("Torneo guardado correctamente", "success");
+
+      await cargarTorneos();
+
+      cerrarEdicion();
+    } catch (err) {
+      console.error(err);
+      mostrarToast("No se pudo guardar el torneo", "error");
     }
   }
 
@@ -423,5 +508,39 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!fechaISO) return "-";
     const [y, m, d] = fechaISO.split("-");
     return `${d}-${m}-${y}`;
+  }
+
+  function convertirFecha(fecha) {
+    const [d, m, y] = fecha.split("-");
+    return new Date(`${y}-${m}-${d}`);
+  }
+
+  function aplicarFiltros() {
+    const estado = document.getElementById("filtro-estado").value;
+    const ciudad = document.getElementById("filtro-ciudad").value.toLowerCase();
+    const sede = document.getElementById("filtro-sede").value.toLowerCase();
+
+    const hoy = new Date();
+
+    const filtrados = state.torneos.filter((t) => {
+      const fechaTorneo = convertirFecha(t.fecha);
+      if (estado === "vigentes" && fechaTorneo < hoy) return false;
+
+      if (estado === "vencidos" && fechaTorneo >= hoy) return false;
+
+      if (ciudad && !t.sede.ciudad.toLowerCase().includes(ciudad)) return false;
+
+      if (sede && !t.sede.nombre.toLowerCase().includes(sede)) return false;
+
+      return true;
+    });
+
+    renderizarCards(filtrados);
+
+    if (state.torneoSeleccionado) {
+      const card = document.querySelector(
+        `[data-id="${state.torneoSeleccionado.id_torneo}"]`,
+      );
+    }
   }
 });

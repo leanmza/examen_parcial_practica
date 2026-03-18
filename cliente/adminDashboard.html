@@ -149,22 +149,71 @@
           <!-- card -->
           <div class="col-cards">
             <div class="card h-100 torneos-card">
-              <h4>Próximos torneos</h4>
-              <div
-                id="torneos-container"
-                class="d-flex flex-column gap-3"
-              ></div>
+              <div class="row">
+                <div class="card-title col-6">
+                  <h4>Lista de torneos</h4>
+                </div>
+                <div class="card-title-btn col-6">
+                  <button
+                    type="button"
+                    class="btn-nuevo-torneo btn btn-primary"
+                  >
+                    <i class="fa-solid fa-plus fa-plus"></i> Nuevo torneo
+                  </button>
+                </div>
+                <div class="row filtros">
+                  <p class="filter-icon">
+                    Filtros
+                    <i class="fa-solid fa-filter"></i>
+                  </p>
+                </div>
+                <div class="row filtros-torneos mb-3">
+                  <!-- estado -->
+                  <div class="col-6 mb-2">
+                    <select id="filtro-estado" class="form-control">
+                      <option value="" selected >Todos</option>
+                      <option value="vigentes">Vigentes</option>
+                      <option value="vencidos">Vencidos</option>
+                    </select>
+                  </div>
+
+                  <!-- ciudad -->
+                  <div class="col-6 mb-2">
+                    <input
+                      type="text"
+                      id="filtro-ciudad"
+                      class="form-control"
+                      placeholder="Ciudad"
+                    />
+                  </div>
+
+                  <!-- sede -->
+                  <div class="col-6 mb-2">
+                    <input
+                      type="text"
+                      id="filtro-sede"
+                      class="form-control"
+                      placeholder="Sede"
+                    />
+                  </div>
+                </div>
+                <div
+                  id="torneos-container"
+                  class="d-flex flex-column gap-3"
+                ></div>
+              </div>
             </div>
           </div>
         </section>
         <section class="detalle-section col-9">
+          <!-- editar torneo -->
           <div class="info-torneo card">
             <div
               class="card-title d-flex justify-content-between align-items-center"
             >
               <h4>Editar torneo</h4>
 
-              <button type="button" class="btn-close cerrar-edicion"></button>
+              <button type="button" class="btn-close cerrar-guardar"></button>
             </div>
             <form id="datos-torneo" class="datos-torneo">
               <div class="row">
@@ -182,7 +231,7 @@
                 </div>
                 <!-- sede del torneo -->
                 <div class="col-4 form-input">
-                  <label for="sede-torneo" class="form-label">Sede</label>
+                  <label for="sede-torneo" class="form-label">Sede  </label>
                   <select
                     type="text"
                     class="form-control"
@@ -208,6 +257,62 @@
                     id="editar"
                   >
                     Editar
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <!-- guardar torneo -->
+          <div class="crear-torneo card">
+            <div
+              class="card-title d-flex justify-content-between align-items-center"
+            >
+              <h4>Crear nuevo torneo</h4>
+
+              <button type="button" class="btn-close cerrar-guardar"></button>
+            </div>
+            <form id="nuevo-torneo" class="nuevo-torneo">
+              <div class="row">
+                <!-- Nombre del torneo -->
+                <div class="col-5 form-input">
+                  <label for="nombre-nuevo-torneo" class="form-label"
+                    >Nombre del torneo</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nombre-nuevo-torneo"
+                    placeholder="Nombre del torneo"
+                  />
+                </div>
+                <!-- sede del torneo -->
+                <div class="col-4 form-input">
+                  <label for="sede-nuevo-torneo" class="form-label">Sede</label>
+                  <select
+                    type="text"
+                    class="form-control"
+                    id="sede-nuevo-torneo"
+                    placeholder="Sede del torneo"
+                  ></select>
+                </div>
+                <!-- fecha -->
+                <div class="col-2 form-input date">
+                  <label for="fecha-torneo" class="form-label">Fecha</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="fecha-nuevo-torneo"
+                    placeholder="Fecha del torneo"
+                  />
+                </div>
+                <!-- btn guardar -->
+                <div class="col-1 col-btn">
+                  <button
+                    class="btn btn-primary btn-submit btn-guardar"
+                    type="submit"
+                    id="guardar"
+                  >
+                    Guardar
                   </button>
                 </div>
               </div>

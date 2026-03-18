@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es" data-bs-theme="dark">
+<html lang="en" data-bs-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,8 +12,8 @@
       crossorigin="anonymous"
     />
 
-    <link rel="stylesheet" href="css/login.css" />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/sedesDashboard.css" />
     <link rel="icon" href="assets/d20.png" />
 
     <!-- fuentes google font -->
@@ -30,7 +30,9 @@
     ></script>
 
     <!-- scripts -->
-    <script src="scripts/login_script.js"></script>
+    <script src="scripts/utils/utils.js" defer></script>
+    <script src="scripts/utils/forms.js"></script>
+    <script src="scripts/sedesDashboard.js"></script>
   </head>
   <body>
     <!-- HEADER / NAVBAR -->
@@ -90,7 +92,7 @@
               <a class="nav-link" href="contacto.html">Contacto</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="torneos.html">Torneos</a>
+              <a class="nav-link" href="sedes.html">sedes</a>
             </li>
           </ul>
 
@@ -137,59 +139,180 @@
     </nav>
     <!-- MAIN -->
     <main class="container-fluid">
-      <div class="login-card">
-        <h1 class="login-title">Iniciar sesión</h1>
-        <form id="loginForm" class="login-form">
-          <div class="mb-3">
-            <label for="usuario" class="form-label">Usuario</label>
-            <input
-              type="text"
-              class="form-control"
-              id="usuario"
-              name="usuario"
-              placeholder="Tu nombre de usuario"
-              required
-              autocomplete="username"
-            />
-          </div>
-          <div class="mb-4">
-            <label for="password" class="form-label">Contraseña</label>
-            <input
-              type="password"
-              class="form-control"
-              id="password"
-              name="password"
-              placeholder="Tu contraseña"
-              required
-              autocomplete="current-password"
-            />
-          </div>
-          <div class="form-check mb-3">
-            <input class="form-check-input" type="checkbox" id="recordar" />
-            <label class="form-check-label" for="recordar">
-              Mantener conectado
-            </label>
-          </div>
-          <div
-            id="loginError"
-            class="alert alert-danger d-none"
-            role="alert"
-          ></div>
-          <button
-            type="submit"
-            class="btn btn-primary btn-login w-100"
-            id="btnLogin"
-          >
-            Entrar
-          </button>
-        </form>
-      </div>
-    </main>
+      <!-- Encabezado -->
+      <section class="encabezado-section">
+        <h1>Administrar sedes</h1>
+      </section>
+      <section class="contenido-section row">
+        <!-- perfil -->
+        <section class="sedes-section col-3">
+          <!-- card -->
+          <div class="col-cards">
+            <div class="card h-100 sedes-card">
+              <div class="row">
+                <div class="card-title col-6">
+                  <h4>Lista de sedes</h4>
+                </div>
+                <div class="card-title-btn col-6">
+                  <button type="button" class="btn-nueva-sede btn btn-primary">
+                    <i class="fa-solid fa-plus fa-plus"></i> Nueva sede
+                  </button>
+                </div>
 
-    <div
-      class="toast-container position-fixed bottom-0 end-0 p-3"
-      style="z-index: 1080"
-    ></div>
+                <div
+                  id="sedes-container"
+                  class="d-flex flex-column gap-3"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="detalle-section col-5">
+          <!-- editar sede -->
+          <div class="info-sede card">
+            <div class="card-title">
+              <h4 class="col-9">Editar sede</h4>
+
+              <button
+                type="button"
+                class="btn-close cerrar-guardar col-1"
+              ></button>
+            </div>
+            <form id="datos-sede" class="datos-sede">
+              <div class="row">
+                <div class="inputs col-9">
+                  <!-- Nombre de la sede -->
+                  <div class="col-10 form-input">
+                    <label for="nombre-sede" class="form-label">Nombre</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="nombre-sede"
+                      placeholder="Nombre"
+                    />
+                  </div>
+                  <!-- direccion de la sede -->
+                  <div class="col-10 form-input">
+                    <label for="direccion" class="form-label">Dirección</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="direccion-sede"
+                      placeholder="Dirección"
+                    />
+                  </div>
+                  <!-- Ciudad -->
+                  <div class="col-10 form-input date">
+                    <label for="ciudad-sede" class="form-label">Ciudad</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="ciudad-sede"
+                      placeholder="Fecha del sede"
+                    />
+                  </div>
+                  <!-- País -->
+                  <div class="col-10 form-input date">
+                    <label for="pais-sede" class="form-label">País</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="pais-sede"
+                      placeholder="País"
+                    />
+                  </div>
+                </div>
+                <div class="img-sede col-2">
+                  <!-- btn editar -->
+                  <div class="col-2 col-btn">
+                    <button
+                      class="btn btn-primary btn-submit editar"
+                      type="submit"
+                      id="editar"
+                    >
+                      Actualizar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <!-- guardar sede -->
+          <div class="crear-sede card">
+            <div class="card-title">
+              <h4>Crear nueva sede</h4>
+
+              <button type="button" class="btn-close cerrar-guardar"></button>
+            </div>
+            <form id="nueva-sede" class="nueva-sede">
+              <div class="row">
+                <div class="inputs col-9">
+                  <!-- Nombre de la sede -->
+                  <div class="col-10 form-input">
+                    <label for="nombre-nueva-sede" class="form-label"
+                      >Nombre</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="nombre-nueva-sede"
+                      placeholder="Nombre"
+                    />
+                  </div>
+                  <!-- direccion de la sede -->
+                  <div class="col-10 form-input">
+                    <label for="direccion-nueva-sede" class="form-label"
+                      >Dirección</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="direccion-nueva-sede"
+                      placeholder="Dirección"
+                    />
+                  </div>
+                  <!-- Ciudad -->
+                  <div class="col-10 form-input date">
+                    <label for="ciudad-nueva-sede" class="form-label"
+                      >Ciudad</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="ciudad-nueva-sede"
+                      placeholder="Fecha del sede"
+                    />
+                  </div>
+                  <!-- País -->
+                  <div class="col-10 form-input date">
+                    <label for="pais-nueva-sede" class="form-label">País</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="pais-nueva-sede"
+                      placeholder="País"
+                    />
+                  </div>
+                </div>
+                <div class="img-sede col-2">
+                  <!-- btn guardar -->
+                  <div class="col-1 col-btn">
+                    <button
+                      class="btn btn-primary btn-submit btn-guardar"
+                      type="submit"
+                      id="guardar"
+                    >
+                      Guardar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </section>
+      </section>
+      <section class="banner-section"></section>
+    </main>
     <!-- FOOTER -->
     <footer class="row row-cols-1 row-cols-3 row-cols-md-5 py-5 border-top">
       <div class="col mb-3">
